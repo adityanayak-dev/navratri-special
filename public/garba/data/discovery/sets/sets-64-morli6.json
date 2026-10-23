@@ -1,0 +1,53 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-morli-bansari-6-2004-hemant-chauhan",
+      "title": "મોરલી | Morli | Bansari (Part 6) | Hemant Chauhan | Non Stop Raas | Krishna Raas Garba",
+      "artists": ["Hemant Chauhan"],
+      "year": 2004,
+      "series": "Bansari",
+      "volume": "6",
+      "categories": ["traditional-garba", "krishna-garba", "raas-dandiya"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "tMdWX1gewo8",
+        "url": "https://www.youtube.com/watch?v=tMdWX1gewo8",
+        "embeddable": true
+      },
+      "linkedReleaseId": "morli-raas-v6-2004",
+      "sourceRuntimeDisplay": "54m 53s",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "756,786",
+        "checkedAt": "2026-09-29"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        {"title": "Chhand - Sar Sar Par, Sanje Ne Sam Re", "startSeconds": 0},
+        {"title": "Mathe Choga Re Meline", "startSeconds": 129},
+        {"title": "He Mane Gamto Kanudo Rupado", "startSeconds": 345},
+        {"title": "Kali Ri Kali Kamrivaro Kutchi", "startSeconds": 537},
+        {"title": "He Ora Aavo Nagar Nandna", "startSeconds": 702},
+        {"title": "Maro Lalo Podhya Chhe Rang", "startSeconds": 864},
+        {"title": "Sona Keru Maru Beldu", "startSeconds": 1082},
+        {"title": "Gopal Maro Paraniye Zule", "startSeconds": 1271},
+        {"title": "Gokul Na Godare Re", "startSeconds": 1431},
+        {"title": "Morli Vaji Mukhethi", "startSeconds": 1634},
+        {"title": "Morli Kamangari Re", "startSeconds": 1918},
+        {"title": "Valam Ni Vansadi Vaagi Re", "startSeconds": 2151},
+        {"title": "Ran Zan Ran Zan Zalar", "startSeconds": 2503},
+        {"title": "Paraniyu Bandhaya Mata", "startSeconds": 2701},
+        {"title": "Nagar Nandna Re", "startSeconds": 2871},
+        {"title": "Zini Zini Morliyu", "startSeconds": 3027},
+        {"title": "Aavo Ne Aalbela Re", "startSeconds": 3140},
+        {"title": "Chhand - Shravan Jal Barse", "startSeconds": 3200}
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One continuous Morli / Bansari Part 6 nonstop Raas master from Soor Mandir Audio Jukebox's verified label channel. The source page showed 54:53, 756,786 views, and a Sep 2, 2023 publication date; its description credits Hemant Chauhan, Appu, traditional lyrics, and Soor Mandir. The existing 2004 Morli (Non Stop Raas, Vol. 6) release has 19 catalogue track rows while this video publishes 18 chapter starts because its opening Chhand chapter combines titles. Preserve all 18 source chapters as metadata only; do not create separate playback routes or infer chapter-to-track alignment."
+    }
+  ]
+}

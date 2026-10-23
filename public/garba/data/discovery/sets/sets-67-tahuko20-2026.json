@@ -1,0 +1,57 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-soor-mandir-tahuko20-2026",
+      "title": "ટહુકાર | Tahukar | Non Stop Garba (Tahuko 20) | Kailash Kher, Hemant chauhan & Pamela Jain",
+      "artists": ["Kailash Kher", "Hemant Chauhan", "Kirtidan Gadhvi", "Pamela Jain", "Kanu Patel"],
+      "series": "Tahuko",
+      "volume": "20",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "6VC2PBEd758",
+        "url": "https://www.youtube.com/watch?v=6VC2PBEd758",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "durationSeconds": 3636,
+      "sourceRuntimeDisplay": "1:00:36",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "114,154",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        { "title": "Chhand", "startSeconds": 0 },
+        { "title": "Maa Pava Te Gadhthi", "startSeconds": 93 },
+        { "title": "Amar Tu Rakhaje", "startSeconds": 354 },
+        { "title": "Pavama Pavo Vagyo", "startSeconds": 519 },
+        { "title": "Ambaji Hinchake Zule Chhe", "startSeconds": 738 },
+        { "title": "Kumkum Na Pagla Padya", "startSeconds": 953 },
+        { "title": "Su Bethi Maa Pag Upar", "startSeconds": 1134 },
+        { "title": "Maa Taro Garbo Zakamzol", "startSeconds": 1312 },
+        { "title": "Lakh Lakh Divdani Mandavadi", "startSeconds": 1545 },
+        { "title": "Alya Bhai Mara Faliyama", "startSeconds": 1702 },
+        { "title": "Re Ho Rer Maani Chundadi Laheray", "startSeconds": 1949 },
+        { "title": "Man Mor Bani Thanganat Kare", "startSeconds": 2058 },
+        { "title": "Ghammar Ghammar Ghumyo Re", "startSeconds": 2163 },
+        { "title": "Lavo Kankudiya Ne Chokhaliya", "startSeconds": 2330 },
+        { "title": "Dholida Dhol Dhimo Vagad", "startSeconds": 2462 },
+        { "title": "Rumzum Karta Madi Aave", "startSeconds": 2648 },
+        { "title": "He Maano Garbo", "startSeconds": 2784 },
+        { "title": "Ekvaar Bolu Ke", "startSeconds": 2942 },
+        { "title": "Ali O Garbo", "startSeconds": 3115 },
+        { "title": "O Madi Re Aevi Garbe", "startSeconds": 3214 },
+        { "title": "Amba Aavo To Ramiye", "startSeconds": 3306 },
+        { "title": "Ugamana Rath Jodya Re Lol", "startSeconds": 3428 }
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "Verified Soor Mandir Audio Jukebox continuous Tahuko 20 set, published Sep 22, 2026. The official description credits singers Kailash Kher, Hemant Chauhan, Kirtidan Gadhvi, Pamela Jain and Kanu Patel; music Appu and Anil Mohile; and Soor Mandir as label. It explicitly publishes 22 chapter starts; these remain metadata-only navigation within this single full-set item. No exact canonical release record was verified, so linkedReleaseId remains null. An older same-title upload (izw8IBaGgcA) was excluded because its displayed runtime (41:48) conflicts with its published chapter list extending to 57:30 and its credits differ from this current upload."
+    }
+  ]
+}

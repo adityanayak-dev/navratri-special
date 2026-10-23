@@ -1,0 +1,54 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-anand-tahuko-8-2001-soor-mandir",
+      "title": "આનંદ | Anand | Tahuko 8 | Nonstop Garba | Pamela Jain, Atul Purohit, Musa Paik | Soormandir",
+      "artists": ["Musa Paik", "Pamela Jain", "Atul Purohit"],
+      "year": 2001,
+      "series": "Tahuko",
+      "volume": "8",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "nAtpEjfZN2w",
+        "url": "https://www.youtube.com/watch?v=nAtpEjfZN2w",
+        "embeddable": true
+      },
+      "linkedReleaseId": "anand-vol8-2001",
+      "sourceRuntimeDisplay": "1h 0m 49s",
+      "durationSeconds": 3649,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "220,726",
+        "checkedAt": "2026-09-29"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        {"title": "Abil Gulal", "startSeconds": 0},
+        {"title": "Dhanya Maa Tu Jogni", "startSeconds": 145},
+        {"title": "Aevo Maa Ambano Darbar", "startSeconds": 435},
+        {"title": "Padvethi Pahelu", "startSeconds": 673},
+        {"title": "Lila Te Rangni Chundadi", "startSeconds": 910},
+        {"title": "Maa Amba Te Ramva", "startSeconds": 1095},
+        {"title": "Khodiyar Chhe Jogmaya", "startSeconds": 1259},
+        {"title": "Eva Rumzumta Kadika", "startSeconds": 1423},
+        {"title": "Ame Aavya Ramva Ne Raas", "startSeconds": 1622},
+        {"title": "Kumkum Pagle Re", "startSeconds": 1829},
+        {"title": "Maro Garbo", "startSeconds": 1947},
+        {"title": "Garbe Rame Ambe", "startSeconds": 2197},
+        {"title": "Maa Sundargadhthi Utrya", "startSeconds": 2435},
+        {"title": "Ghor Andhari Re", "startSeconds": 2615},
+        {"title": "Chotu Chotu Re", "startSeconds": 2840},
+        {"title": "Navrangi Odhni Chundadi Ma", "startSeconds": 2989},
+        {"title": "Chundaladi Odho Ho Rangni", "startSeconds": 3210},
+        {"title": "Gabbarna Gokhe Aaj Amba Ghume", "startSeconds": 3531}
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One continuous 2001 Anand (Tahuko 8 Non Stop Garba) release, linked to the existing 18-track catalogue release. The visible Soor Mandir YouTube page identifies the verified label channel, shows 220,726 views and an Oct 14, 2015 upload date, and publishes all 18 chapter titles and starts; its description credits singers Musa Paik and Pamela Jain and music by Appu. Chapters remain metadata within this single full-set listing and do not create separate set entries or song playback routes. The source title also names Atul Purohit; the catalogue release artist credit remains Musa Paik & Pamela Jain. The YouTube upload date is distinct from the catalogue's 2001 original-release year."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-atul-united-way-2022-day1",
+      "title": "Atul Purohit - United Way 2022 - Day 1",
+      "artists": ["Atul Purohit"],
+      "year": 2022,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-artist-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "L_ENhdsPUiM",
+        "url": "https://www.youtube.com/watch?v=L_ENhdsPUiM",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "notes": "Official Atul Purohit Official artist-channel live-night recording. The YouTube page displayed 290K views and, after playback started, a 2:52:05 runtime (checked 2026-09-30). Preserved as one continuous event programme; no chapter markers or catalogue song links were inferred.",
+      "sourceRuntimeDisplay": "2h 52m 05s",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "290K",
+        "checkedAt": "2026-09-30"
+      },
+      "durationSeconds": 10325
+    }
+  ]
+}

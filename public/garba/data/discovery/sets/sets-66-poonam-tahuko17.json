@@ -1,0 +1,56 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-soor-mandir-poonam-tahuko17",
+      "title": "પૂનમ | Poonam Tahuko 17 | Navratri Songs | Pamela Jain | Non Stop Garba",
+      "artists": ["Pamela Jain"],
+      "series": "Tahuko",
+      "volume": "17",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "9EQsHNTXnj8",
+        "url": "https://www.youtube.com/watch?v=9EQsHNTXnj8",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "durationSeconds": 3649,
+      "sourceRuntimeDisplay": "1:00:49",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1,783,173",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        { "title": "Aavi Aavi Nortani Raat", "startSeconds": 0 },
+        { "title": "Kachi Matino Garbo Koravyo", "startSeconds": 371 },
+        { "title": "Zina Zina Zanzarno Zankar", "startSeconds": 554 },
+        { "title": "Aashoni Ajavali Raat", "startSeconds": 701 },
+        { "title": "Patai Raja Garbadiyo Koravo", "startSeconds": 843 },
+        { "title": "Nav Nav Navli Rataladima", "startSeconds": 1018 },
+        { "title": "Alya Bhai Mara Faliyama", "startSeconds": 1166 },
+        { "title": "Aavo Aavo Sankhalpurvali Re", "startSeconds": 1379 },
+        { "title": "Chapti Re Chokha Chapti Re Kanku", "startSeconds": 1499 },
+        { "title": "Ambevali Manjine Khamma Khamma", "startSeconds": 1603 },
+        { "title": "Eva Sat Sat Deviyune", "startSeconds": 1830 },
+        { "title": "Garbe Ghumti Aavi Maa Mari", "startSeconds": 2068 },
+        { "title": "Hinchko Ambemano Mana Mandiriye", "startSeconds": 2244 },
+        { "title": "Maa Tane Khamma Khamma", "startSeconds": 2377 },
+        { "title": "Saheladi Re..Halo Ramva Rangtali", "startSeconds": 2538 },
+        { "title": "Chanda Re Mari Chitthiya Le Ja", "startSeconds": 2704 },
+        { "title": "Aavi Aavi Aavi Maa Pawavali Aavi", "startSeconds": 2830 },
+        { "title": "Kalo Bhammar Chyo Chyo Jyoto Re", "startSeconds": 2989 },
+        { "title": "Lila Lila Laheriyamatankya Van Na", "startSeconds": 3231 },
+        { "title": "Olya Chachar Kera Chowke", "startSeconds": 3408 },
+        { "title": "Zini Zini Zini Mani Zanzariyu Vaage", "startSeconds": 3540 }
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "Verified Soor Mandir label-channel continuous set. The official description credits Pamela Jain (singer), Appu (music), and Soor Mandir (label) and publishes 21 chapter starts. Chapters remain metadata-only navigation inside this single full-set item, not individual playable songs. The video was published Sep 29, 2015; this is the upload date, not a separately verified original album release year. No exact canonical release match was verified, so linkedReleaseId remains null."
+    }
+  ]
+}

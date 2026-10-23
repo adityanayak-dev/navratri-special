@@ -1,0 +1,140 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-uwb-2016-day5-live-stream",
+      "title": "United Way Baroda - Day 5 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "mvTu1kDUKrE",
+        "url": "https://www.youtube.com/watch?v=mvTu1kDUKrE",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 18m 12s",
+      "durationSeconds": 8292,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "272K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 5; the description dates the live Garba event to 5 October 2016. The watch page showed 272K views and playback started (checked 2026-09-30). Kept as one continuous event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2016-day7-live-stream",
+      "title": "United Way Baroda - Day 7 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "atm2KAcfn_c",
+        "url": "https://www.youtube.com/watch?v=atm2KAcfn_c",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 49m 43s",
+      "durationSeconds": 10183,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "289K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 7; the description dates the live Garba event to 7 October 2016. The watch page showed 289K views and playback started (checked 2026-09-30). Kept as one continuous event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2016-day9-live-stream",
+      "title": "United Way Baroda - Day 9 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "9qspCR2K1ts",
+        "url": "https://www.youtube.com/watch?v=9qspCR2K1ts",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 30m 22s",
+      "durationSeconds": 9022,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "437K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title and description identify Day 9 live Garba in Vadodara on 9 October 2016. The watch page showed 437K views; playback started after YouTube prerolls (checked 2026-09-30). Kept as one continuous event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2019-day4",
+      "title": "United Way Of Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 4",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "fQPjHZenCyU",
+        "url": "https://www.youtube.com/watch?v=fQPjHZenCyU",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "3h 26m 45s",
+      "durationSeconds": 12405,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "816K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda event-channel recording. The title credits Atul Purohit and identifies the 2019 Garba Mahotsav Day 4. The watch page showed 816K views and playback started (checked 2026-09-30). Kept as one continuous live-night programme with no song or chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2019-day10-dussehra",
+      "title": "United Way Of Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 10 Dussehra",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "YDirKuQxD5Y",
+        "url": "https://www.youtube.com/watch?v=YDirKuQxD5Y",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "3h 16m 59s",
+      "durationSeconds": 11819,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "3M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda event-channel recording. The title credits Atul Purohit and identifies the 2019 Garba Mahotsav Day 10 Dussehra. The watch page showed 3M views and playback started (checked 2026-09-30). Kept as one continuous live-night programme with no song or chapter rows inferred."
+    }
+  ]
+}

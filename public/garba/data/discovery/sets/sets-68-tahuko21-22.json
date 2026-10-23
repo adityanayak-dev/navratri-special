@@ -1,0 +1,107 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-soor-mandir-tahuko21-sone-ki-chhadi",
+      "title": "સોને કી છડી | Sone Ki Chhadi - Tahuko 21 | Non Stop Garba | Hemant Chauhan, Pamela Jain | Garba",
+      "artists": ["Hemant Chauhan", "Pamela Jain", "Kailash Kher", "Sonu Kakkad"],
+      "series": "Tahuko",
+      "volume": "21",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "Atk2dC0CpE4",
+        "url": "https://www.youtube.com/watch?v=Atk2dC0CpE4",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "durationSeconds": 3696,
+      "sourceRuntimeDisplay": "1:01:36",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1,488,292",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        { "title": "Chadi, Chhand", "startSeconds": 0 },
+        { "title": "Uncha Uncha Re Mari Madina", "startSeconds": 129 },
+        { "title": "Maa No Garbo Re Rame", "startSeconds": 369 },
+        { "title": "Me To Shangaryo Chachar Chok", "startSeconds": 577 },
+        { "title": "Chachar Chowkma", "startSeconds": 782 },
+        { "title": "Chanda Re Mori Chithiya Leja", "startSeconds": 943 },
+        { "title": "Dhara Nagarthi Utarya", "startSeconds": 1070 },
+        { "title": "Sachi Re Mari Sat Re", "startSeconds": 1262 },
+        { "title": "Rame Ambemaa Chachar", "startSeconds": 1450 },
+        { "title": "Aarasur Ma Amba Kare Re Killol", "startSeconds": 1641 },
+        { "title": "Lal Re Gulab", "startSeconds": 1848 },
+        { "title": "Jai Jai Bolo Anande", "startSeconds": 2054 },
+        { "title": "O Gori Cham Cham", "startSeconds": 2234 },
+        { "title": "Ghammar Ghughari Re", "startSeconds": 2375 },
+        { "title": "Avli Savli Ambaliyani", "startSeconds": 2589 },
+        { "title": "Chummak Chummak Thay", "startSeconds": 2708 },
+        { "title": "Hu Re Ghumu Ne Maro", "startSeconds": 2859 },
+        { "title": "Baje Payal Cham Cham", "startSeconds": 2978 },
+        { "title": "Ude Re Gulal", "startSeconds": 3104 },
+        { "title": "Mari Mahisagarni Aare", "startSeconds": 3461 },
+        { "title": "Tahuka Karto Jay, Shanti Karan", "startSeconds": 3641 }
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "Verified Soor Mandir channel full-set upload, published Jun 1, 2015. The description identifies the album as Sone Ki Chhadi (Non Stop Garba), credits singers Hemant Chauhan, Pamela Jain, Kailash Kher and Sonu Kakkad, music by Appu, and label Soor Mandir. The source publishes 21 chapter starts; they are metadata-only navigation within this one continuous set. No exact canonical release match was verified, so linkedReleaseId remains null."
+    },
+    {
+      "id": "set-soor-mandir-tahuko22-gham-gham",
+      "title": "ઘમ ઘમ | Gham Gham | Tahuko 22 | Pamela Jain | Gujarati Nonstop Garba | Garba Songs",
+      "artists": ["Pamela Jain", "Kirtidan Gadhvi"],
+      "series": "Tahuko",
+      "volume": "22",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "8S1weOZSsPo",
+        "url": "https://www.youtube.com/watch?v=8S1weOZSsPo",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "durationSeconds": 4049,
+      "sourceRuntimeDisplay": "1:07:29",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1,682,160",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        { "title": "Om Namo Maa", "startSeconds": 0 },
+        { "title": "Mane Mavtar Male to Maa", "startSeconds": 205 },
+        { "title": "Chudi Ne Chandalo Re", "startSeconds": 442 },
+        { "title": "Varse Bhale Vadli Ne", "startSeconds": 649 },
+        { "title": "Uncha Uncha Re Mari Madina Dham", "startSeconds": 896 },
+        { "title": "Ambamaa Palakhadi Shangaro", "startSeconds": 1139 },
+        { "title": "Patanthi Patoda Mangavo", "startSeconds": 1327 },
+        { "title": "Maa Amba Madi Tamara Malakma", "startSeconds": 1565 },
+        { "title": "Ambemaa No Garbo Bahucharmaa No", "startSeconds": 1790 },
+        { "title": "Hu To Fularo Garbo Layee Mataji", "startSeconds": 1952 },
+        { "title": "Khodalna Mandire Nache Govadiyo", "startSeconds": 2081 },
+        { "title": "Maa No Hindodo Bandhavo Re", "startSeconds": 2256 },
+        { "title": "Dhan Dhan Chhe Kutch Ni Dharti", "startSeconds": 2390 },
+        { "title": "Aavo Aavo Shankhalpurvadi", "startSeconds": 2523 },
+        { "title": "Pawama Pavo Vagyo", "startSeconds": 2698 },
+        { "title": "Lal Kahumbal Kalgivado Kukdo", "startSeconds": 2887 },
+        { "title": "Maa Tara Vadhamana Re", "startSeconds": 3145 },
+        { "title": "O Jay Maa Jay Jay Jay Jagdambe", "startSeconds": 3365 },
+        { "title": "Bol Re Mari Mat Bhavani", "startSeconds": 3610 },
+        { "title": "Ghamgham Ghamgham Ghughara Ghamke", "startSeconds": 3676 },
+        { "title": "Ramo Ramo Ramo Rangtali Maa", "startSeconds": 3842 }
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "Verified Soor Mandir channel full-set upload, published May 19, 2015. The description identifies Tahuko 22 / Gham Gham, credits Pamela Jain as singer, Kirtidan Gadhvi as an additional singer, Appu for music, and Soor Mandir as label. The source publishes 21 chapter starts; these remain metadata-only navigation within this single continuous set. No exact canonical release match was verified, so linkedReleaseId remains null."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-kinjal-dave-killol-2-2022",
+      "title": "Kinjal Dave - Killol 2.0 - કિલ્લોલ 2.0 - Nonstop Trantali Garba 2022 | KD Digital",
+      "artists": ["Kinjal Dave"],
+      "year": 2022,
+      "series": "Killol",
+      "volume": "2.0",
+      "categories": [
+        "modern-gujarati-garba",
+        "mataji-devotional",
+        "krishna-garba",
+        "tran-taali",
+        "folk-lokgeet"
+      ],
+      "setType": "official-nonstop",
+      "officiality": "official-artist-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "yvs-M7yDfwQ",
+        "url": "https://www.youtube.com/watch?v=yvs-M7yDfwQ",
+        "embeddable": true
+      },
+      "linkedReleaseId": "killol-2-kinjal-dave-2022",
+      "sourceRuntimeDisplay": "50m 2s",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "4,429,429",
+        "checkedAt": "2026-09-29"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "KD Digital's Official Artist Channel presents this as Kinjal Dave's 2022 nonstop Trantali Garba album. The visible source page showed a 50:02 runtime, 4,429,429 views, and a Sep 20, 2022 publication date; its description credits producer Lalit Dave, singer Kinjal Dave, and music arrangement by Alpesh Panchal. Linked to the existing 23-track Killol 2.0 catalogue release. The description does not publish chapter timestamps, so the continuous video remains one full-set playback item without fabricated segment starts or separate chapter routes."
+    }
+  ]
+}

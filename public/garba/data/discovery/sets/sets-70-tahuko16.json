@@ -1,0 +1,55 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-soor-mandir-tahuko16-chandaliyo",
+      "title": "ચાંદલિયો | Chandaliyo I Tahuko (Part -16) I Navratri Garba I Vikram Thakor, Pamlela Jain | Garba",
+      "artists": ["Vikram Thakor", "Pamela Jain"],
+      "series": "Tahuko",
+      "volume": "16",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "k7-WQ4FpPYs",
+        "url": "https://www.youtube.com/watch?v=k7-WQ4FpPYs",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "durationSeconds": 3627,
+      "sourceRuntimeDisplay": "1:00:27",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "313,676",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        { "title": "Ganpati Aayo Baapa", "startSeconds": 0 },
+        { "title": "Hadve Hadve Aavje", "startSeconds": 215 },
+        { "title": "Mane Shidne Satavo Ma", "startSeconds": 473 },
+        { "title": "Sonani Indhoni", "startSeconds": 590 },
+        { "title": "Fulara Garba Re", "startSeconds": 747 },
+        { "title": "Maa No Hindolo", "startSeconds": 1029 },
+        { "title": "Khili Khili Chandarmani", "startSeconds": 1262 },
+        { "title": "Gabbar Uper Pepro", "startSeconds": 1413 },
+        { "title": "Rajwadi Motor", "startSeconds": 1628 },
+        { "title": "Mane Dhup Chadavu", "startSeconds": 1812 },
+        { "title": "Navli Aa Nortani Raat", "startSeconds": 1983 },
+        { "title": "Ashta Bhavani Durge Rani", "startSeconds": 2187 },
+        { "title": "Aavjo Aavjo Re Bhavani", "startSeconds": 2305 },
+        { "title": "Aavi Ambani Paas", "startSeconds": 2479 },
+        { "title": "Ambema Taro Garbo", "startSeconds": 2614 },
+        { "title": "Bendvaja Vaage", "startSeconds": 2813 },
+        { "title": "Pawagadh No Dungar Dolyo", "startSeconds": 2946 },
+        { "title": "Dhamdham Dhamdham", "startSeconds": 3165 },
+        { "title": "Baje Payal Chhamchham", "startSeconds": 3308 },
+        { "title": "Amba Amba Akhaand Omkar", "startSeconds": 3476 }
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "Verified Soor Mandir Audio Jukebox channel full-set upload, published Sep 26, 2020. The description identifies the title as Chandaliyo (Tahuko-16), credits Vikram Thakor and Pamela Jain as singers, Anil Mohile for music, and Soor Mandir as label. Its description publishes 20 chapter starts in Gujarati and romanized form; the romanized labels and starts are metadata-only navigation within this single continuous set. No exact canonical release match was verified, so linkedReleaseId remains null."
+    }
+  ]
+}

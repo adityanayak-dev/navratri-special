@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Face cutout · PlayGarba</title>
+  <link rel="stylesheet" href="meme-cat-picker.css">
+  <script type="module" src="meme-cat-picker.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="topline"><a class="wordmark" href="index.html">PlayGarba</a></header>
+    <form class="link-form" id="linkForm" novalidate>
+      <label class="visually-hidden" for="youtubeUrl">YouTube video or playlist link</label>
+      <div class="link-row">
+        <input id="youtubeUrl" name="youtubeUrl" type="url" inputmode="url" autocomplete="url" placeholder="YouTube video or playlist link" aria-label="YouTube video or playlist link" aria-describedby="linkStatus">
+        <button class="button button-primary" type="submit">Add link</button>
+      </div>
+      <p class="visually-hidden" id="linkStatus" aria-live="polite"></p>
+    </form>
+    <section class="cutout-panel" aria-labelledby="cutout-title">
+      <h1 id="cutout-title">Add a face cutout</h1>
+      <div class="cutout-options" id="cutoutOptions" aria-label="Face cutouts"></div>
+    </section>
+  </main>
+</body>
+</html>

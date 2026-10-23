@@ -1,0 +1,31 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-uwb-2017-day9-live-stream",
+      "title": "United Way Baroda - Garba Mahotsav with Atul Purohit - Day 9 - Live Stream",
+      "artists": ["Atul Purohit"],
+      "year": 2017,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "6SE1JrQS3so",
+        "url": "https://www.youtube.com/watch?v=6SE1JrQS3so",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 35m",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The displayed title identifies Day 9 and credits Atul Purohit; the description dates the live Garba in Vadodara to 29 September 2017. YouTube search showed a rounded 2h 35m runtime and 1M views (checked 2026-09-30). Kept as one continuous event recording with no inferred songs, chapters, or release relationship."
+    }
+  ]
+}

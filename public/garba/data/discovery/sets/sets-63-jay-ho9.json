@@ -1,0 +1,56 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-jay-ho-tahuko-9-2002-kishor-manraja",
+      "title": "Jay Ho | Tahuko (Part 9) | Navratri Nonstop Garba | Kishor Manraja | Gujarati Garba Songs | Garba",
+      "artists": ["Kishor Manraja"],
+      "year": 2002,
+      "series": "Tahuko",
+      "volume": "9",
+      "categories": ["traditional-garba"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "cAiAwvkvwpE",
+        "url": "https://www.youtube.com/watch?v=cAiAwvkvwpE",
+        "embeddable": true
+      },
+      "linkedReleaseId": "jay-ho-vol9-2002",
+      "sourceRuntimeDisplay": "56m",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "115,155",
+        "checkedAt": "2026-09-29"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        {"title": "Chhand", "startSeconds": 0},
+        {"title": "Partham Parvati Putra", "startSeconds": 92},
+        {"title": "Ma Ne Poche Te Garba", "startSeconds": 273},
+        {"title": "Choto Choto Madine Man", "startSeconds": 508},
+        {"title": "Aavi Navratri Ni Ratyu", "startSeconds": 778},
+        {"title": "Rude Garbe Rame Chhe", "startSeconds": 951},
+        {"title": "Madi Tara Naam Chhe Hazar", "startSeconds": 1103},
+        {"title": "Chapti Bhari Chokha", "startSeconds": 1272},
+        {"title": "Sheriye Shariye Vage Chhe", "startSeconds": 1420},
+        {"title": "Daityo Ne Ranma Rodya", "startSeconds": 1580},
+        {"title": "Madi Aaya Chachar", "startSeconds": 1647},
+        {"title": "Zanzariyu Zamke Chhe", "startSeconds": 1727},
+        {"title": "Aavi Aavi Chhe", "startSeconds": 1810},
+        {"title": "Aavo To Ramvane", "startSeconds": 2017},
+        {"title": "Aavo Aavone Madi", "startSeconds": 2219},
+        {"title": "Chachar Chockma", "startSeconds": 2475},
+        {"title": "Maa Mara Garba Ma", "startSeconds": 2681},
+        {"title": "O Gori Chham Chham", "startSeconds": 2818},
+        {"title": "Aarasurni Ambe Maa", "startSeconds": 2965},
+        {"title": "Tahuka Karto Jay Mataji", "startSeconds": 3085},
+        {"title": "Jay Bhavani Jai Jai", "startSeconds": 3230}
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One continuous Jay Ho / Tahuko Vol. 9 nonstop Garba recording from Soor Mandir Audio Jukebox's verified channel. Its visible watch-page description identifies singer Kishor Manraja, music Appu, and Soor Mandir; the page showed 115,155 views and a Sep 26, 2020 upload date. Search results displayed a 56-minute runtime. All 21 source-published chapter titles and starts are preserved only as metadata in this one set. The linked 2002 catalogue release has 22 track rows, so chapter-to-track alignment is intentionally not inferred and no chapter gets a separate playback route."
+    }
+  ]
+}

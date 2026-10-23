@@ -1,0 +1,134 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-aditya-chamund-maa-no-rankar-nonstop",
+      "title": "Chamund Maa No Rankar | Nonstop Garba",
+      "artists": ["Aditya Gadhvi"],
+      "series": "No Rankar",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "eBJMwxHAndY",
+        "url": "https://www.youtube.com/watch?v=eBJMwxHAndY",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "1h 02m 46s",
+      "durationSeconds": 3766,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1.1M",
+        "checkedAt": "2026-09-29"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One complete continuous Garba recording from Studio Sharda's verified YouTube channel. The video description credits singer Aditya Gadhavi and music Manoj Vimal. YouTube displayed 1.1M views on 2026-09-29 and a runtime of 1:02:46. The page showed a relative publication age of one year; no exact release year or companion playlist is asserted. Kept as one full set with no chapter/song rows."
+    },
+    {
+      "id": "set-aditya-mogal-maa-no-rankar-nonstop",
+      "title": "Mogal Maa No Rankar | Nonstop Garba",
+      "artists": ["Aditya Gadhvi"],
+      "series": "No Rankar",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "Zn5Ig1w6a-c",
+        "url": "https://www.youtube.com/watch?v=Zn5Ig1w6a-c",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "1h 02m 40s",
+      "durationSeconds": 3760,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "977K",
+        "checkedAt": "2026-09-29"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One complete continuous Garba recording from Studio Sharda's verified YouTube channel. The video description credits singer Aditya Gadhavi and music Manoj Vimal. YouTube displayed 977K views on 2026-09-29 and a runtime of 1:02:40. The page showed a relative publication age of one year; no exact release year or companion playlist is asserted. Kept as one full set with no chapter/song rows."
+    },
+    {
+      "id": "set-aditya-jay-mogal-jogmaya-nonstop",
+      "title": "Aditya Gadhvi Garba Mogal Maa Na Nonstop Garba",
+      "artists": ["Aditya Gadhvi"],
+      "series": "Jay Mogal Jogmaya",
+      "categories": ["traditional-garba", "mataji-devotional"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "KMo7XvDBqfo",
+        "url": "https://www.youtube.com/watch?v=KMo7XvDBqfo",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "1h 11m 53s",
+      "durationSeconds": 4313,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "759K",
+        "checkedAt": "2026-09-29"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One complete continuous Garba recording from Studio Sharda's verified YouTube channel. The video description credits album Jay Mogal Jogmaya, singer Aditya Gadhvi, and Studio Sharda as the music label. YouTube displayed 759K views on 2026-09-29 and a runtime of 1:11:53. The page showed a relative publication age of ten years; no exact release year or companion playlist is asserted. Kept as one full set with no chapter/song rows."
+    },
+    {
+      "id": "set-amber-gaje-2021-nonstop-jhankar",
+      "title": "અંબર ગાજે । Amber Gaje | Nonstop Raas Garba | Aditya Gadhvi | Shruti Ahir | Navratri Special 2021",
+      "artists": ["Aditya Gadhvi", "Shruti Ahir"],
+      "year": 2021,
+      "series": "Amber Gaje",
+      "categories": ["traditional-garba", "raas-dandiya"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "COImOkuZ_wU",
+        "url": "https://www.youtube.com/watch?v=COImOkuZ_wU",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "1 hour, 4 minutes",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "271,099",
+        "checkedAt": "2026-09-30"
+      },
+      "segmentRouting": "metadata-only",
+      "chapterStatus": "published-complete",
+      "segments": [
+        {"title": "Sarar Sarar", "startSeconds": 0},
+        {"title": "Kan Tari Moraliye Mohi Ne", "startSeconds": 77},
+        {"title": "Sad Karyu Tya Aavje", "startSeconds": 310},
+        {"title": "He Maru Vanrate Vanma Rudu", "startSeconds": 568},
+        {"title": "Chakasar Pal Mathe Dholida Dhuske", "startSeconds": 764},
+        {"title": "Khamma Mara Nandji Na Lal", "startSeconds": 885},
+        {"title": "Kanuda Na Bag Ma", "startSeconds": 1149},
+        {"title": "Venuma Virdo", "startSeconds": 1321},
+        {"title": "Zilan Tara Pani", "startSeconds": 1563},
+        {"title": "Sava Baser Nu Maru Datardu", "startSeconds": 1704},
+        {"title": "Ho Rang Rasiya Kya Rami Aavya", "startSeconds": 1909},
+        {"title": "Nand Kuvar Natwar", "startSeconds": 2167},
+        {"title": "Ubhali Re Ne Re Govalani", "startSeconds": 2381},
+        {"title": "Bhala Bhanejda Sarovar", "startSeconds": 2639},
+        {"title": "Sharad Punam Ni Ratadi", "startSeconds": 2816},
+        {"title": "Ramva Aavo Ne Raas", "startSeconds": 3007},
+        {"title": "He Sohe Radha Ne Kan", "startSeconds": 3196},
+        {"title": "Ras Radhe Ghan Shyam Rame", "startSeconds": 3386},
+        {"title": "Ambar Gaje Megha Dammar Gaje", "startSeconds": 3614}
+      ],
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One continuous 2021 Nonstop Raas Garba upload from Jhankar Music Gujarati (Kinjal Studio)'s verified YouTube channel. Its description identifies Amber Gaje, credits Aditya Gadhvi and Shruti Ahir, music by Pankaj Bhatt, and label Kinjal Studio; it publishes all 19 chapter titles and start times. The watch page showed 271,099 views and an Oct 4, 2021 publication date on 2026-09-30; rendered search results display a rounded runtime of 1 hour 4 minutes. Chapters are retained as metadata only. This 2021 master is not linked to the distinct 2024 expanded Amber Gaje release, and no exact duration seconds, chapter end times, or separate song playback routes are inferred."
+    }
+  ]
+}

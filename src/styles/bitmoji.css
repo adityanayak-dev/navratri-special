@@ -1,0 +1,99 @@
+@property --a1 { syntax: '<color>'; inherits: true; initial-value: #c26a98; }
+@property --a2 { syntax: '<color>'; inherits: true; initial-value: #3c1735; }
+
+.bm { --size: 220px; position: relative; width: var(--size); aspect-ratio: 1 / 1; flex: none; transition: --a1 .7s ease, --a2 .7s ease; isolation: isolate; }
+.bm-aura { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 50% 38%, var(--a1) 0%, var(--a2) 82%); }
+.bm-round { border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px rgba(255,255,255,.10), 0 18px 46px -14px var(--glow, var(--a1)); }
+.bm-free .bm-aura { inset: 8% 6% 0; opacity: .5; }
+.bm-free .bm-mask { -webkit-mask-image: linear-gradient(#000 78%, transparent 99%); mask-image: linear-gradient(#000 78%, transparent 99%); }
+.bm-mask { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; }
+.bm-free .bm-mask { overflow: visible; }
+.bm-zoom { position: absolute; inset: 0; transform-origin: var(--zx) var(--zy); }
+.bm.is-zoom .bm-zoom { transform: translate(calc(50% - var(--zx)), calc(50% - var(--zy) + 4%)) scale(2.15); }
+.bm-body { position: absolute; inset: 0; transform-origin: 50% 100%; animation: bmBreath 4.4s ease-in-out infinite; will-change: transform; }
+.bm-body img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+.bm-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.bm-layer.is-in { animation: bmIn .4s ease both; }
+.bm-layer.is-out { animation: bmOut .4s ease both; }
+@keyframes bmIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bmOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes bmBreath { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-1.2%) scale(1.012); } }
+
+/* head motion per mood */
+.motion-bob { animation: mBob .9s ease-in-out infinite; }
+.motion-laugh { animation: mLaugh .42s ease-in-out infinite; }
+.motion-sway { animation: mSway 2.4s ease-in-out infinite; }
+.motion-wiggle { animation: mWiggle 1.1s ease-in-out infinite; }
+.motion-shake { animation: mShake .16s linear infinite; }
+.motion-tilt { animation: mTilt 3.2s ease-in-out infinite; }
+.motion-droop { animation: mDroop 3.6s ease-in-out infinite; }
+.motion-tremble { animation: mTremble .22s linear infinite; }
+.motion-pop { animation: mPop .7s cubic-bezier(.2,1.6,.4,1) both, bmBreath 4.4s 0.7s ease-in-out infinite; }
+.motion-pout { animation: mPout 2.6s ease-in-out infinite; }
+@keyframes mBob { 0%,100% { transform: translateY(0) rotate(-1.5deg); } 50% { transform: translateY(-3.2%) rotate(1.5deg) scale(1.02); } }
+@keyframes mLaugh { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-2.4%) rotate(2deg); } }
+@keyframes mSway { 0%,100% { transform: rotate(-3.5deg) translateX(-1%); } 50% { transform: rotate(3.5deg) translateX(1%); } }
+@keyframes mWiggle { 0%,100% { transform: rotate(-3deg) translateY(1%); } 50% { transform: rotate(3deg) translateY(1%); } }
+@keyframes mShake { 0% { transform: translate(-1%, 0) rotate(-1deg); } 25% { transform: translate(1%, .6%) rotate(1deg); } 50% { transform: translate(-.8%, -.4%) rotate(-.6deg); } 75% { transform: translate(.9%, .3%) rotate(.8deg); } 100% { transform: translate(-1%, 0) rotate(-1deg); } }
+@keyframes mTilt { 0%,100% { transform: rotate(-5deg) translateX(-1.5%); } 50% { transform: rotate(-3deg) translateX(-.5%); } }
+@keyframes mDroop { 0%,100% { transform: translateY(3%) rotate(3deg); } 50% { transform: translateY(5%) rotate(4.5deg); } }
+@keyframes mTremble { 0% { transform: translate(-.5%, 1%) rotate(-.7deg); } 50% { transform: translate(.5%, 1.2%) rotate(.7deg); } 100% { transform: translate(-.5%, 1%) rotate(-.7deg); } }
+@keyframes mPop { 0% { transform: scale(.9); } 100% { transform: scale(1.05); } }
+@keyframes mPout { 0%,100% { transform: rotate(-2.5deg) scale(1.01); } 50% { transform: rotate(2.5deg) scale(1.03); } }
+
+/* face parts */
+.bm-lid, .bm-blink { transform-box: fill-box; transform-origin: 50% 0; transform: scaleY(var(--lid, 0)); transition: transform .45s ease; }
+.bm-svg.is-blinking .bm-blink { animation: bmBlink .24s ease-in-out; }
+@keyframes bmBlink { 0%, 100% { transform: scaleY(var(--lid, 0)); } 45%, 55% { transform: scaleY(1); } }
+.bm-tint { opacity: var(--a, .3); }
+.bm-heart-eye { transform-box: fill-box; transform-origin: center; animation: bmBeat .75s ease-in-out infinite; }
+@keyframes bmBeat { 0%,100% { transform: scale(.92); } 50% { transform: scale(1.12); } }
+.bm-vein { transform-box: fill-box; transform-origin: center; animation: bmVein .5s ease-in-out infinite; }
+@keyframes bmVein { 0%,100% { transform: scale(.85) rotate(-6deg); } 50% { transform: scale(1.15) rotate(6deg); } }
+.bm-tear { animation: bmTear 1.6s ease-in infinite; }
+.bm-tear.slow { animation-duration: 2.8s; }
+@keyframes bmTear { 0% { translate: 0 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: .9; } 100% { translate: 2px 62px; opacity: 0; } }
+.bm-stream { transform-box: fill-box; transform-origin: 50% 0; animation: bmStream 1.6s ease-in-out infinite; }
+@keyframes bmStream { 0%,100% { transform: scaleY(.5); opacity: .5; } 50% { transform: scaleY(1); opacity: .85; } }
+.bm-sweat { animation: bmSweat 2s ease-in infinite; }
+@keyframes bmSweat { 0% { translate: 0 -4px; opacity: 0; } 25% { opacity: 1; } 100% { translate: 0 30px; opacity: 0; } }
+.bm-wobble { animation: bmWob .3s ease-in-out infinite alternate; }
+@keyframes bmWob { from { transform: translateY(-1px); } to { transform: translateY(2px); } }
+.bm-bang, .bm-bubble { transform-box: fill-box; transform-origin: 50% 90%; animation: bmStick 1.4s cubic-bezier(.2,1.5,.4,1) infinite alternate; }
+@keyframes bmStick { from { transform: scale(.82) rotate(-6deg); } to { transform: scale(1.06) rotate(5deg); } }
+.bm-sideeyes { animation: bmSide 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes bmSide { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08) rotate(-4deg); } }
+.bm-pupil { animation: bmPupil 2.2s ease-in-out infinite; }
+@keyframes bmPupil { 0%,40% { transform: translateX(0); } 55%,90% { transform: translateX(-9px); } 100% { transform: translateX(0); } }
+.bm-glint { transform-box: fill-box; transform-origin: center; animation: bmGlint 1.6s ease-in-out infinite; }
+@keyframes bmGlint { 0%,100% { transform: scale(0) rotate(0); opacity: 0; } 40% { transform: scale(1) rotate(45deg); opacity: 1; } 70% { transform: scale(.4) rotate(90deg); opacity: .5; } }
+.bm-puff { animation: bmPuff 1.6s ease-in-out infinite; }
+@keyframes bmPuff { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+/* particles */
+.bm-fx { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.bm-fx i { position: absolute; font-style: normal; line-height: 1; }
+.fx-sparkle i { left: var(--x); top: var(--y); color: #ffe08a; font-size: calc(var(--s) * 20px); text-shadow: 0 0 10px rgba(255,214,102,.9); animation: fxTwinkle var(--dur) var(--d) ease-in-out infinite; opacity: 0; }
+@keyframes fxTwinkle { 0%,100% { transform: scale(0) rotate(0); opacity: 0; } 50% { transform: scale(1) rotate(35deg); opacity: 1; } }
+.fx-heart i { left: var(--x); bottom: -8%; color: #ff7aa8; font-size: calc(var(--s) * 22px); text-shadow: 0 0 12px rgba(255,90,150,.8); animation: fxRise calc(var(--dur) + 1.4s) var(--d) ease-out infinite; opacity: 0; }
+@keyframes fxRise { 0% { transform: translateY(0) scale(.5); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-260%) translateX(14px) scale(1.1); opacity: 0; } }
+.fx-steam i { left: var(--x); top: 14%; width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.75), rgba(255,255,255,0) 70%); animation: fxSteam 1.5s var(--d) ease-out infinite; opacity: 0; }
+@keyframes fxSteam { 0% { transform: translateY(14px) scale(.5); opacity: 0; } 30% { opacity: .85; } 100% { transform: translateY(-46px) scale(1.7); opacity: 0; } }
+.fx-drops i { left: var(--x); top: 36%; width: 7px; height: 11px; border-radius: 60% 60% 70% 70%; background: #a5deff; animation: fxDrop var(--dur) var(--d) ease-in infinite; opacity: 0; }
+@keyframes fxDrop { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(150px); opacity: 0; } }
+.fx-burst i { left: 76%; top: 20%; width: 4px; height: 16px; border-radius: 3px; background: #ff9d5c; transform-origin: 50% 0; animation: fxBurst .9s var(--d) ease-out infinite; opacity: 0; }
+@keyframes fxBurst { 0% { transform: rotate(var(--r)) translateY(34px) scaleY(.3); opacity: 0; } 30% { opacity: 1; } 100% { transform: rotate(var(--r)) translateY(52px) scaleY(1); opacity: 0; } }
+
+.bm-chip { position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%); z-index: 4; padding: .32em .9em; border-radius: 999px; background: rgba(20,8,20,.82); border: 1px solid rgba(255,243,223,.22); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; animation: chipPop .45s cubic-bezier(.2,1.5,.4,1) both; }
+@keyframes chipPop { from { transform: translateX(-50%) scale(.6); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-body, .bm-fx i, .bm-tint, .bm-blush, .bm-heart-eye, .bm-vein, .bm-tear, .bm-stream, .bm-sweat, .bm-bang, .bm-bubble, .bm-sideeyes, .bm-pupil, .bm-glint, .bm-puff, .bm-wobble { animation: none !important; }
+  .bm-svg.is-blinking .bm-blink { animation: none; }
+}
+
+/* off-screen Bitmojis freeze; phones skip the idle breathing */
+.bm[data-vis='0'] * { animation-play-state: paused !important; }
+.bm[data-vis='0'] .bm-fx { display: none; }
+.is-lite .bm-body.motion-idle { animation: none; }
+.is-lite .bm-mask { contain: paint; }

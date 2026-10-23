@@ -1,0 +1,141 @@
+{
+  "version": "0.28.0",
+  "updated": "2026-09-28",
+  "note": "Issue #152 Catalogue Wave D7 fully resolved under the production YouTube-only execution policy. All eleven Nortani Raat 2 songs are independently verified on Kirtidan Gadhvi Official YouTube distribution and are executable YouTube routes, with prior Amazon Music references retained as alternate provenance where applicable.",
+  "songSources": {
+    "nortani-raat-2-kirtidan-anita-2025-01-divo-maa-no-divo": {
+      "provider": "youtube",
+      "videoId": "Vsh_cuFmP3w",
+      "sourceUrl": "https://www.youtube.com/watch?v=Vsh_cuFmP3w",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 1,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2X12YX",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-02-birdali-bahucharvali": {
+      "provider": "youtube",
+      "videoId": "pbh2_Wq2aS0",
+      "sourceUrl": "https://www.youtube.com/watch?v=pbh2_Wq2aS0",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 2,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2Q8F6V",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-03-garbe-ramva-aavo-madi-maa-mogal": {
+      "provider": "youtube",
+      "videoId": "xQMhX6yvQys",
+      "sourceUrl": "https://www.youtube.com/watch?v=xQMhX6yvQys",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 3,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2T34P2",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-04-meethi-meethi-te-sakhi": {
+      "provider": "youtube",
+      "videoId": "bjvCI12UuCY",
+      "sourceUrl": "https://www.youtube.com/watch?v=bjvCI12UuCY",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 4,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2W56V3",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-05-sharad-poonam-ni-rat-ma": {
+      "provider": "youtube",
+      "videoId": "s2Pp3Zy7D_Y",
+      "sourceUrl": "https://www.youtube.com/watch?v=s2Pp3Zy7D_Y",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 5,
+      "evidenceType": "verified-official-song"
+    },
+    "nortani-raat-2-kirtidan-anita-2025-06-radha-ne-shyam-rame-raas-sharad-purnima-ni-raat": {
+      "provider": "youtube",
+      "videoId": "j0xm-j_L-tQ",
+      "sourceUrl": "https://www.youtube.com/watch?v=j0xm-j_L-tQ",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 6,
+      "evidenceType": "verified-official-song"
+    },
+    "nortani-raat-2-kirtidan-anita-2025-07-avi-norta-ni-raat": {
+      "provider": "youtube",
+      "videoId": "68JNU2G2yWg",
+      "sourceUrl": "https://www.youtube.com/watch?v=68JNU2G2yWg",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 7,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2T1VNW",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-08-sona-no-garbo": {
+      "provider": "youtube",
+      "videoId": "02RqLW6cJpI",
+      "sourceUrl": "https://www.youtube.com/watch?v=02RqLW6cJpI",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 8,
+      "evidenceType": "verified-official-song"
+    },
+    "nortani-raat-2-kirtidan-anita-2025-09-dhire-dhire-chundadiye-rang-lagyo": {
+      "provider": "youtube",
+      "videoId": "I2rzBJ5_P_4",
+      "sourceUrl": "https://www.youtube.com/watch?v=I2rzBJ5_P_4",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 9,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2T54MG",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-10-gori-gori-gokul-gaam-ni-chori": {
+      "provider": "youtube",
+      "videoId": "TPXLfYzSPf8",
+      "sourceUrl": "https://www.youtube.com/watch?v=TPXLfYzSPf8",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 10,
+      "evidenceType": "verified-official-song",
+      "alternate": {
+        "provider": "amazon-music",
+        "sourceUrl": "https://music.amazon.com/tracks/B0FP2WC1JD",
+        "sourceType": "verified-track-source"
+      }
+    },
+    "nortani-raat-2-kirtidan-anita-2025-11-nav-nav-naganiyo-no-rafdo": {
+      "provider": "youtube",
+      "videoId": "htucA8V33oM",
+      "sourceUrl": "https://www.youtube.com/watch?v=htucA8V33oM",
+      "sourceType": "official-artist-channel",
+      "releaseId": "nortani-raat-2-kirtidan-anita-2025",
+      "trackNumber": 11,
+      "evidenceType": "verified-official-song"
+    }
+  }
+}

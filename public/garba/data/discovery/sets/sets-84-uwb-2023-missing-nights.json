@@ -1,0 +1,58 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-uwb-2023-day3",
+      "title": "United Way Of Baroda - Garba Mahotsav 2023 By Atul Purohit - Day 3",
+      "artists": ["Atul Purohit"],
+      "year": 2023,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "fgYcyxUyayw",
+        "url": "https://www.youtube.com/watch?v=fgYcyxUyayw",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "notes": "Official United Way of Baroda channel recording. The watch page displays the Day 3 2023 title, 446K views, and #UWay2023; YouTube search showed a rounded runtime of 2h 57m (checked 2026-09-30). Preserved as one continuous live-night programme with no song or chapter rows inferred.",
+      "sourceRuntimeDisplay": "2h 57m",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "446K",
+        "checkedAt": "2026-09-30"
+      }
+    },
+    {
+      "id": "set-uwb-2023-day5",
+      "title": "United Way Of Baroda - Garba Mahotsav 2023 By Atul Purohit - Day 5",
+      "artists": ["Atul Purohit"],
+      "year": 2023,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "8xl9O1ruyuE",
+        "url": "https://www.youtube.com/watch?v=8xl9O1ruyuE",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "notes": "Official United Way of Baroda channel recording. The watch page displays the Day 5 2023 title, 216K views, and #UWay2023; the player reported a 2:45:34 runtime (checked 2026-09-30). Preserved as one continuous live-night programme with no song or chapter rows inferred.",
+      "sourceRuntimeDisplay": "2h 45m 34s",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "216K",
+        "checkedAt": "2026-09-30"
+      },
+      "durationSeconds": 9934
+    }
+  ]
+}

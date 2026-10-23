@@ -1,0 +1,113 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-uwb-2019-day1",
+      "title": "United Way Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 1",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "ffXTikRA60g",
+        "url": "https://www.youtube.com/watch?v=ffXTikRA60g",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 53m 34s",
+      "durationSeconds": 10414,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1.4M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel recording. The title identifies the 2019 Garba Mahotsav Day 1 and credits Atul Purohit; the official 2019 playlist groups it with the event-night recordings. The watch page showed 1.4M views and a 2h 53m 34s runtime (checked 2026-09-30). Kept as one continuous event set; no separate song or chapter rows are inferred."
+    },
+    {
+      "id": "set-uwb-2019-day3",
+      "title": "United Way Of Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 3",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "1GLGg_AhM1k",
+        "url": "https://www.youtube.com/watch?v=1GLGg_AhM1k",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 46m 31s",
+      "durationSeconds": 9991,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1.4M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel recording. The title identifies the 2019 Garba Mahotsav Day 3 and credits Atul Purohit. The watch page showed 1.4M views and a 2h 46m 31s runtime; playback started (checked 2026-09-30). Kept as one continuous event set; no separate song or chapter rows are inferred."
+    },
+    {
+      "id": "set-uwb-2019-day5",
+      "title": "United Way Of Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 5",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "Uht5gLVk8w0",
+        "url": "https://www.youtube.com/watch?v=Uht5gLVk8w0",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 45m 35s",
+      "durationSeconds": 9935,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "790K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel recording. The title identifies the 2019 Garba Mahotsav Day 5 and credits Atul Purohit. The watch page showed 790K views and a 2h 45m 35s runtime; playback started (checked 2026-09-30). Kept as one continuous event set; no separate song or chapter rows are inferred."
+    },
+    {
+      "id": "set-uwb-2019-day6",
+      "title": "United Way Of Baroda - Garba Mahotsav 2019 By Atul Purohit - Day 6",
+      "artists": ["Atul Purohit"],
+      "year": 2019,
+      "series": "United Way of Baroda Garba Mahotsav",
+      "setType": "live-full-set",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "9loQZiPN0Ew",
+        "url": "https://www.youtube.com/watch?v=9loQZiPN0Ew",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "3h 21m 7s",
+      "durationSeconds": 12067,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1.7M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel recording. The title identifies the 2019 Garba Mahotsav Day 6 and credits Atul Purohit. The watch page showed 1.7M views and a 3h 21m 7s runtime; playback started (checked 2026-09-30). Kept as one continuous event set; no separate song or chapter rows are inferred."
+    }
+  ]
+}

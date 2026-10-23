@@ -1,0 +1,53 @@
+{
+  "updated": "2026-09-29",
+  "sets": [
+    {
+      "id": "set-shyam-bansari-3-1998-soor-mandir",
+      "title": "શ્યામ | Shyam | Bansari 3 | Nonstop Raas Garba | Hemant Chauhan | Navratri Songs | Soor Mandir",
+      "artists": ["Hemant Chauhan"],
+      "year": 1998,
+      "series": "Bansari",
+      "volume": "3",
+      "categories": ["krishna-garba", "traditional-garba"],
+      "setType": "verified-label-nonstop",
+      "officiality": "verified-label-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "n6EiPrtxqlk",
+        "url": "https://www.youtube.com/watch?v=n6EiPrtxqlk",
+        "embeddable": true
+      },
+      "linkedReleaseId": "shyam-raas-v3-1998",
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1,872,354",
+        "checkedAt": "2026-09-29"
+      },
+      "segmentRouting": "metadata-only",
+      "segments": [
+        {"title": "Chhand", "startSeconds": 0},
+        {"title": "Ashabharya Te Ame Aaviya Ne", "startSeconds": 75},
+        {"title": "Gokul Vahelera Padharajo Re", "startSeconds": 275},
+        {"title": "Bhala Bhanejda Sarovar Jau", "startSeconds": 480},
+        {"title": "Ame Govadiya Re Vanra Te Vanna", "startSeconds": 668},
+        {"title": "Radhajina Ucha Mandir Nicha Mol", "startSeconds": 890},
+        {"title": "Kanudana Bagma Champo Ne", "startSeconds": 1087},
+        {"title": "Zagdo Lagyo Re Jamnaji Ne Aare", "startSeconds": 1237},
+        {"title": "Libuda Zule Tara Bagma Chabila Kan", "startSeconds": 1454},
+        {"title": "Gokulma Ek Kanudo Kan Se", "startSeconds": 1684},
+        {"title": "Tari Nazryuna Ae Ban Kanuda", "startSeconds": 1860},
+        {"title": "Sona Indhoni Rupa Bedlu Re Nagar", "startSeconds": 2090},
+        {"title": "Brij Bansi Govaliyo Re", "startSeconds": 2328},
+        {"title": "Mahida Lyore Mahida Lyore", "startSeconds": 2508},
+        {"title": "Dhan Re Gokuliyu Dhan Re Vanravan", "startSeconds": 2785},
+        {"title": "Vanra Te Vanma Morpanchi Bole", "startSeconds": 2959},
+        {"title": "Ghammar Ghammar Mara Valona Gaje", "startSeconds": 3142},
+        {"title": "Latke Halone Nandlal", "startSeconds": 3330},
+        {"title": "Vage Chhe Re Vage Chhe Vanravan Morli", "startSeconds": 3512}
+      ],
+      "chapterStatus": "published-complete",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "One continuous 1998 Shyam (Bansari-3) nonstop Raas Garba master from Soor Mandir's verified YouTube channel. Its description identifies album Shyam (Bansari-3), singer Hemant Chauhan, music Appu, and label Soor Mandir; the visible watch page showed 1,872,354 views and an Oct 11, 2015 upload date. All 19 published chapter titles and start times are retained as metadata within this one set, with no separate song or chapter playback routes. The original 1998 catalogue release year remains distinct from the 2015 upload date; runtime seconds and chapter end times are not inferred."
+    }
+  ]
+}

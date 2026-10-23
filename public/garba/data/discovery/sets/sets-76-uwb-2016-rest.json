@@ -1,0 +1,140 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-uwb-2016-day3-live-stream",
+      "title": "United Way Baroda - Day 3 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "_NHpLdo3zmw",
+        "url": "https://www.youtube.com/watch?v=_NHpLdo3zmw",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 29m 22s",
+      "durationSeconds": 8962,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "727K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 3; the description dates the live Garba in Vadodara to 3 October 2016. The watch page showed 727K views and playback started (checked 2026-09-30). Kept as one continuous live-event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2016-day4-live-stream",
+      "title": "United Way Baroda - Day 4 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "-gowHfPYOhU",
+        "url": "https://www.youtube.com/watch?v=-gowHfPYOhU",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "1h 22m 32s",
+      "durationSeconds": 4952,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "89K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 4; the description dates the live Garba in Vadodara to 4 October 2016. The watch page showed 89K views and playback started (checked 2026-09-30). Catalogued as one continuous live-event recording; its 1:22:32 runtime is not asserted to cover the entire event night. No performer credit or song/chapter rows are inferred."
+    },
+    {
+      "id": "set-uwb-2016-day6-live-stream",
+      "title": "United Way Baroda - Day 6 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "-U8pFKjMZ_Q",
+        "url": "https://www.youtube.com/watch?v=-U8pFKjMZ_Q",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 51m 41s",
+      "durationSeconds": 10301,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "1.1M",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 6; the description dates the live Garba in Vadodara to 6 October 2016. The watch page showed 1.1M views and playback started (checked 2026-09-30). Kept as one continuous live-event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2016-day8-live-stream",
+      "title": "United Way Baroda - Day 8 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "RD3BMzCDhIo",
+        "url": "https://www.youtube.com/watch?v=RD3BMzCDhIo",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 49m 17s",
+      "durationSeconds": 10157,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "204K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 8; the description dates the live Garba in Vadodara to 8 October 2016. The watch page showed 204K views and playback started (checked 2026-09-30). Kept as one continuous live-event recording with no performer credit or song/chapter rows inferred."
+    },
+    {
+      "id": "set-uwb-2016-day10-live-stream",
+      "title": "United Way Baroda - Day 10 - Live Stream",
+      "artists": [],
+      "year": 2016,
+      "series": "United Way Baroda Live Stream",
+      "setType": "live-event-recording",
+      "officiality": "official-event-channel",
+      "source": {
+        "provider": "youtube",
+        "videoId": "f5WF7zLW8k8",
+        "url": "https://www.youtube.com/watch?v=f5WF7zLW8k8",
+        "embeddable": false
+      },
+      "linkedReleaseId": null,
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-external-visible",
+      "sourceRuntimeDisplay": "2h 32m 34s",
+      "durationSeconds": 9154,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "210K",
+        "checkedAt": "2026-09-30"
+      },
+      "notes": "Official United Way of Baroda channel upload. The title identifies Day 10; the description dates the live Garba in Vadodara to 10 October 2016. The watch page showed 210K views and playback started (checked 2026-09-30). Kept as one continuous live-event recording with no performer credit or song/chapter rows inferred."
+    }
+  ]
+}

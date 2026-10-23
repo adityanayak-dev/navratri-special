@@ -1,0 +1,61 @@
+{
+  "updated": "2026-09-30",
+  "sets": [
+    {
+      "id": "set-falguni-aavo-ramva-raas-2018-part-1-community",
+      "title": "Non Stop Falguni Pathak Garba - 2018 | Part - 1",
+      "artists": ["Falguni Pathak"],
+      "year": 2018,
+      "series": "Aavo Ramva Raas",
+      "categories": ["traditional-garba"],
+      "setType": "official-release-community-video",
+      "officiality": "community-upload",
+      "source": {
+        "provider": "youtube",
+        "videoId": "PVzXD_PzQdU",
+        "url": "https://www.youtube.com/watch?v=PVzXD_PzQdU",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "31m 17s",
+      "durationSeconds": 1877,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "606K",
+        "checkedAt": "2026-09-30"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "RAJSHAKTI PRODUCTION's YouTube title identifies this as Part 1 of a 2018 Falguni Pathak nonstop Garba. Its description calls the original album name “Aavo Ramva Raas”; that album attribution comes only from this unverified uploader and is not treated as a confirmed catalogue release. The channel had 14.2K subscribers and was not verified; YouTube displayed 606K views and a 31:17 runtime on 2026-09-30. No matching official playlist or stronger official upload was found. Retained as one continuous community discovery set, with no rights claim, no linked release, and no inferred songs or chapters."
+    },
+    {
+      "id": "set-falguni-aavo-ramva-raas-2018-part-2-community",
+      "title": "Non Stop Falguni Pathak Garba - 2018 | Part - 2",
+      "artists": ["Falguni Pathak"],
+      "year": 2018,
+      "series": "Aavo Ramva Raas",
+      "categories": ["traditional-garba"],
+      "setType": "official-release-community-video",
+      "officiality": "community-upload",
+      "source": {
+        "provider": "youtube",
+        "videoId": "8iZkaeYHhw8",
+        "url": "https://www.youtube.com/watch?v=8iZkaeYHhw8",
+        "embeddable": true
+      },
+      "linkedReleaseId": null,
+      "sourceRuntimeDisplay": "29m 15s",
+      "durationSeconds": 1755,
+      "viewSnapshot": {
+        "provider": "youtube",
+        "displayed": "5.5M",
+        "checkedAt": "2026-09-30"
+      },
+      "segments": [],
+      "chapterStatus": "full-set-only-no-chapter-evidence",
+      "playbackPolicy": "youtube-embed-visible",
+      "notes": "RAJSHAKTI PRODUCTION's YouTube title identifies this as Part 2 of a 2018 Falguni Pathak nonstop Garba. Its description calls the original album name “Aavo Ramva Raas”; that album attribution comes only from this unverified uploader and is not treated as a confirmed catalogue release. The channel had 14.2K subscribers and was not verified; YouTube displayed 5.5M views and a 29:15 runtime on 2026-09-30. No matching official playlist or stronger official upload was found. Retained as one continuous community discovery set, with no rights claim, no linked release, and no inferred songs or chapters."
+    }
+  ]
+}

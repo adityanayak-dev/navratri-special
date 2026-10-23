@@ -1,0 +1,5556 @@
+:root {
+  --ivory: #f6ecd7;
+  --muted: rgba(246, 236, 215, 0.68);
+  --faint: rgba(246, 236, 215, 0.22);
+  --accent: #d6b06f;
+  --panel: rgba(13, 17, 30, 0.91);
+  --panel-solid: #111624;
+  --courtyard-text-scrim: rgba(5, 7, 16, 0.72);
+  --courtyard-label-scrim: rgba(5, 7, 16, 0.64);
+  --courtyard-control-scrim: rgba(5, 7, 16, 0.52);
+  --courtyard-focus-halo: rgba(5, 7, 16, 0.88);
+  --courtyard-muted-text: rgba(246, 236, 215, 0.90);
+  --courtyard-text-shadow: 0 1px 2px rgba(3, 4, 10, 0.92), 0 5px 20px rgba(3, 4, 10, 0.68);
+  --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  --safe-top: max(20px, env(safe-area-inset-top));
+  --safe-right: max(20px, env(safe-area-inset-right));
+  --safe-bottom: max(20px, env(safe-area-inset-bottom));
+  --safe-left: max(20px, env(safe-area-inset-left));
+  --ease: cubic-bezier(.2, .72, .2, 1);
+  --serif: "Iowan Old Style", "Palatino Linotype", Baskerville, Georgia, "Times New Roman", serif;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--sans);
+  color: var(--ivory);
+  background: #111323;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { width: 100%; min-height: 100%; background: #111323; overscroll-behavior: none; }
+body { width: 100%; min-height: 100%; margin: 0; overflow: hidden; background: #111323; -webkit-tap-highlight-color: transparent; }
+button, input { font: inherit; }
+button { color: inherit; }
+button, a { touch-action: manipulation; }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--ivory);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--courtyard-focus-halo);
+}
+
+.skip-link {
+  position: fixed; z-index: 100; top: 8px; left: 8px; transform: translateY(-160%);
+  padding: 9px 13px; border-radius: 10px; background: #0d111e; color: var(--ivory); text-decoration: none;
+}
+.skip-link:focus { transform: translateY(0); }
+
+.app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #111323;
+  isolation: isolate;
+}
+
+.world { position: absolute; inset: 0; z-index: -3; overflow: hidden; background: #111323; }
+.world-layer {
+  position: absolute; inset: -2px;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+  transform: scale(1.003);
+  transition: opacity 900ms var(--ease), filter 900ms var(--ease);
+  will-change: opacity;
+}
+.world-layer.is-visible { opacity: 1; }
+.world-vignette {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(7,8,18,.10) 0%, rgba(7,8,18,.015) 30%, rgba(7,8,18,.13) 68%, rgba(7,8,18,.56) 100%),
+    radial-gradient(circle at 50% 46%, rgba(5,7,16,.015) 0 20%, rgba(5,7,16,.07) 56%, rgba(5,7,16,.2) 100%);
+  pointer-events: none;
+}
+.world-ambient {
+  position: absolute;
+  left: 38%; right: 38%; bottom: 17%; height: 1px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 36%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 18%, transparent);
+  opacity: .12;
+  transform: scaleX(.72);
+  transition: background-color 700ms var(--ease), box-shadow 700ms var(--ease), opacity 350ms ease;
+  pointer-events: none;
+}
+.app.is-playing .world-ambient { opacity: .22; }
+
+.topbar {
+  position: absolute; inset: 0 0 auto 0; z-index: 8;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: clamp(24px, 3vw, 44px) clamp(28px, 3.5vw, 58px);
+  padding-left: max(clamp(28px, 3.5vw, 58px), var(--safe-left));
+  padding-right: max(clamp(28px, 3.5vw, 58px), var(--safe-right));
+}
+.brand {
+  color: var(--ivory); text-decoration: none;
+  font-family: var(--serif);
+  font-size: clamp(25px, 2.05vw, 38px); letter-spacing: .018em;
+  text-shadow: var(--courtyard-text-shadow);
+}
+.utilities { display: flex; align-items: center; gap: clamp(7px, 1vw, 14px); }
+.icon-button, .transport, .heart-button {
+  appearance: none; border: 0; background: var(--courtyard-control-scrim); padding: 8px;
+  display: grid; place-items: center; cursor: pointer; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(246, 236, 215, 0.10);
+  filter: drop-shadow(0 1px 2px rgba(3, 4, 10, 0.78));
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.icon-button svg, .transport svg, .heart-button svg {
+  width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round;
+}
+@media (hover: hover) {
+  .icon-button:hover, .transport:hover, .heart-button:hover { background: rgba(24, 25, 34, .72); }
+  .genre-button:hover { color: var(--ivory); }
+  .browse-button:hover span { border-color: color-mix(in srgb, var(--accent) 60%, var(--ivory)); }
+}
+.icon-button:active, .transport:active, .heart-button:active { transform: scale(.94); }
+.has-badge { position: relative; }
+.utility-badge {
+  position: absolute; top: -2px; right: -2px; min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: 999px; display: none; place-items: center;
+  background: var(--accent); color: #17131b; font-size: 9.5px; line-height: 1; font-weight: 750;
+  box-shadow: 0 0 0 2px #0d0f18, 0 2px 6px rgba(0,0,0,.45);
+  pointer-events: none; z-index: 2;
+}
+.utility-badge.show { display: grid; }
+
+.player-shell {
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto auto auto auto 1fr;
+  align-content: center;
+  justify-items: center;
+  padding: clamp(104px, 10vh, 148px) 22px max(28px, 3.5vh);
+}
+.track-block {
+  position: relative;
+  isolation: isolate;
+  grid-row: 2;
+  text-align: center;
+  max-width: min(760px, 78vw);
+  text-shadow: var(--courtyard-text-shadow);
+  transform-origin: center;
+}
+.track-block::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: min(1040px, 112vw);
+  height: calc(100% + 46px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--courtyard-text-scrim) 0 72%,
+    rgba(5, 7, 16, 0.50) 86%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+.genre-eyebrow {
+  margin: 0 auto 8px; color: var(--ivory); font-size: clamp(13px, 1.05vw, 18px);
+  text-align: center;
+  text-transform: uppercase; letter-spacing: .055em; font-weight: 600;
+  text-shadow: var(--courtyard-text-shadow);
+}
+.song-title {
+  margin: 0 auto; font-family: var(--serif); font-weight: 400;
+  text-align: center;
+  font-size: clamp(42px, 4.65vw, 70px); line-height: 1.01; text-wrap: balance;
+  color: var(--ivory); letter-spacing: -.022em;
+  text-shadow: var(--courtyard-text-shadow);
+}
+.track-block.is-long-title .song-title { font-size: clamp(36px, 3.8vw, 58px); }
+.track-block.is-very-long-title .song-title { font-size: clamp(31px, 3.25vw, 50px); }
+.artist-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-inline: auto; text-align: center; }
+.artist {
+  margin: 12px auto 0;
+  text-align: center;
+  max-width: min(620px, 82vw);
+  color: var(--courtyard-muted-text);
+  font-size: clamp(15px, 1.35vw, 21px);
+  text-wrap: balance;
+  letter-spacing: .006em;
+  text-shadow: var(--courtyard-text-shadow);
+}
+.mobile-heart { display: none; margin-top: 8px; }
+.track-block .mobile-heart {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(246,236,215,.66);
+  filter: drop-shadow(0 1px 2px rgba(3,4,10,.96)) drop-shadow(0 4px 12px rgba(3,4,10,.72));
+}
+.track-block .mobile-heart.active {
+  background: transparent;
+  color: var(--accent);
+}
+@media (hover: hover) {
+  .track-block .mobile-heart:hover {
+    background: transparent;
+    color: var(--ivory);
+    filter: drop-shadow(0 1px 2px rgba(3,4,10,.96)) drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 22%, transparent));
+  }
+}
+.track-block .mobile-heart:focus-visible { outline-offset: 2px; }
+
+.controls {
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  text-align: center;
+}
+.play-button {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  position: relative;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  width: 72px;
+  height: 72px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.play-button:active { transform: scale(.96); }
+.play-button svg { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.pause-icon { display: none; }
+.is-playing .play-icon { display: none; }
+.is-playing .pause-icon { display: block; }
+.ambient-ring {
+  position: absolute; inset: -34px; border: 1px solid color-mix(in srgb, var(--accent) 10%, transparent); border-radius: 50%; opacity: .2; pointer-events: none;
+}
+.ambient-ring::before, .ambient-ring::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(246,236,215,.03); }
+.ambient-ring::before { inset: 11px; }
+.ambient-ring::after { inset: 22px; }
+
+.progress-wrap {
+  grid-row: 4;
+  display: grid;
+  align-items: center;
+}
+.time {
+  font-variant-numeric: tabular-nums;
+  text-shadow: var(--courtyard-text-shadow);
+}
+.progress { width: 100%; accent-color: var(--accent); cursor: pointer; }
+input[type="range"] { appearance: none; height: 18px; background: transparent; }
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(to right, var(--ivory) 0 var(--progress,0%), var(--faint) var(--progress,0%) 100%);
+  box-shadow: 0 0 0 1px rgba(5,7,16,.74), 0 1px 6px rgba(5,7,16,.72);
+}
+input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); margin-top: -5px; box-shadow: 0 0 0 1px rgba(5,7,16,.82), 0 0 9px color-mix(in srgb, var(--accent) 50%, transparent); }
+input[type="range"]::-moz-range-track { height: 4px; background: var(--faint); box-shadow: 0 0 0 1px rgba(5,7,16,.74), 0 1px 6px rgba(5,7,16,.72); }
+input[type="range"]::-moz-range-progress { height: 4px; background: var(--ivory); }
+input[type="range"]::-moz-range-thumb { border: 1px solid rgba(5,7,16,.82); width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+
+.genre-strip {
+  grid-row: 5;
+  display: flex; gap: clamp(20px, 2.55vw, 41px); align-items: flex-end;
+  max-width: min(770px, 88vw); overflow-x: auto; scrollbar-width: none; overscroll-behavior-inline: contain;
+  scroll-snap-type: x proximity; scroll-padding-inline: 32px;
+  padding: 20px 10px 9px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    var(--courtyard-label-scrim) 12%,
+    var(--courtyard-label-scrim) 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+}
+.genre-strip::-webkit-scrollbar { display: none; }
+.genre-button {
+  position: relative; flex: 0 0 auto; appearance: none; border: 0; background: transparent; color: var(--courtyard-muted-text); cursor: pointer;
+  padding: 0 0 10px; font-size: clamp(14px, 1.2vw, 19px); white-space: nowrap; scroll-snap-align: center;
+  text-shadow: var(--courtyard-text-shadow);
+  transition: color 180ms ease;
+}
+.genre-button::after { content: ""; position: absolute; height: 1px; left: 16%; right: 16%; bottom: 0; background: transparent; }
+.genre-button::before { content: ""; position: absolute; width: 7px; height: 7px; border-radius: 50%; left: 50%; bottom: -4px; transform: translateX(-50%); background: transparent; }
+.genre-button.active { color: var(--ivory); }
+
+/* Courtyard integration: make the player feel lit by the scene instead of sitting on it. */
+.player-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.player-shell::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: clamp(58px, 8vh, 102px);
+  width: min(940px, 96vw);
+  height: clamp(250px, 34vh, 390px);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 50% 70%, color-mix(in srgb, var(--accent) 10%, transparent) 0 9%, rgba(8,10,18,.14) 34%, rgba(8,10,18,.08) 53%, transparent 72%),
+    linear-gradient(to bottom, transparent 4%, rgba(6,8,15,.05) 42%, rgba(6,8,15,.16) 100%);
+  filter: blur(2px);
+  opacity: .88;
+  pointer-events: none;
+}
+
+.player-shell::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: clamp(54px, 7.2vh, 92px);
+  width: min(900px, 92vw);
+  height: clamp(150px, 20vh, 220px);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 24%, rgba(246,236,215,.13));
+  box-shadow: 0 -7px 32px color-mix(in srgb, var(--accent) 7%, transparent);
+  opacity: .48;
+  pointer-events: none;
+}
+
+.world-ambient {
+  left: 50%;
+  right: auto;
+  bottom: 7.5%;
+  width: min(760px, 78vw);
+  height: clamp(92px, 13vh, 150px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    color-mix(in srgb, var(--accent) 13%, transparent) 0 8%,
+    color-mix(in srgb, var(--accent) 7%, transparent) 26%,
+    transparent 67%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent) 16%, transparent),
+    0 0 54px color-mix(in srgb, var(--accent) 9%, transparent);
+  opacity: .22;
+  transform: translateX(-50%) scale(.94);
+  transition: opacity 550ms ease, transform 900ms var(--ease), box-shadow 700ms var(--ease);
+}
+
+.app.is-playing .world-ambient {
+  opacity: .38;
+  transform: translateX(-50%) scale(1);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--accent) 24%, transparent),
+    0 0 72px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+@media (max-width: 700px) {
+  .player-shell::before {
+    left: 0;
+    right: 0;
+    bottom: -16px;
+    width: 100vw;
+    height: 72%;
+    transform: none;
+    border-radius: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(6,8,15,.08) 25%, rgba(6,8,15,.42) 65%, rgba(6,8,15,.82) 100%);
+    filter: none;
+    opacity: 1;
+  }
+
+  .player-shell::after {
+    display: none !important;
+  }
+
+  .world-ambient {
+    bottom: max(3.5%, calc(var(--safe-bottom) + 8px));
+    width: 94vw;
+    height: 96px;
+  }
+}
+
+@media (max-height: 660px) and (max-width: 700px) {
+  .player-shell::before { height: 76%; }
+  .player-shell::after { display: none !important; }
+  .world-ambient { bottom: 2%; height: 72px; }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .player-shell::before {
+    left: 48%;
+    bottom: -24px;
+    width: 62vw;
+    height: 170px;
+  }
+
+  .player-shell::after { display: none; }
+
+  .world-ambient {
+    left: 49%;
+    bottom: -8px;
+    width: 48vw;
+    height: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-ambient { transition: none; }
+}
+.genre-button.active::after { background: color-mix(in srgb, var(--accent) 70%, var(--ivory)); }
+.genre-button.active::before { background: var(--accent); box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 48%, transparent); }
+
+.browse-button {
+  grid-row: 6; align-self: start; margin-top: clamp(17px, 2.6vh, 28px);
+  appearance: none; border: 0; background: transparent; color: var(--ivory); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 2px;
+  font-size: clamp(14px, 1.15vw, 18px);
+}
+.browse-button span { border-bottom: 1px solid rgba(246,236,215,.2); padding-bottom: 3px; transition: border-color 180ms ease; }
+.browse-button svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.4; transition: transform 260ms var(--ease); }
+.app:not([data-sheet-snap="closed"]) .browse-button svg { transform: rotate(180deg); }
+
+.sheet-backdrop {
+  position: fixed;
+  z-index: 19;
+  inset: 0;
+  background: rgba(4, 5, 10, .34);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.sheet-backdrop[hidden] {
+  display: none !important;
+}
+
+.sheet {
+  position: fixed; z-index: 20; inset: auto 50% 0 auto;
+  width: min(1120px, 74vw); height: min(68vh, 710px); height: min(68dvh, 710px);
+  transform: translate(50%, calc(100% + 48px));
+  border: 1px solid rgba(246,236,215,.08); border-bottom: 0; border-radius: 24px 24px 0 0;
+  background: var(--panel); backdrop-filter: blur(18px) saturate(.88); -webkit-backdrop-filter: blur(18px) saturate(.88);
+  box-shadow: 0 -18px 54px rgba(0,0,0,.30);
+  transition: transform 420ms var(--ease), height 420ms var(--ease), width 320ms var(--ease);
+  overflow: hidden;
+  contain: layout paint;
+}
+.sheet[aria-hidden="true"],
+.sheet[data-snap="closed"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+.sheet[data-snap="medium"],
+.sheet[data-snap="full"],
+.sheet[data-snap="collapsed"] {
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(50%, 0);
+}
+.sheet-handle {
+  display: none; appearance: none; border: 0; background: transparent; width: 100%; height: 28px; padding: 0; cursor: ns-resize;
+}
+.sheet-handle span { display: block; width: 46px; height: 4px; border-radius: 999px; background: rgba(246,236,215,.18); margin: 11px auto 0; }
+.sheet-inner { height: 100%; display: grid; grid-template-rows: auto auto 1fr auto; padding: 26px 34px 0; }
+.sheet-header { display: grid; grid-template-columns: 1fr minmax(170px, 260px) auto; align-items: center; gap: 18px; }
+.sheet-header h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(29px, 2.25vw, 37px); margin: 0; letter-spacing: -.015em; }
+.search-field { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(246,236,215,.26); padding: 7px 0; }
+.search-field svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; flex: 0 0 auto; }
+.search-field input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ivory); }
+.search-field input::placeholder { color: rgba(246,236,215,.4); }
+.sheet-close svg { width: 21px; height: 21px; }
+.sheet-genres { grid-row: auto; max-width: 100%; margin: 4px 0 7px; padding-left: 0; }
+.sheet.mode-favourites .sheet-genres, .sheet.mode-queue .sheet-genres, .sheet.mode-search .sheet-genres { display: none; }
+.sheet.mode-queue .search-field { display: none !important; }
+.sheet.mode-queue .sheet-header { grid-template-columns: 1fr auto; }
+.song-list { overflow-y: auto; min-height: 0; padding-right: 4px; scrollbar-width: thin; scrollbar-color: rgba(246,236,215,.14) transparent; }
+.song-row {
+  display: grid; grid-template-columns: 34px minmax(0,1fr) 56px 40px; gap: 10px; align-items: center;
+  min-height: 68px; border-top: 1px solid rgba(246,236,215,.065); position: relative; color: rgba(246,236,215,.76);
+}
+.song-row:first-child { border-top: 0; }
+.song-row.current::before { content: ""; position: absolute; left: -34px; top: 14px; bottom: 14px; width: 1px; background: color-mix(in srgb, var(--accent) 82%, transparent); }
+.song-index { color: rgba(246,236,215,.42); text-align: right; font-variant-numeric: tabular-nums; }
+.song-row.current .song-index { color: color-mix(in srgb, var(--accent) 76%, var(--ivory)); }
+.song-row.current .song-index::before { content: none; display: none; }
+.song-copy { min-width: 0; cursor: pointer; border: 0; background: transparent; color: inherit; text-align: left; padding: 8px 0; }
+.song-copy strong { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: 450; font-size: 16px; }
+.song-row.current .song-copy strong { color: var(--ivory); font-weight: 500; }
+.song-copy small { display: block; color: rgba(246,236,215,.48); margin-top: 3px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.song-duration { color: rgba(246,236,215,.5); font-size: 13px; font-variant-numeric: tabular-nums; }
+.song-favourite { justify-self: center; }
+.song-favourite.active svg, .heart-button.active svg { fill: var(--accent); stroke: var(--accent); }
+.empty-state { display: grid; align-content: center; justify-items: start; min-height: 180px; color: rgba(246,236,215,.6); line-height: 1.55; }
+.empty-state strong { color: var(--ivory); font-weight: 500; margin-bottom: 4px; }
+
+.mini-player {
+  position: relative; height: 76px; border-top: 1px solid rgba(246,236,215,.08);
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px;
+  background: transparent;
+}
+.mini-progress { position: absolute; top: -1px; left: 0; right: 0; height: 2px; background: rgba(246,236,215,.08); }
+.mini-progress span { display: block; width: 0; height: 100%; background: var(--accent); }
+.mini-track { min-width: 0; }
+.mini-track strong, .mini-track span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-track strong { font-weight: 500; }
+.mini-track span { color: rgba(246,236,215,.48); margin-top: 3px; font-size: 12px; }
+.mini-controls { display: flex; align-items: center; gap: 1px; }
+
+.install-banner {
+  position: fixed; z-index: 35; left: 50%; bottom: max(24px, calc(var(--safe-bottom) + 8px)); transform: translateX(-50%);
+  width: min(560px, calc(100vw - 36px)); display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: 13px 14px 13px 18px; border: 1px solid rgba(246,236,215,.14); border-radius: 18px;
+  background: rgba(11,15,26,.92); backdrop-filter: blur(18px); box-shadow: 0 18px 55px rgba(0,0,0,.34);
+}
+.install-banner[hidden] { display: none; }
+.install-banner strong, .install-banner span { display: block; }
+.install-banner strong { font-weight: 600; font-size: 14px; }
+.install-banner span { margin-top: 3px; color: rgba(246,236,215,.58); font-size: 12px; }
+.install-actions { display: flex; flex: 0 0 auto; gap: 5px; }
+.install-actions button { border: 0; background: transparent; color: rgba(246,236,215,.7); padding: 9px 11px; border-radius: 10px; cursor: pointer; font-size: 12px; }
+.install-actions .install-primary { color: #17131b; background: var(--accent); font-weight: 700; }
+.app:not([data-sheet-snap="closed"]) .install-banner { display: none !important; }
+
+.toast {
+  position: fixed; z-index: 40; left: 50%; bottom: max(28px, calc(var(--safe-bottom) + 12px)); transform: translate(-50%, 18px);
+  opacity: 0; pointer-events: none; background: rgba(10,13,23,.92); border: 1px solid rgba(246,236,215,.14); color: var(--ivory);
+  border-radius: 999px; padding: 10px 16px; font-size: 13px; box-shadow: 0 10px 35px rgba(0,0,0,.28); transition: opacity 180ms ease, transform 180ms ease;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (min-width: 701px) {
+  .sheet {
+    bottom: 24px;
+    border: 1px solid rgba(246,236,215,.12);
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.52);
+  }
+}
+
+/* Tablet and compact desktop */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .topbar { padding: max(24px, var(--safe-top)) max(30px, var(--safe-right)) 0 max(30px, var(--safe-left)); }
+  .brand { font-size: clamp(28px, 3.6vw, 36px); }
+  .player-shell { padding-top: clamp(108px, 11vh, 138px); padding-bottom: max(28px, var(--safe-bottom)); }
+  .track-block { max-width: 82vw; }
+  .song-title { font-size: clamp(48px, 6.8vw, 66px); }
+  .artist { font-size: clamp(17px, 2.2vw, 21px); }
+  .genre-eyebrow { font-size: clamp(14px, 1.7vw, 17px); }
+  .genre-strip { max-width: 84vw; gap: clamp(25px, 3.5vw, 38px); }
+  .genre-button { font-size: clamp(16px, 2vw, 19px); }
+  .sheet { width: min(880px, 88vw); height: min(68dvh, 700px); }
+  .sheet-inner { padding-inline: 30px; }
+  .song-row.current::before { left: -30px; }
+}
+
+@media (min-width: 701px) and (max-width: 920px) and (orientation: portrait) {
+  .world-layer { background-position: center 46%; }
+  .world-vignette { background: linear-gradient(to bottom, rgba(7,8,18,.06), rgba(7,8,18,.035) 33%, rgba(7,8,18,.18) 69%, rgba(7,8,18,.58)); }
+  .player-shell { grid-template-rows: 1.15fr auto auto auto auto .85fr; padding-top: 112px; }
+  .song-title { font-size: clamp(50px, 7.7vw, 64px); }
+  .track-block { max-width: 86vw; }
+  .genre-strip { width: 88vw; max-width: 88vw; }
+  .browse-button { margin-top: 22px; }
+  .sheet { width: 92vw; }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .world-layer { background-position: center 47%; }
+  .world-vignette {
+    background:
+      linear-gradient(to bottom, rgba(5,7,16,.015), rgba(5,7,16,.055) 34%, rgba(5,7,16,.22) 70%, rgba(5,7,16,.66)),
+      radial-gradient(circle at 50% 51%, transparent 0 20%, rgba(5,7,16,.08) 54%, rgba(5,7,16,.16) 100%);
+  }
+  .world-ambient { left: 42%; right: 42%; bottom: 24%; opacity: .08; }
+
+  .topbar { padding: var(--safe-top) max(22px, var(--safe-right)) 0 max(22px, var(--safe-left)); align-items: flex-start; }
+  .brand { font-size: clamp(27px, 7.6vw, 32px); }
+  .icon-button { min-width: 42px; min-height: 42px; padding: 8px; }
+  .icon-button svg { width: 23px; height: 23px; }
+  .desktop-only { display: none; }
+
+  .player-shell {
+    min-height: 100svh; min-height: 100dvh;
+    grid-template-rows: minmax(120px, 1.05fr) auto auto auto minmax(90px, .68fr) auto;
+    padding: 86px 0 calc(var(--safe-bottom) + 14px);
+  }
+  .track-block { max-width: min(90vw, 560px); }
+  .genre-eyebrow { font-size: clamp(12px, 3.5vw, 14px); margin-bottom: 8px; letter-spacing: .045em; }
+  .song-title { font-size: clamp(39px, 10.7vw, 50px); line-height: .99; }
+  .track-block.is-long-title .song-title { font-size: clamp(34px, 9.1vw, 43px); }
+  .track-block.is-very-long-title .song-title { font-size: clamp(30px, 8vw, 38px); }
+  .artist-row { flex-direction: column; gap: 4px; }
+  .artist { font-size: clamp(16px, 4.6vw, 19px); margin-top: 11px; }
+  .mobile-heart { display: grid; width: 38px; height: 38px; margin-top: 2px; }
+  .mobile-heart svg { width: 21px; height: 21px; }
+
+  .ambient-ring { display: none; }
+
+  .progress-wrap .progress { grid-column: 1 / -1; grid-row: 1; }
+  .progress-wrap .time { grid-row: 2; font-size: 10px; }
+  .progress-wrap .time:last-child { text-align: right; }
+  .genre-strip {
+    width: 100%; max-width: 100%; gap: clamp(25px, 7.2vw, 34px);
+    padding: 17px max(26px, var(--safe-right)) 8px max(26px, var(--safe-left));
+    justify-content: flex-start; align-self: end;
+    scroll-padding-inline: 32px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+  }
+  .genre-button { font-size: clamp(16px, 4.4vw, 18px); }
+  .browse-button { align-self: end; margin: 10px 0 0; min-height: 44px; font-size: 16px; }
+  .browse-button span { border: 0; }
+
+  .sheet {
+    width: 100%; max-width: none; height: 82vh; height: 82dvh;
+    border-radius: 26px 26px 0 0; border-left: 0; border-right: 0;
+    background: rgba(12,16,29,.955); transform: translate(50%, calc(100% + 10px));
+    transition: transform 380ms var(--ease), height 380ms var(--ease);
+    contain: layout paint;
+  }
+  .sheet[data-snap="collapsed"] { height: calc(102px + var(--safe-bottom)); transform: translate(50%, 0); }
+  .sheet[data-snap="medium"] { height: 56vh; height: 56dvh; transform: translate(50%, 0); }
+  .sheet[data-snap="full"] { height: 82vh; height: 82dvh; transform: translate(50%, 0); }
+  .sheet-handle { display: block; height: 31px; touch-action: none; }
+  .sheet-handle span { width: 44px; height: 4px; margin-top: 12px; }
+  .sheet-inner { padding: 8px max(22px, var(--safe-right)) var(--safe-bottom) max(22px, var(--safe-left)); grid-template-rows: auto auto 1fr auto; }
+  .sheet-header { grid-template-columns: 1fr auto auto; gap: 6px; }
+  .sheet-header h2 { font-size: clamp(32px, 9vw, 38px); }
+  .search-field { width: 42px; height: 42px; border: 0; padding: 8px; justify-self: end; }
+  .search-field svg { width: 23px; height: 23px; }
+  .search-field input {
+    position: fixed; z-index: 3; left: max(18px, var(--safe-left)); right: max(18px, var(--safe-right)); top: calc(var(--safe-top) + 72px);
+    width: auto; background: rgba(12,16,29,.985); border: 1px solid rgba(246,236,215,.16); border-radius: 14px;
+    padding: 13px 16px; opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 150ms ease, transform 150ms ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  }
+  .sheet.searching .search-field input { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .sheet-close { display: none; }
+  .sheet-genres { margin: 3px calc(-1 * max(22px, var(--safe-right))) 8px calc(-1 * max(22px, var(--safe-left))); padding-left: max(22px, var(--safe-left)); padding-right: max(22px, var(--safe-right)); }
+  .sheet.mode-favourites .sheet-genres, .sheet.mode-queue .sheet-genres, .sheet.mode-search .sheet-genres { display: none; }
+  .song-list { margin-right: -4px; }
+  .song-row { grid-template-columns: 34px minmax(0,1fr) 45px 38px; min-height: 76px; gap: 8px; }
+  .song-row.current::before { left: calc(-1 * max(22px, var(--safe-left))); }
+  .song-copy { min-height: 62px; display: grid; align-content: center; }
+  .song-copy strong { font-size: 17px; }
+  .song-copy small { font-size: 13px; }
+  .song-duration { font-size: 13px; }
+  .heart-button { min-width: 40px; min-height: 40px; }
+  .mini-player { height: 84px; min-height: 84px; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+  .mini-track strong { font-size: 15px; }
+  .mini-track span { font-size: 12px; }
+
+  .sheet[data-snap="collapsed"] .sheet-handle { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
+  .sheet[data-snap="collapsed"] .sheet-inner { display: block; height: 100%; padding-top: 18px; }
+  .sheet[data-snap="collapsed"] .sheet-header,
+  .sheet[data-snap="collapsed"] .sheet-genres,
+  .sheet[data-snap="collapsed"] .song-list { display: none; }
+  .sheet[data-snap="collapsed"] .mini-player { height: calc(100% - 18px); border-top: 0; }
+
+  .install-banner { align-items: flex-end; bottom: max(16px, var(--safe-bottom)); border-radius: 16px; padding: 12px 12px 12px 15px; }
+  .install-banner span { max-width: 230px; }
+  .install-actions button { padding: 8px 9px; }
+
+  .toast { max-width: calc(100vw - 40px); text-align: center; white-space: normal; }
+}
+
+
+/* Listening flow #287 */
+.song-row{grid-template-columns:34px minmax(0,1fr) 56px 36px 40px}
+.song-queue-action{display:grid;place-items:center;width:34px;height:34px;justify-self:center;border:0;border-radius:0;background:transparent;color:rgba(246,236,215,.48);cursor:pointer;transition:opacity .16s ease,color .16s ease}
+.song-queue-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.song-queue-action:hover,.song-queue-action:focus-visible{color:var(--ivory);border:0;background:transparent}
+.song-row.manually-queued .song-index{color:var(--accent)}
+.queue-toolbar,.queue-section-label{position:sticky;z-index:2;display:flex;align-items:center;justify-content:space-between;min-height:38px;background:rgba(10,14,25,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:rgba(246,236,215,.52);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.queue-toolbar{top:0;border-bottom:1px solid rgba(246,236,215,.055)}
+.queue-section-label{top:0;justify-content:flex-start;border-top:1px solid rgba(246,236,215,.055)}
+.queue-clear{min-height:32px;padding:0 2px;border:0;border-radius:0;background:transparent;color:rgba(246,236,215,.58);font:inherit;font-size:11px;letter-spacing:0;text-transform:none;cursor:pointer}
+.queue-clear:hover,.queue-clear:focus-visible{color:var(--ivory);border:0}
+@media(hover:hover) and (pointer:fine){.song-row:not(:hover):not(:focus-within) .song-queue-action{opacity:.34}}
+@media(max-width:700px){.song-row{grid-template-columns:28px minmax(0,1fr) 36px 38px;gap:8px}.song-duration{display:none}.song-queue-action{width:34px;height:34px}.queue-toolbar,.queue-section-label{min-height:36px}}
+@media(prefers-reduced-motion:reduce){.song-queue-action{transition:none!important}}
+
+/* Shuffle transport button */
+.shuffle-button {
+  transition: color 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+.shuffle-button[aria-pressed="true"] {
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 60%, transparent));
+}
+.shuffle-button[aria-pressed="true"] svg {
+  stroke: var(--accent);
+}
+
+/* 24/7 Live Garba Station Button (Bottom Left) */
+.live-station-container {
+  position: fixed;
+  left: max(22px, var(--safe-left));
+  bottom: max(22px, var(--safe-bottom));
+  z-index: 12;
+  pointer-events: auto;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.live-station-button {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 236, 215, 0.16);
+  background: rgba(14, 18, 30, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.38);
+  color: rgba(246, 236, 215, 0.92);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease, transform 180ms ease;
+}
+
+.live-station-button:hover {
+  background: rgba(20, 26, 44, 0.88);
+  border-color: rgba(246, 236, 215, 0.28);
+  color: var(--ivory);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.live-station-button:focus-visible {
+  outline: 2px solid var(--ivory);
+  box-shadow: 0 0 0 6px var(--courtyard-focus-halo);
+}
+
+.live-beacon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+}
+
+.beacon-core {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.beacon-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ef4444;
+  opacity: 0.75;
+  animation: live-beacon-pulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  transition: background-color 200ms ease;
+}
+
+@keyframes live-beacon-pulse {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.live-station-button .live-badge-text {
+  line-height: 1;
+}
+
+/* Active Live Mode - turns green when live is active */
+.live-station-button[aria-pressed="true"],
+.app[data-live-mode="true"] .live-station-button {
+  background: rgba(12, 34, 20, 0.88);
+  border-color: rgba(34, 197, 94, 0.70);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.40), 0 6px 24px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.live-station-button[aria-pressed="true"] .beacon-core,
+.app[data-live-mode="true"] .live-station-button .beacon-core {
+  background-color: #22c55e;
+  box-shadow: 0 0 10px #22c55e, 0 0 18px rgba(34, 197, 94, 0.6);
+}
+
+.live-station-button[aria-pressed="true"] .beacon-ping,
+.app[data-live-mode="true"] .live-station-button .beacon-ping {
+  background-color: #22c55e;
+}
+
+.app[data-live-mode="true"] .progress-wrap .progress {
+  accent-color: #22c55e;
+}
+/* Responsive adaptation */
+@media (max-width: 700px) {
+  .live-station-container {
+    left: max(14px, var(--safe-left));
+    bottom: max(14px, var(--safe-bottom));
+  }
+  .live-station-button {
+    height: 36px;
+    padding: 0 12px 0 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+  .app:not([data-sheet-snap="closed"]) .live-station-container,
+  .app[data-sheet-snap="collapsed"] .live-station-container,
+  .app[data-sheet-snap="medium"] .live-station-container,
+  .app[data-sheet-snap="full"] .live-station-container {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .beacon-ping { animation: none; }
+}@media (max-width: 390px) {
+  .topbar { padding-left: max(18px, var(--safe-left)); padding-right: max(18px, var(--safe-right)); }
+  .brand { font-size: 27px; }
+  .song-title { font-size: clamp(36px, 10.2vw, 42px); }
+  .track-block.is-long-title .song-title { font-size: clamp(32px, 8.9vw, 37px); }
+  .track-block.is-very-long-title .song-title { font-size: clamp(29px, 8vw, 34px); }
+  .genre-strip { gap: 23px; padding-left: max(22px, var(--safe-left)); padding-right: max(22px, var(--safe-right)); }
+  .sheet-inner { padding-left: max(18px, var(--safe-left)); padding-right: max(18px, var(--safe-right)); }
+  .sheet-genres { margin-left: calc(-1 * max(18px, var(--safe-left))); margin-right: calc(-1 * max(18px, var(--safe-right))); padding-left: max(18px, var(--safe-left)); padding-right: max(18px, var(--safe-right)); }
+  .song-row.current::before { left: calc(-1 * max(18px, var(--safe-left))); }
+  .song-row { grid-template-columns: 31px minmax(0,1fr) 42px 36px; }
+  .mini-controls .transport { width: 36px; height: 38px; }
+}
+
+/* Short landscape screens */
+@media (max-height: 560px) and (orientation: landscape) {
+  .world-layer { background-position: center 52%; }
+  .topbar { padding: max(12px, var(--safe-top)) max(18px, var(--safe-right)) 0 max(18px, var(--safe-left)); }
+  .brand { font-size: 24px; }
+  .utilities .icon-button { min-width: 38px; min-height: 38px; }
+  .player-shell {
+    grid-template-rows: auto auto auto auto auto;
+    align-content: center;
+    padding: 48px max(18px, var(--safe-right)) max(10px, var(--safe-bottom)) max(18px, var(--safe-left));
+  }
+  .track-block { grid-row: 1; max-width: 68vw; }
+  .genre-eyebrow { font-size: 11px; margin-bottom: 3px; }
+  .song-title { font-size: clamp(29px, 6vw, 43px); }
+  .artist { font-size: 14px; margin-top: 5px; }
+  .mobile-heart { display: none; }
+  .controls { grid-row: 2; }
+  .progress-wrap { grid-row: 3; }
+  .genre-strip { grid-row: 4; width: min(720px, 78vw); padding-top: 3px; padding-bottom: 2px; }
+  .genre-button { font-size: 14px; padding-bottom: 8px; }
+  .browse-button { grid-row: 5; position: fixed; right: max(18px, var(--safe-right)); bottom: max(9px, var(--safe-bottom)); margin: 0; font-size: 13px; }
+  .sheet[data-snap="medium"] { height: 72dvh; }
+  .sheet[data-snap="full"] { height: 94dvh; }
+}
+
+@media (display-mode: standalone) {
+  /* Topbar top-padding in standalone: respect the status bar / notch */
+  .topbar { padding-top: max(24px, env(safe-area-inset-top)); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 1ms !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; }
+  .world-layer { transform: none; }
+}
+
+/* Keep the player controls on the original straight baseline. The late Nonstop
+   runtime may restate layout values, so these intentionally use higher specificity. */
+html body .app #genreStrip .genre-button,
+html body .app #genreStrip #nonstopButton {
+  transform: none !important;
+}
+
+/* Folk uses its own immutable asset URL. This avoids stale PWA/image cache entries
+   and pins the exact supplied dhol artwork directly in both player and Explore. */
+html body .app #genreStrip .genre-button[data-genre="folk"],
+html body .sheet-genres .genre-button[data-genre="folk"] {
+  --genre-icon-image: url("../assets/genre-icons/folk-dhol.webp");
+  background-image: url("../assets/genre-icons/folk-dhol.webp") !important;
+  background-repeat: no-repeat !important;
+}
+
+html body .app #genreStrip .genre-button[data-genre="folk"] {
+  background-size: 36px 36px !important;
+  background-position: center 5px !important;
+}
+
+html body .sheet-genres .genre-button[data-genre="folk"] {
+  background-size: 27px 27px !important;
+  background-position: 2px calc(50% - 4px) !important;
+}
+
+/* Lift the Explore/Browse entry slightly while keeping it in the original player grid. */
+html body .app #browseActions {
+  margin-top: -4px !important;
+}
+
+/* Ensure Explore chevron remains visible and centered */
+html body .app #browseActions .browse-button svg {
+  display: block;
+}
+
+html body .app #browseActions #browseButton {
+  border-radius: 0 !important;
+}
+
+@media (max-width: 700px) {
+  html body .app #browseActions { margin-top: -3px !important; }
+  html body .app #genreStrip .genre-button[data-genre="folk"] {
+    background-size: 31px 31px !important;
+    background-position: center 5px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  html body .app #genreStrip .genre-button[data-genre="folk"] {
+    background-size: 29px 29px !important;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  html body .app #browseActions { margin-top: 0 !important; }
+  html body .app #genreStrip .genre-button[data-genre="folk"] {
+    background-size: 22px 22px !important;
+    background-position: center 1px !important;
+  }
+}
+
+/* The first-paint production layer owns the single dandiya selection marker.
+   This layer only strips legacy card/glow state and keeps inactive choices quieter. */
+html body .app #genreStrip .genre-button[data-genre],
+html body .app #genreStrip #nonstopButton {
+  box-shadow: none !important;
+  transition:
+    color 160ms ease,
+    opacity 160ms ease !important;
+}
+
+html body .app #genreStrip .genre-button[data-genre]:not(.active),
+html body .app #genreStrip #nonstopButton:not(.active) {
+  opacity: .72;
+}
+
+html body .app #genreStrip .genre-button[data-genre].active,
+html body .app #genreStrip #nonstopButton.active,
+html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton {
+  opacity: 1;
+  border-color: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html body .app #genreStrip .genre-button[data-genre]:focus-visible,
+html body .app #genreStrip #nonstopButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 76%, var(--ivory));
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  html body .app #genreStrip .genre-button[data-genre]:not(.active):hover,
+  html body .app #genreStrip #nonstopButton:not(.active):hover {
+    opacity: .94;
+    background-color: transparent !important;
+  }
+}
+
+/* Explore keeps the same selection language at a quieter intensity. */
+html body .sheet-genres .genre-button[data-genre].active {
+  color: var(--ivory);
+  border-color: color-mix(in srgb, var(--accent) 24%, rgba(246, 236, 215, .10));
+  background-color: rgba(8, 10, 18, .20);
+  filter: brightness(1.05) saturate(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .app #genreStrip .genre-button[data-genre],
+  html body .app #genreStrip #nonstopButton {
+    transition: none !important;
+  }
+}
+
+/* Open player control system. Main-surface controls use space, hierarchy and light
+   instead of cards, pills, circles, borders or corner chrome. Hit targets stay large. */
+html body .app .utilities {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 6px;
+  border: 1px solid rgba(246, 236, 215, .12);
+  border-radius: 999px;
+  background: rgba(18, 14, 28, .52);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .32);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+html body .app .utilities .icon-button,
+html body .app .utilities .mobile-heart {
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: rgba(246, 236, 215, .88);
+  opacity: .92;
+  transition: color 150ms ease, opacity 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+html body .app .utilities .mobile-heart.active {
+  background: transparent;
+  color: var(--accent);
+  opacity: 1;
+}
+
+html body .app .controls {
+  width: auto;
+  max-width: min(380px, 86vw);
+  min-height: 74px;
+  margin-top: 8px;
+  margin-inline: auto;
+  padding: 5px 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 3.2vw, 38px);
+}
+
+
+html body .app .transport {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(246, 236, 215, .76);
+  opacity: .90;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.28));
+  transition: color 150ms ease, opacity 150ms ease, filter 150ms ease;
+}
+
+html body .app .transport svg {
+  width: 27px;
+  height: 27px;
+  opacity: 1;
+}
+
+html body .app .play-button {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  box-sizing: border-box !important;
+  flex: 0 0 auto !important;
+  width: 72px;
+  height: 72px;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--ivory);
+  filter:
+    drop-shadow(0 3px 10px rgba(0,0,0,.36))
+    drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 14%, transparent));
+  transition: color 150ms ease, filter 180ms ease, opacity 150ms ease;
+}
+
+html body .app .play-button svg {
+  width: 38px;
+  height: 38px;
+  filter: none;
+}
+
+html body .app .progress-wrap {
+  width: min(330px, 78vw);
+  margin-top: -3px;
+  padding: 4px 8px 7px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html body .app .progress-wrap .time {
+  color: rgba(246, 236, 215, .88);
+  font-size: 12px;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .85);
+  font-variant-numeric: tabular-nums;
+}
+
+html body .app .sheet-close {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  html body .app .utilities .icon-button:hover,
+  html body .app .utilities .mobile-heart:hover {
+    background: rgba(246, 236, 215, .12);
+    color: var(--ivory);
+    opacity: 1;
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 24%, transparent));
+  }
+
+  html body .app .transport:hover {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--ivory);
+    opacity: 1;
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 24%, transparent));
+  }
+
+  html body .app .play-button:hover {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: color-mix(in srgb, var(--accent) 68%, var(--ivory));
+    filter:
+      drop-shadow(0 3px 10px rgba(0,0,0,.34))
+      drop-shadow(0 0 24px color-mix(in srgb, var(--accent) 24%, transparent));
+  }
+}
+
+html body .app .utilities .icon-button:focus-visible,
+html body .app .utilities .mobile-heart:focus-visible,
+html body .app .transport:focus-visible,
+html body .app .play-button:focus-visible,
+html body .app .sheet-close:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 72%, var(--ivory));
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  html body .app .utilities { gap: 1px; }
+
+  html body .app .utilities .icon-button,
+  html body .app .utilities .mobile-heart {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+  }
+
+  /* 5-button row: [Shuffle][Prev][Play][Next][Fav] — gap tightened for 5 items */
+  html body .app .controls {
+    width: auto;
+    max-width: min(340px, calc(100vw - 20px));
+    min-height: 66px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 4.2vw, 28px);
+    padding: 3px 0 6px;
+  }
+
+  html body .app .transport {
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 42px;
+    height: 44px;
+    min-height: 44px !important;
+  }
+
+  html body .app .transport svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  html body .app .play-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 58px;
+    height: 58px;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  html body .app .play-button svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  html body .app .progress-wrap {
+    width: min(340px, calc(100vw - 20px));
+    margin-top: -2px;
+    padding-inline: 6px;
+  }
+
+  html body .app .sheet-close {
+    border: 0;
+    background: transparent;
+  }
+}
+
+/* Narrowest phones (320px): keep play ≥44px with 5-button bar */
+@media (max-width: 360px) {
+  html body .app .controls,
+  html body .app .progress-wrap {
+    width: calc(100vw - 12px);
+  }
+
+  html body .app .controls {
+    gap: clamp(8px, 3vw, 14px);
+    padding: 3px 4px 6px;
+  }
+
+  html body .app .transport {
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 36px;
+    height: 44px;
+    min-height: 44px !important;
+  }
+
+  html body .app .transport svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  html body .app .play-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 52px;
+    height: 52px;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  html body .app .play-button svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  /* 5-button row in short landscape — keep play ≥44px, tighten rest */
+  html body .app .controls {
+    width: min(340px, 46vw);
+    min-height: 46px;
+    margin-top: 2px;
+    padding: 0 6px 2px;
+    gap: clamp(10px, 2.4vw, 18px);
+  }
+
+  html body .app .transport {
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 36px;
+    height: 44px;
+    min-height: 44px !important;
+  }
+
+  html body .app .transport svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  html body .app .play-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    width: 44px;
+    height: 44px;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+
+  html body .app .play-button svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  html body .app .progress-wrap {
+    width: min(276px, 40vw);
+    margin-top: 0;
+    padding-block: 2px 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .app .utilities .icon-button,
+  html body .app .utilities .mobile-heart,
+  html body .app .transport,
+  html body .app .play-button {
+    transition: none;
+  }
+}/* Final product polish layer. Keep this file last so it can improve the core system without duplicating it. */
+
+:root {
+  --glass-border: rgba(246, 236, 215, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.075);
+  --focus-ring: color-mix(in srgb, var(--accent) 82%, white);
+}
+
+html { text-rendering: optimizeLegibility; }
+body { -webkit-font-smoothing: antialiased; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline-color: var(--focus-ring);
+  outline-width: 2px;
+}
+
+/* First paint should feel intentional instead of flashing demo metadata. */
+.app[data-loading="true"] .track-block > * {
+  visibility: hidden;
+}
+.app[data-loading="true"] .track-block {
+  position: relative;
+  width: min(650px, 78vw);
+  min-height: 122px;
+}
+.app[data-loading="true"] .track-block::after {
+  content: "";
+  position: absolute;
+  inset: 10px 8% auto;
+  height: 94px;
+  border-radius: 24px;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgba(246,236,215,.09) 35%, rgba(246,236,215,.15) 50%, rgba(246,236,215,.09) 65%, transparent 82%) 0 42px / 220% 34px no-repeat,
+    linear-gradient(rgba(246,236,215,.12), rgba(246,236,215,.12)) center 8px / 34% 10px no-repeat,
+    linear-gradient(rgba(246,236,215,.08), rgba(246,236,215,.08)) center 78px / 26% 8px no-repeat;
+  opacity: .82;
+  animation: garba-loading 1.7s ease-in-out infinite;
+}
+@keyframes garba-loading { 50% { background-position: 100% 42px, center 8px, center 78px; opacity: 1; } }
+
+/* A local scrim protects text without hiding the courtyard. */
+.track-block { position: relative; isolation: isolate; }
+.track-block::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -32px -54px -28px;
+  border-radius: 48px;
+  background: radial-gradient(ellipse at center, rgba(7,9,18,.30), rgba(7,9,18,.10) 52%, transparent 76%);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Keep the two bottom actions side-by-side. This also fixes the dynamically inserted
+   Nonstop Garba button sharing the same grid cell as Browse Songs. */
+.browse-actions {
+  grid-row: 6;
+  align-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: clamp(17px, 2.6vh, 28px);
+}
+.browse-actions .browse-button {
+  grid-row: auto;
+  margin-top: 0;
+  min-height: 42px;
+  padding: 8px 4px;
+}
+.browse-actions .nonstop-section-button { margin-bottom: 0; }
+.browse-actions .nonstop-section-button span:last-child {
+  border: 0;
+  color: var(--accent);
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* Current-track favourite belongs next to the track on every device. */
+.mobile-heart {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+@media (min-width: 701px) {
+  .mobile-heart { display: grid; margin-top: 7px; }
+  .artist-row { gap: 4px; }
+}
+
+@media (hover: hover) {
+  .song-row:hover { background: transparent; }
+  .song-row:hover .song-copy strong { color: var(--ivory); }
+}
+
+.progress { min-height: 28px; }
+input[type="range"]::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+}
+input[type="range"]::-moz-range-thumb { width: 12px; height: 12px; }
+
+.icon-button {
+  min-width: 42px;
+  min-height: 42px;
+}
+
+/* Small trust/status indicators added by ux-polish.js. */
+.source-badge,
+.network-status,
+.sheet-summary {
+  font-family: var(--sans);
+  font-variant-numeric: tabular-nums;
+}
+.source-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin-top: 9px;
+  padding: 4px 9px;
+  border: 1px solid rgba(246,236,215,.12);
+  border-radius: 999px;
+  background: rgba(8,10,18,.20);
+  color: rgba(246,236,215,.67);
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  backdrop-filter: blur(8px);
+}
+.source-badge.show { display: inline-flex; }
+.source-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 9px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.network-status {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(246,236,215,.14);
+  background: rgba(8,10,18,.48);
+  color: rgba(246,236,215,.78);
+  font-size: 11px;
+  backdrop-filter: blur(9px);
+}
+.network-status.show { display: inline-flex; }
+.network-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #ffbd7a; }
+.sheet-summary {
+  color: rgba(246,236,215,.48);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Secondary listening surfaces should read as one open layer, not a glass card stack. */
+.sheet {
+  border-color: transparent !important;
+  border-top-color: rgba(246,236,215,.09) !important;
+  background: rgba(10,14,25,.96) !important;
+  box-shadow: 0 -18px 56px rgba(0,0,0,.30) !important;
+  backdrop-filter: blur(18px) saturate(.9) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(.9) !important;
+}
+.sheet::before {
+  content: none;
+  display: none;
+}
+.sheet-header { min-height: 56px; padding-bottom: 4px; }
+.sheet-header-title { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.song-list { overscroll-behavior: contain; }
+.song-row {
+  border-radius: 0;
+  transition: color 150ms ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 68px;
+}
+.song-copy:focus-visible {
+  outline-offset: -2px;
+  border-radius: 0;
+}
+.song-copy strong { letter-spacing: -.005em; }
+.song-copy small { line-height: 1.35; }
+
+.search-field:focus-within { border-color: color-mix(in srgb, var(--accent) 72%, var(--ivory)); }
+.search-field input { caret-color: var(--accent); }
+.search-field input::-webkit-search-cancel-button { filter: invert(1); opacity: .6; }
+
+/* Make provider playback feel like part of GARBA instead of a second app. */
+.provider-overlay {
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left)) !important;
+  background: rgba(6,8,15,.77) !important;
+  backdrop-filter: blur(28px) saturate(.85) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(.85) !important;
+}
+.provider-panel {
+  border-color: rgba(246,236,215,.15) !important;
+  background: linear-gradient(180deg, rgba(21,24,39,.98), rgba(11,14,25,.985)) !important;
+  box-shadow: 0 36px 120px rgba(0,0,0,.6) !important;
+}
+.provider-head {
+  background: rgba(17,20,33,.94) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.provider-head h2 {
+  font-family: var(--serif) !important;
+  font-weight: 400 !important;
+  color: var(--ivory) !important;
+}
+.provider-close { min-width: 44px !important; min-height: 44px !important; }
+.provider-action {
+  min-height: 44px !important;
+  background: var(--ivory) !important;
+  color: #17131b !important;
+}
+.provider-action.secondary { background: rgba(246,236,215,.09) !important; color: var(--ivory) !important; }
+.provider-frame { box-shadow: 0 14px 45px rgba(0,0,0,.28); }
+.provider-chapter,
+.nonstop-item { border-color: rgba(246,236,215,.10) !important; }
+.provider-chapter:focus-visible,
+.nonstop-play:focus-visible,
+.provider-close:focus-visible,
+.provider-action:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+
+/* Toast should remain readable over both artwork and open sheets. */
+.toast {
+  border-color: rgba(246,236,215,.18);
+  background: rgba(8,11,20,.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  line-height: 1.35;
+}
+
+@media (max-width: 700px) {
+  .track-block::before { inset: -26px -12px -22px; border-radius: 36px; }
+  .app[data-loading="true"] .track-block { width: 88vw; min-height: 108px; }
+  .app[data-loading="true"] .track-block::after { inset-inline: 12%; height: 86px; }
+
+  .browse-actions {
+    width: 100%;
+    align-self: end;
+    gap: 6px 18px;
+    margin-top: 7px;
+    padding-inline: max(18px, var(--safe-left));
+  }
+  .browse-actions .browse-button { min-height: 44px; font-size: 15px; }
+  .browse-actions .nonstop-section-button span:last-child { font-size: 17px; }
+
+  .source-badge { margin-top: 6px; }
+  .sheet-header-title { gap: 8px; }
+  .sheet-summary { font-size: 11px; }
+
+  .provider-overlay { padding: 0 !important; align-items: flex-end !important; }
+  .provider-panel {
+    max-height: calc(92dvh - env(safe-area-inset-top)) !important;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (max-width: 390px) {
+  #shareButton { display: none; }
+  .browse-actions { gap: 4px 14px; }
+  .browse-actions .browse-button { font-size: 14px; }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .browse-actions {
+    position: fixed;
+    z-index: 7;
+    right: max(18px, var(--safe-right));
+    bottom: max(7px, var(--safe-bottom));
+    width: auto;
+    gap: 4px 12px;
+    margin: 0;
+    padding: 0;
+  }
+  .browse-actions .browse-button { position: static; margin: 0; font-size: 12px; min-height: 38px; }
+}
+
+@media (pointer: coarse) {
+  .genre-button { min-height: 44px; }
+  .song-favourite { min-width: 44px; min-height: 44px; }
+  input[type="range"] { min-height: 30px; }
+}
+
+@media (prefers-contrast: more) {
+  :root { --muted: rgba(246,236,215,.82); --faint: rgba(246,236,215,.38); }
+  .world-vignette { background: linear-gradient(to bottom, rgba(5,7,16,.16), rgba(5,7,16,.08) 35%, rgba(5,7,16,.36) 72%, rgba(5,7,16,.72)); }
+  .song-row { border-top-color: rgba(246,236,215,.22); }
+  .sheet, .provider-panel { border-color: rgba(246,236,215,.35) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app[data-loading="true"] .track-block::after { animation: none; }
+}
+
+/* Keep the player and Explore feeling like one continuous product surface. */
+@view-transition {
+  navigation: auto;
+}
+
+#browseButton {
+  view-transition-name: playgarba-explore-entry;
+}
+
+html[data-song-handoff="true"] #songTitle {
+  view-transition-name: playgarba-song-title;
+}
+html[data-song-handoff="true"] #songArtist {
+  view-transition-name: playgarba-song-artist;
+}
+html[data-song-handoff="true"] #playButton {
+  view-transition-name: playgarba-song-control;
+}
+
+::view-transition-group(playgarba-explore-entry),
+::view-transition-group(playgarba-song-title),
+::view-transition-group(playgarba-song-artist),
+::view-transition-group(playgarba-song-control) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(.2,.72,.18,1);
+}
+
+::view-transition-group(playgarba-song-artist) {
+  animation-duration: 460ms;
+}
+
+::view-transition-group(playgarba-song-control) {
+  animation-duration: 390ms;
+}
+
+::view-transition-old(playgarba-song-title),
+::view-transition-new(playgarba-song-title),
+::view-transition-old(playgarba-song-artist),
+::view-transition-new(playgarba-song-artist),
+::view-transition-old(playgarba-song-control),
+::view-transition-new(playgarba-song-control) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: playgarba-route-out 220ms cubic-bezier(.4,0,1,1) both;
+}
+
+::view-transition-new(root) {
+  animation: playgarba-route-in 380ms cubic-bezier(.16,.78,.18,1) both;
+}
+
+@keyframes playgarba-route-out {
+  to { opacity: .18; transform: scale(1.006); filter: blur(1.5px); }
+}
+
+@keyframes playgarba-route-in {
+  from { opacity: .14; transform: scale(.994); filter: blur(2px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #browseButton,
+  html[data-song-handoff="true"] #songTitle,
+  html[data-song-handoff="true"] #songArtist,
+  html[data-song-handoff="true"] #playButton {
+    view-transition-name: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(playgarba-explore-entry),
+  ::view-transition-group(playgarba-song-title),
+  ::view-transition-group(playgarba-song-artist),
+  ::view-transition-group(playgarba-song-control) {
+    animation-duration: 1ms !important;
+  }
+}
+
+/* Now Playing and genre composition. Keeps playback and catalogue behaviour unchanged. */
+html body .app .player-shell { row-gap: 0; }
+
+html body .app .track-block .genre-eyebrow {
+  color: rgba(246, 236, 215, .58);
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+
+html body .app #browseActions {
+  min-height: 34px;
+  margin-top: 5px !important;
+}
+
+html body .app #browseActions #browseButton {
+  min-height: 34px;
+  padding: 4px 28px 7px !important;
+  font-size: 14px;
+  opacity: .88;
+}
+
+@media (hover: hover) {
+  html body .app #browseActions #browseButton:hover { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  html body .app .player-shell {
+    padding-left: max(14px, var(--safe-left));
+    padding-right: max(14px, var(--safe-right));
+    padding-bottom: max(12px, var(--safe-bottom));
+  }
+
+  html body .app #browseActions {
+    min-height: 31px;
+    margin-top: 4px !important;
+  }
+
+  html body .app #browseActions #browseButton {
+    min-height: 31px;
+    padding: 3px 25px 6px !important;
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 760px) and (max-width: 700px) {
+  html body .app #browseActions { margin-top: 1px !important; }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  html body .app #browseActions { margin-top: 0 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .app #genreStrip .genre-button,
+  html body .app #genreStrip #nonstopButton { transition-duration: 1ms; }
+}/* Follow-up states for accessibility and truthful catalogue UX. */
+
+.progress:disabled {
+  cursor: default;
+  opacity: .48;
+}
+.progress:disabled::-webkit-slider-thumb { opacity: 0; }
+.progress:disabled::-moz-range-thumb { opacity: 0; }
+
+.retry-catalogue {
+  appearance: none;
+  margin-top: 18px;
+  min-height: 42px;
+  padding: 9px 17px;
+  border: 1px solid rgba(246,236,215,.28);
+  border-radius: 999px;
+  background: rgba(8,10,18,.24);
+  color: var(--ivory);
+  cursor: pointer;
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.retry-catalogue:active { transform: scale(.97); }
+
+/* Press/focus feedback belongs to the control itself and must not depend on hover.
+   Keep transforms on the control box so geometry and neighbouring anchors never move. */
+.browse-button,
+.sheet-close,
+.song-copy,
+.install-actions button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.browse-button {
+  transition: color 150ms ease, opacity 150ms ease;
+}
+
+.sheet-close,
+.install-actions button {
+  transition: background-color 150ms ease, color 150ms ease, opacity 150ms ease, transform 140ms ease;
+}
+
+.song-copy {
+  transition: color 150ms ease, opacity 140ms ease;
+}
+
+.browse-button:active,
+.song-copy:active {
+  opacity: .72;
+}
+
+.sheet-close:active,
+.install-actions button:active {
+  transform: scale(.96);
+}
+
+.retry-catalogue:focus-visible,
+.browse-button:focus-visible,
+.sheet-close:focus-visible,
+.song-copy:focus-visible,
+.install-actions button:focus-visible {
+  outline: 2px solid var(--focus-ring, color-mix(in srgb, var(--accent) 82%, white));
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .retry-catalogue:hover {
+    background: rgba(8,10,18,.42);
+    border-color: rgba(246,236,215,.48);
+  }
+
+  .sheet-close:hover,
+  .install-actions button:hover {
+    background-color: rgba(246,236,215,.07);
+    color: var(--ivory);
+  }
+}
+
+.search-empty-prompt {
+  min-height: 180px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 5px;
+  padding: 22px 2px;
+  color: rgba(246,236,215,.58);
+  line-height: 1.5;
+}
+.search-empty-prompt strong {
+  color: var(--ivory);
+  font-family: var(--serif);
+  font-size: clamp(23px, 2vw, 30px);
+  font-weight: 400;
+}
+.search-empty-prompt[hidden] { display: none; }
+.sheet.search-awaiting-query .song-row,
+.sheet.search-awaiting-query .empty-state:not(.search-empty-prompt) { display: none; }
+
+/* Inert content is genuinely unavailable while the mobile sheet is modal. */
+@media (max-width: 700px) {
+  .sheet[aria-modal="true"] {
+    box-shadow: 0 -22px 70px rgba(0,0,0,.48);
+  }
+  .sheet[aria-modal="true"]::after {
+    content: "";
+    position: fixed;
+    inset: -100vh 0 100% 0;
+    background: rgba(3,5,11,.20);
+    pointer-events: none;
+  }
+  .sheet-close {
+    display: grid;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .retry-catalogue { min-height: 44px; }
+  .search-empty-prompt { min-height: 150px; }
+}
+
+@media (pointer: coarse) {
+  .retry-catalogue,
+  .browse-button,
+  .sheet-close,
+  .install-actions button {
+    min-height: 44px;
+  }
+
+  .sheet-close,
+  .install-actions button {
+    min-width: 44px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: rgba(246,236,215,.90);
+    --faint: rgba(246,236,215,.50);
+  }
+
+  .retry-catalogue { border-color: rgba(246,236,215,.68); }
+  .search-empty-prompt { color: rgba(246,236,215,.86); }
+
+  html body .app .utilities .icon-button,
+  html body .app .utilities .mobile-heart,
+  html body .app .transport,
+  html body .app .play-button {
+    color: var(--ivory) !important;
+    opacity: 1 !important;
+  }
+
+  html body .app .progress-wrap .time {
+    color: rgba(246,236,215,.90) !important;
+  }
+
+  html body .app input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, var(--ivory) 0 var(--progress,0%), rgba(246,236,215,.50) var(--progress,0%) 100%);
+  }
+
+  html body .app input[type="range"]::-moz-range-track {
+    background: rgba(246,236,215,.50);
+  }
+}
+
+/* Windows/Edge High Contrast replaces author colours with system colours. Keep the
+   open control language, but make interaction, selection and focus explicit without
+   relying on translucency, accent colour or opacity alone. */
+@media (forced-colors: active) {
+  .retry-catalogue,
+  .sheet-close,
+  .install-actions button {
+    border: 1px solid ButtonText !important;
+    background: Canvas !important;
+    color: ButtonText !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .browse-button {
+    color: LinkText !important;
+    opacity: 1 !important;
+    text-decoration: underline;
+    text-underline-offset: .24em;
+  }
+
+  .song-copy {
+    color: ButtonText !important;
+    opacity: 1 !important;
+    text-decoration: underline;
+    text-underline-offset: .2em;
+  }
+
+  html body .app .utilities .icon-button,
+  html body .app .utilities .mobile-heart,
+  html body .app .transport,
+  html body .app .play-button,
+  html body .app #genreStrip .genre-button[data-genre],
+  html body .app #genreStrip #nonstopButton {
+    color: ButtonText !important;
+    opacity: 1 !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+
+  html body .app #genreStrip .genre-button[data-genre].active,
+  html body .app #genreStrip #nonstopButton.active,
+  html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton {
+    border-bottom: 2px solid Highlight !important;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: .35em;
+  }
+
+  .progress:disabled {
+    color: GrayText !important;
+    opacity: 1 !important;
+  }
+
+  .retry-catalogue:focus-visible,
+  .browse-button:focus-visible,
+  .sheet-close:focus-visible,
+  .song-copy:focus-visible,
+  .install-actions button:focus-visible,
+  html body .app .utilities .icon-button:focus-visible,
+  html body .app .utilities .mobile-heart:focus-visible,
+  html body .app .transport:focus-visible,
+  html body .app .play-button:focus-visible,
+  html body .app #genreStrip .genre-button[data-genre]:focus-visible,
+  html body .app #genreStrip #nonstopButton:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 3px;
+  }
+}
+
+/* Apple platforms expose a reduced-transparency preference. Keep the same hierarchy,
+   but trade glass/blur for opaque-enough surfaces and cheaper compositing. Browsers
+   that do not support this media feature simply ignore the block. */
+@media (prefers-reduced-transparency: reduce) {
+  .sheet,
+  .provider-overlay,
+  .provider-panel,
+  .provider-head,
+  .toast,
+  .retry-catalogue,
+  .source-badge,
+  .network-status {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .sheet {
+    background: #101421 !important;
+  }
+
+  .provider-overlay {
+    background: rgba(6,8,15,.96) !important;
+  }
+
+  .provider-panel {
+    background: #0d111d !important;
+  }
+
+  .provider-head {
+    background: #111522 !important;
+  }
+
+  .toast {
+    background: #090d17 !important;
+  }
+
+  .retry-catalogue,
+  .source-badge,
+  .network-status {
+    background: #111522 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retry-catalogue,
+  .browse-button,
+  .sheet-close,
+  .song-copy,
+  .install-actions button {
+    transition: none !important;
+  }
+
+  .retry-catalogue:active,
+  .sheet-close:active,
+  .install-actions button:active {
+    transform: none;
+  }
+}
+/* Discovery, device and data-saver refinements layered after the core UI. */
+
+.enhanced-search-note {
+  padding: 8px 2px 11px;
+  color: rgba(246,236,215,.48);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+
+.enhanced-search-row .enhanced-search-arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  min-height: 40px;
+  color: color-mix(in srgb, var(--accent) 72%, var(--ivory));
+  font-size: 18px;
+  opacity: .72;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+@media (hover: hover) {
+  .enhanced-search-row:hover .enhanced-search-arrow {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+}
+
+.source-badge[data-metadata-only="true"] {
+  color: rgba(246,236,215,.52);
+}
+.source-badge[data-metadata-only="true"]::before {
+  background: rgba(246,236,215,.42);
+  box-shadow: none;
+}
+
+/* Pause purely decorative work while the page is hidden. */
+.app.page-hidden .world-ambient,
+.app.page-hidden .ambient-ring {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Respect Save-Data / very slow network hints without changing the product structure. */
+.app[data-save-data="true"] .world-ambient,
+.app[data-save-data="true"] .ambient-ring {
+  display: none;
+}
+.app[data-save-data="true"] .sheet,
+.app[data-save-data="true"] .utilities .icon-button,
+.app[data-save-data="true"] .source-badge,
+.app[data-save-data="true"] .network-status,
+.app[data-save-data="true"] .retry-catalogue {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.app[data-save-data="true"] .world-layer {
+  transition-duration: 180ms;
+}
+
+/*
+ * Production player artwork.
+ *
+ * Only the visible world is allowed to request a high-resolution WebP. The old
+ * selector matched hidden transition layers as soon as app.js wrote a genre SVG
+ * into their inline style, which let multiple 2K images join the cold-start
+ * waterfall even though only one world could be seen.
+ *
+ * The approved WebP is the only painted image while that world is visible. The
+ * legacy SVG remains an internal runtime identity/fallback token, but it is not
+ * stacked underneath the live artwork, so listeners never see the retired world
+ * flash while the 2K image is arriving.
+ */
+.world-layer.is-visible[style*="assets/backgrounds/traditional.svg"] {
+  background-image: url("/assets/backgrounds/library/11-master-dark-courtyard.webp") !important;
+}
+.world-layer.is-visible[style*="assets/backgrounds/dandiya.svg"] {
+  background-image: url("/assets/backgrounds/library/10-dandiya-silhouette-courtyard.webp") !important;
+}
+.world-layer.is-visible[style*="assets/backgrounds/devotional.svg"] {
+  background-image: url("/assets/backgrounds/library/03-devotional-garba-courtyard.webp") !important;
+}
+.world-layer.is-visible[style*="assets/backgrounds/folk.svg"] {
+  background-image: url("/assets/backgrounds/library/14-gujarati-folk-courtyard.webp") !important;
+}
+.world-layer.is-visible[style*="assets/backgrounds/sanedo.svg"] {
+  background-image: url("/assets/backgrounds/library/08-colourful-garba-courtyard-b.webp") !important;
+}
+.world-layer.is-visible[style*="assets/backgrounds/fusion.svg"] {
+  background-image: url("/assets/backgrounds/library/05-fusion-gujarati-neon.webp") !important;
+}
+.world-layer[style*="assets/backgrounds/"] {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  filter: none !important;
+  image-rendering: auto;
+}
+
+/* A listener who explicitly enables Save-Data, or is on the runtime's very-slow
+ * connection path, should not be forced to download a 2K background. Keep the
+ * stable dark world instead of reviving the retired SVG artwork. */
+.app[data-save-data="true"] .world-layer.is-visible[style*="assets/backgrounds/"] {
+  background-image: none !important;
+}
+
+.sheet-handle[aria-expanded="true"] span {
+  background: color-mix(in srgb, var(--accent) 42%, rgba(246,236,215,.34));
+}
+
+@media (max-width: 700px) {
+  .enhanced-search-note {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-inline: -2px;
+    padding: 9px 2px 10px;
+    background: linear-gradient(to bottom, rgba(12,16,29,.98), rgba(12,16,29,.88));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .enhanced-search-row {
+    min-height: 72px;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .enhanced-search-note { color: rgba(246,236,215,.78); }
+  .enhanced-search-row .enhanced-search-arrow { color: var(--ivory); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enhanced-search-row .enhanced-search-arrow { transition: none; }
+}
+/* Runtime/provider viewport and playback-surface tuning. Later semantic layers own mobile coordination and genre artwork. */
+
+.source-badge { display: none !important; }
+
+/* Edge-to-edge viewport contract. Artwork always fills the actual browser viewport,
+   including the area beneath iPhone safe-area insets. Safe-area variables are only
+   for controls, never for the background itself. */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #111323;
+}
+
+.app {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  width: 100% !important;
+  height: 100% !important;
+  height: -webkit-fill-available !important;
+  height: 100dvh !important;
+  min-width: 0 !important;
+  min-height: 100% !important;
+  min-height: 100dvh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  background: #111323;
+}
+
+/* The app owns the fixed viewport. Artwork stays absolute inside that rectangle so
+   iOS/WebKit cannot give nested background layers a smaller independent fixed viewport. */
+.app > .world {
+  position: absolute !important;
+  inset: -12px !important;
+  width: calc(100% + 24px) !important;
+  height: calc(100% + 24px) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.app > .world > .world-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  transform-origin: center center;
+  image-rendering: auto;
+}
+
+.player-shell {
+  width: 100%;
+  height: 100%;
+  min-height: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Playback truth stays visible without reviving the legacy source badge. */
+.playback-status {
+  display: none;
+  width: max-content;
+  max-width: min(92vw, 440px);
+  margin: 8px auto 0;
+  padding: 5px 9px;
+  border: 1px solid rgba(246,236,215,.11);
+  border-radius: 999px;
+  background: rgba(8,10,18,.18);
+  color: rgba(246,236,215,.62);
+  font: 600 10px/1 var(--sans);
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.playback-status.show { display: inline-flex; align-items: center; }
+.playback-status::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.playback-status[data-kind="release"] { color: rgba(246,236,215,.52); }
+
+/* Keep the UI lighter than the artwork. */
+.track-block::before {
+  inset: -24px -42px -20px;
+  background: radial-gradient(ellipse at center, rgba(7,9,18,.24), rgba(7,9,18,.075) 55%, transparent 78%);
+}
+.browse-actions { gap: 0; }
+
+/* The approved 2K courtyard pack is art-directed per genre. */
+.app[data-genre="traditional"] .world-layer { background-position: center 48%; }
+.app[data-genre="dandiya"] .world-layer { background-position: center 49%; }
+.app[data-genre="devotional"] .world-layer { background-position: center 47%; }
+.app[data-genre="folk"] .world-layer { background-position: center 49%; }
+.app[data-genre="sanedo"] .world-layer { background-position: center 49%; }
+.app[data-genre="fusion"] .world-layer { background-position: center 50%; }
+
+/* In-app provider playback stays above interactive browser surfaces and below toast UI. */
+.provider-dock {
+  position: fixed;
+  z-index: 30;
+  top: max(92px, calc(var(--safe-top) + 68px));
+  right: max(20px, var(--safe-right));
+  width: min(356px, calc(100vw - 40px));
+  border: 1px solid rgba(246,236,215,.13);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(8,11,20,.96);
+  box-shadow: 0 22px 60px rgba(0,0,0,.38);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(.985);
+  transition: opacity 180ms ease, transform 220ms var(--ease), visibility 0s linear 220ms;
+}
+.provider-dock.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+.provider-media {
+  width: 100%;
+  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  background: #050609;
+}
+.provider-media iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 200px;
+  min-height: 200px;
+  border: 0;
+  background: #050609;
+}
+.provider-dock.is-spotify .provider-media { height: 152px; min-height: 152px; }
+.provider-dock.is-spotify .provider-media iframe { min-height: 152px; }
+.provider-dock.is-apple .provider-media { height: 260px; min-height: 260px; }
+.provider-dock.is-apple .provider-media iframe { min-height: 260px; }
+.provider-dock.is-soundcloud .provider-media { height: 166px; min-height: 166px; }
+.provider-dock.is-soundcloud .provider-media iframe { min-height: 166px; }
+.provider-dock.is-external .provider-media { height: auto; min-height: 0; }
+.provider-external {
+  min-height: 166px;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 8px;
+  padding: 22px;
+  color: var(--ivory);
+  background:
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 40%),
+    #0a0d16;
+}
+.provider-external strong { font: 500 18px/1.2 var(--serif); }
+.provider-external span { color: rgba(246,236,215,.58); font: 12px/1.45 var(--sans); }
+.provider-external-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  margin-top: 4px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: var(--ivory);
+  color: #141620;
+  text-decoration: none;
+  font: 700 12px/1 var(--sans);
+}
+.provider-external-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.provider-dock-bar {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 8px 2px 12px;
+  border-top: 1px solid rgba(246,236,215,.09);
+  color: rgba(246,236,215,.54);
+  font-size: 11px;
+  letter-spacing: .01em;
+}
+.provider-dock-bar > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.provider-dock-actions { display: flex; align-items: center; flex: 0 0 auto; gap: 1px; }
+.provider-dock-open,
+.provider-dock-bar button {
+  min-height: 30px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 7px;
+  background: transparent;
+  color: rgba(246,236,215,.76);
+  font: inherit;
+}
+.provider-dock-open {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.provider-dock-bar button { cursor: pointer; }
+.provider-dock-open:hover,
+.provider-dock-bar button:hover { background: rgba(246,236,215,.07); color: var(--ivory); }
+.provider-dock-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.provider-dock.is-loading .provider-dock-bar span::after { content: "…"; }
+.provider-dock.needs-tap .provider-dock-bar span { color: var(--ivory); }
+
+/* Compact laptops and tablets should keep the whole player above the fold. */
+@media (min-width: 701px) and (max-height: 760px) {
+  .player-shell { padding-top: 82px; padding-bottom: 16px; }
+  .genre-eyebrow { margin-bottom: 5px; }
+  .song-title { font-size: clamp(38px, 4.25vw, 58px); }
+  .artist { margin-top: 8px; }
+  .genre-strip { padding-top: 10px; }
+  .browse-actions { margin-top: 8px; }
+  .provider-dock { top: max(74px, calc(var(--safe-top) + 54px)); }
+}
+
+@media (min-width: 1101px) and (min-aspect-ratio: 2/1) {
+  .player-shell { padding-top: 92px; padding-bottom: 22px; }
+  .track-block { max-width: min(760px, 52vw); }
+  .song-title { font-size: clamp(44px, 3.65vw, 66px); }
+  .genre-strip { max-width: min(760px, 62vw); }
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .sheet { width: min(900px, 92vw); }
+  .provider-dock { width: min(336px, calc(100vw - 44px)); }
+}
+
+@media (max-width: 700px) {
+  .app[data-genre="traditional"] .world-layer { background-position: center 46%; }
+  .app[data-genre="dandiya"] .world-layer { background-position: center 47%; }
+  .app[data-genre="devotional"] .world-layer { background-position: center 46%; }
+  .app[data-genre="folk"] .world-layer { background-position: center 45%; }
+  .app[data-genre="sanedo"] .world-layer { background-position: center 47%; }
+  .app[data-genre="fusion"] .world-layer { background-position: center 47%; }
+
+  .topbar {
+    padding-top: max(18px, var(--safe-top));
+    padding-left: max(20px, var(--safe-left));
+    padding-right: max(20px, var(--safe-right));
+  }
+  .player-shell {
+    padding-left: max(18px, var(--safe-left));
+    padding-right: max(18px, var(--safe-right));
+    padding-bottom: max(12px, var(--safe-bottom));
+  }
+  .track-block::before { inset: -20px -8px -18px; }
+  .song-title { font-size: clamp(36px, 10vw, 46px); }
+  .artist { font-size: clamp(15px, 4.25vw, 18px); }
+  .genre-strip { padding-top: 12px; }
+  .browse-actions { margin-top: 2px; }
+  .install-banner {
+    width: calc(100vw - 24px);
+    bottom: max(12px, calc(var(--safe-bottom) + 8px));
+    padding: 12px 12px 12px 14px;
+    border-radius: 15px;
+  }
+
+  .provider-dock {
+    z-index: 30;
+    top: auto;
+    right: max(12px, var(--safe-right));
+    bottom: max(82px, calc(var(--safe-bottom) + 70px));
+    width: min(calc(100vw - 24px), calc(100vw - var(--safe-left) - var(--safe-right) - 24px));
+    border-radius: 14px;
+  }
+  .provider-media { height: 200px; }
+  .provider-dock.is-spotify .provider-media { height: 152px; }
+  .provider-dock.is-apple .provider-media { height: 235px; min-height: 235px; }
+  .provider-dock.is-soundcloud .provider-media { height: 166px; min-height: 166px; }
+  .playback-status { max-width: 88vw; margin-top: 6px; font-size: 9px; }
+}
+
+@media (max-width: 390px) {
+  .provider-dock { right: max(8px, var(--safe-right)); width: calc(100vw - 16px); }
+  .provider-dock-bar { padding-inline: 8px; }
+  .provider-dock-bar > span { max-width: 54%; }
+  .provider-dock-open, .provider-dock-bar button { padding-inline: 6px; }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .provider-dock {
+    top: max(48px, calc(var(--safe-top) + 38px));
+    right: max(10px, var(--safe-right));
+    bottom: auto;
+    width: 300px;
+  }
+  .provider-media { height: 200px; }
+}
+
+@media (display-mode: standalone),
+       (display-mode: fullscreen),
+       (display-mode: minimal-ui),
+       (display-mode: window-controls-overlay) {
+  .install-banner { display: none !important; }
+}
+
+/* ---------------------------------------------------------------------------------------
+   Garba Circle: topbar toggle state and the Circle dialog (native <dialog>, top layer).
+   The dialog carries its own dark panel so it stays legible over light and dark artwork.
+   --------------------------------------------------------------------------------------- */
+html body .app .utilities #circleButton[aria-pressed="true"] {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.circle-dialog {
+  width: min(400px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - max(32px, var(--safe-top) + var(--safe-bottom)));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ivory);
+  font-family: var(--sans);
+  overflow: visible;
+}
+.circle-dialog::backdrop {
+  background: rgba(5, 7, 16, .64);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.circle-sheet {
+  max-height: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(246, 236, 215, .12);
+  border-radius: 24px;
+  background: var(--panel-solid);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .52);
+}
+.circle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.circle-header h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.circle-dialog .circle-close {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  color: rgba(246, 236, 215, .78);
+}
+.circle-dialog .circle-close:focus-visible { outline-offset: -4px; }
+.circle-lede,
+.circle-message,
+.circle-status,
+.circle-next {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.circle-lede { color: var(--muted); }
+.circle-message {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent);
+  color: var(--ivory);
+}
+.circle-message[hidden],
+.circle-invite[hidden],
+.circle-next[hidden],
+.circle-dialog button[hidden] { display: none; }
+.circle-invite { margin-top: 16px; }
+.circle-qr {
+  width: min(216px, 62vw);
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ivory);
+}
+.circle-qr svg { display: block; width: 100%; height: auto; }
+.circle-link {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+  user-select: all;
+  -webkit-user-select: all;
+}
+.circle-actions {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+.circle-primary,
+.circle-secondary,
+.circle-leave {
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 150ms ease, background-color 150ms ease;
+}
+.circle-primary {
+  border: 0;
+  background: var(--accent);
+  color: #17131b;
+}
+.circle-dialog > .circle-sheet > .circle-primary { width: 100%; margin-top: 16px; }
+.circle-primary:disabled { opacity: .6; cursor: progress; }
+.circle-secondary,
+.circle-leave {
+  border: 1px solid rgba(246, 236, 215, .2);
+  background: transparent;
+  color: var(--ivory);
+}
+.circle-leave {
+  width: 100%;
+  margin-top: 16px;
+  color: rgba(246, 236, 215, .8);
+  font-weight: 550;
+}
+.circle-primary:active,
+.circle-secondary:active,
+.circle-leave:active { transform: scale(.98); }
+.circle-status { color: rgba(246, 236, 215, .8); font-size: 13px; }
+.circle-next { color: var(--muted); font-size: 13px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .circle-dialog[open] { animation: circle-dialog-in 220ms var(--ease); }
+  @keyframes circle-dialog-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@media (max-width: 700px) {
+  /* Bottom sheet on phones, clear of the home indicator. */
+  .circle-dialog {
+    width: 100%;
+    max-height: calc(100dvh - max(24px, var(--safe-top)));
+    margin: auto 0 0;
+  }
+  .circle-sheet {
+    padding: 14px max(18px, env(safe-area-inset-right)) max(20px, calc(env(safe-area-inset-bottom) + 12px)) max(18px, env(safe-area-inset-left));
+    border-width: 1px 0 0;
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+/* The Circle button makes four topbar utilities. On the narrowest phones use the compact 38px
+   utility size (as short landscape screens do) so the controls stay clear of the brand. */
+@media (max-width: 340px) {
+  html body .app .topbar .brand { font-size: 23px !important; }
+  html body .app .topbar .utilities { max-width: none; }
+  html body .app .topbar .utilities .icon-button {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding: 6px !important;
+  }
+  html body .app .topbar .utilities .icon-button svg { width: 21px !important; height: 21px !important; }
+}
+
+@media (forced-colors: active) {
+  .circle-sheet { border: 1px solid CanvasText; }
+  .circle-primary, .circle-secondary, .circle-leave { border: 1px solid ButtonText; }
+}
+
+/* Song lists: songs that cannot play here yet sit below the playable ones */
+.song-row--unavailable { opacity: .5; }
+.song-section-unavailable { margin-top: 10px; }
+
+/* Add a song from YouTube */
+.add-song-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  margin: 4px 0 6px;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(246, 236, 215, .065);
+  background: transparent;
+  color: color-mix(in srgb, var(--accent) 80%, var(--ivory));
+  font: 600 15px/1.2 var(--sans);
+  text-align: left;
+  cursor: pointer;
+}
+.add-song-row svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.add-song-row:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.my-song-dialog {
+  width: min(440px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - max(32px, var(--safe-top) + var(--safe-bottom)));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ivory);
+  font-family: var(--sans);
+}
+.my-song-dialog::backdrop { background: rgba(5, 7, 16, .64); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.my-song-sheet {
+  max-height: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 20px 20px;
+  border: 1px solid rgba(246, 236, 215, .12);
+  border-radius: 24px;
+  background: var(--panel-solid);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .52);
+}
+.my-song-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.my-song-header h2 { margin: 0; font: 600 22px/1.2 var(--serif); }
+.my-song-lede, .my-song-note { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
+.my-song-note:empty { display: none; }
+.my-song-field { display: grid; gap: 6px; margin-top: 14px; font-size: 13px; color: var(--muted); }
+.my-song-field input, .my-song-field select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid rgba(246, 236, 215, .18);
+  border-radius: 12px;
+  background: rgba(246, 236, 215, .06);
+  color: var(--ivory);
+  font: 16px/1.2 var(--sans);
+}
+.my-song-field select option { color: #17131b; }
+.my-song-field input:focus-visible, .my-song-field select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.my-song-primary {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #17131b;
+  font: 600 16px/1 var(--sans);
+  cursor: pointer;
+}
+.my-song-list { margin-top: 22px; }
+.my-song-list h3 { margin: 0 0 6px; font: 600 14px/1.3 var(--sans); color: var(--muted); }
+.my-song-list ul { margin: 0; padding: 0; list-style: none; }
+.my-song-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 10px 0; border-top: 1px solid rgba(246, 236, 215, .08); }
+.my-song-item { flex: 1 1 100%; display: grid; gap: 2px; padding: 0; border: 0; background: transparent; color: var(--ivory); text-align: left; cursor: pointer; min-height: 40px; }
+.my-song-item strong { font-size: 15px; }
+.my-song-item small { color: var(--muted); font-size: 13px; }
+.my-song-link { padding: 6px 0; border: 0; background: transparent; color: color-mix(in srgb, var(--accent) 80%, var(--ivory)); font: 500 13px/1.2 var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media (max-width: 640px) {
+  .my-song-dialog { width: 100%; max-height: calc(100dvh - max(24px, var(--safe-top))); margin: auto 0 0; }
+  .my-song-sheet {
+    padding: 14px max(18px, env(safe-area-inset-right)) max(20px, calc(env(safe-area-inset-bottom) + 12px)) max(18px, env(safe-area-inset-left));
+    border-width: 1px 0 0;
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+/* Full Explore over the player: the music keeps playing underneath */
+.explore-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--panel-solid);
+}
+.explore-overlay[hidden] { display: none; }
+.explore-frame { display: block; width: 100%; height: 100%; border: 0; background: var(--panel-solid); }
+html.explore-open, html.explore-open body { overflow: hidden; }
+
+@media (forced-colors: active) {
+  .my-song-sheet { border: 1px solid CanvasText; }
+  .my-song-primary { border: 1px solid ButtonText; }
+}
+
+/* Continue after the phone paused playback */
+.resume-prompt {
+  position: fixed;
+  left: 50%;
+  bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
+  z-index: 120;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  width: min(460px, calc(100vw - 32px));
+  padding: 12px 14px 12px 16px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(246, 236, 215, .14);
+  border-radius: 18px;
+  background: var(--panel-solid);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, .5);
+  color: var(--ivory);
+  font: 14px/1.35 var(--sans);
+}
+.resume-prompt[hidden] { display: none; }
+.resume-copy { flex: 1 1 100%; color: var(--muted); padding-right: 28px; }
+.resume-continue {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #17131b;
+  font: 600 15px/1 var(--sans);
+  cursor: pointer;
+}
+.resume-youtube { color: color-mix(in srgb, var(--accent) 80%, var(--ivory)); font-weight: 500; text-underline-offset: 3px; }
+.resume-youtube[hidden] { display: none; }
+.resume-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.resume-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.resume-continue:focus-visible, .resume-youtube:focus-visible, .resume-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (forced-colors: active) {
+  .resume-prompt { border: 1px solid CanvasText; }
+  .resume-continue { border: 1px solid ButtonText; }
+}
+
+/* Immersive replaces the Simple renderer with the full Garbo prototype. */
+
+.garbo-prototype-overlay {
+  position: fixed; z-index: 1200; inset: 0; display: block; overflow: hidden;
+  background: #0b0605; color: #f3e6d0;
+}
+.garbo-prototype-overlay[hidden] { display: none !important; }
+.garbo-prototype-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #0b0605; }
+/* An aarti in Immersive: the song's own YouTube player sits in the stage screen, behind the see-through scene, and
+   the rest of the window stays the venue's ink */
+html.garba-stage-screen .garbo-prototype-overlay,
+html.garba-stage-screen .garbo-prototype-frame { background: transparent; }
+html.garba-stage-screen body #youtubeStage.youtube-dock.open {
+  position: fixed !important; z-index: 1199 !important; inset: auto !important;
+  left: var(--stage-screen-x) !important; top: var(--stage-screen-y) !important;
+  width: var(--stage-screen-w) !important; height: var(--stage-screen-h) !important; max-width: none !important; max-height: none !important;
+  margin: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; overflow: hidden !important;
+  opacity: 1 !important; visibility: visible !important; transform: none !important; transition: none !important; pointer-events: none !important;
+  background: #000 !important; box-shadow: 0 0 0 200vmax #0b0605 !important;
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
+html.garba-stage-screen body #youtubeStage.youtube-dock.open::before,
+html.garba-stage-screen body #youtubeStage.youtube-dock.open .provider-media::after { display: none !important; }
+html.garba-stage-screen body #youtubeStage.youtube-dock.open .provider-dock-bar { display: none !important; }
+html.garba-stage-screen body #youtubeStage.youtube-dock.open .provider-media {
+  position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important;
+  width: var(--stage-screen-vw) !important; height: var(--stage-screen-vh) !important; min-width: 0 !important; min-height: 0 !important; max-height: none !important;
+}
+html.garba-stage-screen body #youtubeStage.youtube-dock.open .provider-media iframe { width: 100% !important; height: 100% !important; min-width: 0 !important; min-height: 0 !important; max-height: none !important; }
+
+/* The top bar keeps only what each screen needs; the rest lives in More.
+   Phones and iPad: Search, Up next and More. Desktop: Search, Garba Circle, My Garba, Up next and More. */
+@media (max-width: 1023px) {
+  .utilities #shareButton, .utilities #circleButton, .utilities #favouritesButton, .utilities #atmosphereButton { display: none !important; }
+}
+@media (min-width: 1024px) {
+  .utilities #shareButton, .utilities #atmosphereButton { display: none !important; }
+  .more-row-circle, .more-row-favourites { display: none !important; }
+}
+
+.more-button[aria-expanded="true"] { color: var(--accent); }
+
+.utilities { position: relative; }
+.utilities > .view-switch {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 70;
+  /* The same capsule as the controls above it: frosted plum, a faint ivory edge, a soft shadow */
+  display: flex; align-items: center; padding: 3px; border: 1px solid rgba(246, 236, 215, .12); border-radius: 999px;
+  background: rgba(18, 14, 28, .52); color: var(--ivory); box-shadow: 0 4px 18px rgba(0, 0, 0, .32);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.utilities > .view-switch button {
+  position: relative; width: 76px; min-width: 76px; height: 40px; min-height: 40px; display: block; padding: 0; border: 0; border-radius: 999px;
+  background: transparent; color: inherit; cursor: pointer; touch-action: manipulation;
+}
+/* A toggle: the knob carries the icon of the view you're in, the other view's icon waits faintly on the track */
+.view-switch-control .view-switch-detail { position: absolute; left: 3px; top: 3px; width: 34px; height: 34px; border-radius: 50%; background: rgba(246, 236, 215, .14); box-shadow: inset 0 0 0 1px rgba(246, 236, 215, .16); transition: left .2s var(--ease); }
+.view-switch-control[aria-checked="true"] .view-switch-detail { left: 39px; }
+.view-switch-icon { position: absolute; top: 50%; width: 16px; height: 16px; transform: translateY(-50%); transition: color .2s var(--ease), opacity .2s var(--ease); }
+.view-switch-icon-simple { left: 12px; color: var(--accent); }
+.view-switch-icon-immersive { left: 48px; color: var(--muted); opacity: .7; }
+.view-switch-control[aria-checked="true"] .view-switch-icon-simple { color: var(--muted); opacity: .7; }
+.view-switch-control[aria-checked="true"] .view-switch-icon-immersive { color: var(--accent); opacity: 1; }
+.utilities > .view-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .view-switch-icon, .view-switch-control .view-switch-detail { transition: none; } }
+@media (forced-colors: active) { .utilities > .view-switch, .utilities > .view-switch button { border: 1px solid ButtonText; } .view-switch-control .view-switch-detail { background: ButtonText; box-shadow: none; } }
+
+/* The More card: a small panel from the top right, no dimmed backdrop */
+.more-card {
+  position: fixed; z-index: 60; top: calc(var(--safe-top) + 50px); right: var(--safe-right);
+  width: min(340px, calc(100vw - 32px)); max-height: calc(100dvh - var(--safe-top) - 70px); overflow-y: auto; overscroll-behavior: contain;
+  display: grid; gap: 14px; padding: 14px 14px 16px; border-radius: 20px;
+  border: 1px solid rgba(214, 176, 111, .22); background: var(--panel); color: var(--ivory);
+  box-shadow: var(--shadow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  animation: more-in .2s var(--ease);
+}
+.more-card[hidden] { display: none; }
+@keyframes more-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+.more-card-head { display: flex; align-items: center; justify-content: space-between; padding-left: 4px; }
+.more-card-head h2 { margin: 0; font: 400 22px/1.2 var(--serif); letter-spacing: .01em; }
+.more-card-close { min-width: 38px; min-height: 38px; }
+.more-label { margin: 0 0 8px 4px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.more-view-choice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.more-view-choice button {
+  display: grid; justify-items: center; gap: 6px; min-height: 76px; padding: 10px 8px; border-radius: 14px; cursor: pointer;
+  border: 1px solid var(--faint); background: rgba(246, 236, 215, .04); color: var(--ivory); font: 600 14px/1.2 var(--sans);
+}
+.more-view-choice svg, .more-row svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.more-view-choice button[aria-pressed="true"] { border-color: var(--accent); background: rgba(214, 176, 111, .14); color: #fff; }
+.more-view-choice button[aria-pressed="true"] svg { color: var(--accent); }
+.more-note { margin: 8px 4px 0; font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.more-rows { display: grid; gap: 2px; border-top: 1px solid var(--faint); padding-top: 8px; }
+.more-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 8px 10px; border: 0; border-radius: 12px; cursor: pointer;
+  background: none; color: var(--ivory); font: 500 15px/1.2 var(--sans); text-align: left;
+}
+a.more-row { text-decoration: none; box-sizing: border-box; }
+.more-row:hover { background: rgba(246, 236, 215, .06); }
+.more-row[aria-pressed="true"] svg { color: var(--accent); }
+.more-row span:first-of-type { flex: 1; }
+.more-badge:empty { display: none; }
+.more-badge { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--accent); color: #1b1408; font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+@media (prefers-reduced-motion: reduce) { .more-card { animation: none; } }
+
+.link-song-card { right: calc(var(--safe-right) + 48px); }
+@media (max-width: 480px) { .link-song-card { right: var(--safe-right); } }
+.link-song-desc { margin: 0 4px; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.link-song-form { display: grid; gap: 12px; }
+.link-song-label { display: grid; gap: 6px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.link-song-label input {
+  height: 42px; padding: 0 12px; border-radius: 12px;
+  border: 1px solid var(--faint); background: rgba(246, 236, 215, .05); color: var(--ivory);
+  font: 14px/1.3 var(--sans);
+}
+.link-song-label input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.link-song-status:empty { display: none; }
+.link-song-status { margin: 0 4px; font-size: 13px; line-height: 1.4; color: var(--accent); }
+.link-song-actions { display: flex; justify-content: flex-end; margin-top: 2px; }
+.link-song-submit {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 44px;
+  border: 0; border-radius: 12px; background: var(--accent); color: #1b1408; font: 600 15px/1.2 var(--sans); cursor: pointer;
+  box-shadow: 0 4px 12px rgba(214, 176, 111, .25);
+}
+.link-song-submit:hover { filter: brightness(1.08); }
+
+
+/* ---------------------------------------------------------------------------------------
+   Garba Circle name and face: the host's editor in the dialog, and the chip that sits above
+   24/7 LIVE for everyone in the circle.
+   --------------------------------------------------------------------------------------- */
+.circle-header .circle-face {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(246, 236, 215, .1);
+  box-shadow: inset 0 0 0 1px rgba(246, 236, 215, .16);
+}
+.circle-header .circle-face[hidden] { display: none; }
+.circle-header .circle-face svg,
+.circle-perch-face svg,
+.circle-face-choice svg { display: block; width: 100%; height: 100%; }
+.circle-header h2 {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.circle-identity {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.circle-identity[hidden] { display: none; }
+.circle-field { display: grid; gap: 8px; }
+.circle-field-label {
+  color: rgba(246, 236, 215, .72);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.circle-name {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid rgba(246, 236, 215, .2);
+  border-radius: 12px;
+  background: rgba(246, 236, 215, .06);
+  color: var(--ivory);
+  font: inherit;
+  font-size: 16px;
+}
+.circle-name::placeholder { color: rgba(246, 236, 215, .5); }
+.circle-name:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.circle-face-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.circle-face-choice {
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(246, 236, 215, .08);
+  box-shadow: inset 0 0 0 1px rgba(246, 236, 215, .14);
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+.circle-face-choice[aria-checked="true"] {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 5px rgba(0, 0, 0, .28);
+}
+.circle-face-choice:focus-visible { outline: 2px solid var(--ivory); outline-offset: 3px; }
+.circle-face-choice:active { transform: scale(.95); }
+
+/* The chip above 24/7 LIVE: the circle's face and name, in the same glass as the Live button. */
+.circle-perch {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(260px, calc(100vw - 44px));
+  height: 48px;
+  margin: 0 0 10px;
+  padding: 0 16px 0 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(246, 236, 215, .16);
+  background: rgba(14, 18, 30, .72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .38);
+  color: rgba(246, 236, 215, .94);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 180ms ease;
+}
+.circle-perch[hidden] { display: none; }
+.circle-perch:hover {
+  background: rgba(20, 26, 44, .88);
+  border-color: rgba(246, 236, 215, .28);
+  transform: translateY(-1px);
+}
+.circle-perch:focus-visible {
+  outline: 2px solid var(--ivory);
+  box-shadow: 0 0 0 6px var(--courtyard-focus-halo);
+}
+.circle-perch-face {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(246, 236, 215, .12);
+  box-shadow: 0 0 0 1.5px var(--accent);
+}
+.circle-perch-text {
+  display: grid;
+  min-width: 0;
+  line-height: 1.15;
+}
+.circle-perch-name {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 650;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.circle-perch-kicker {
+  color: rgba(246, 236, 215, .66);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+@media (max-width: 700px) {
+  .circle-perch {
+    height: 42px;
+    margin-bottom: 8px;
+    padding-right: 14px;
+  }
+  .circle-perch-face { width: 32px; height: 32px; }
+  .circle-perch-name { font-size: 13px; }
+  .circle-face-grid { gap: 6px; }
+}
+.circle-perch-face[hidden],
+.circle-perch-kicker[hidden] { display: none; }
+/* Before a circle, the chip says what it is: the ring of dots in the accent colour, "Private Garba Circle",
+   "Listen with friends". It is how people find the circle without opening More. */
+.circle-perch.is-idle .circle-perch-face {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: rgba(246, 236, 215, .08);
+}
+.circle-perch.is-idle .circle-perch-face svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  stroke: none;
+}
+.circle-perch.is-idle .circle-perch-name { font-size: 13.5px; }
+
+/* Picking how the circle plays, and what a circle of your own songs holds */
+.circle-setup { display: grid; gap: 10px; margin-top: 6px; }
+.circle-setup[hidden] { display: none; }
+.circle-choice {
+  appearance: none;
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(246, 236, 215, .18);
+  background: rgba(246, 236, 215, .06);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+.circle-choice strong { font-size: 16px; font-weight: 700; }
+.circle-choice span { color: rgba(246, 236, 215, .72); font-size: 13.5px; line-height: 1.4; }
+.circle-choice:hover { background: rgba(246, 236, 215, .1); border-color: rgba(246, 236, 215, .3); }
+.circle-choice:focus-visible { outline: 2px solid var(--ivory); outline-offset: 2px; }
+.circle-songs { margin: 0; color: rgba(246, 236, 215, .78); font-size: 13.5px; line-height: 1.45; }
+.circle-songs[hidden] { display: none; }
+.circle-songs.is-changed { color: var(--ivory); font-weight: 650; }
+
+/* The container holding the Private Garba Circle chip and 24/7 LIVE is as tall and wide as the chip, so on phones
+   its box reaches over the genre strip and Explore. Only its buttons take taps; the space around them passes taps
+   through to the controls underneath. While a sheet hides the container, its buttons stay untappable too. */
+.live-station-container { pointer-events: none; }
+.live-station-container > button { pointer-events: auto; }
+@media (max-width: 700px) {
+  .app:not([data-sheet-snap="closed"]) .live-station-container > button,
+  .app[data-sheet-snap="collapsed"] .live-station-container > button,
+  .app[data-sheet-snap="medium"] .live-station-container > button,
+  .app[data-sheet-snap="full"] .live-station-container > button { pointer-events: none; }
+}
+/* Mobile playback/sheet coordination. Loaded last so provider visibility wins over generic sheet sizing. */
+
+/*
+  YouTube performance stage
+  -------------------------
+  The iframe remains a real, visible YouTube surface, but its chrome belongs to the
+  PlayGarba visual system. Compact is the default listening state. The monochrome
+  YouTube control expands/collapses the stage without becoming a second Play button.
+*/
+#youtubeStage.youtube-dock {
+  border-color: rgba(246,236,215,.18);
+  border-radius: 22px 22px 16px 16px;
+  overflow: clip;
+  background:
+    linear-gradient(180deg, rgba(18,20,31,.96), rgba(7,9,17,.97));
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.46),
+    0 0 0 1px rgba(246,236,215,.025) inset,
+    0 0 32px color-mix(in srgb, var(--accent) 8%, transparent);
+  backdrop-filter: blur(18px) saturate(1.05);
+  -webkit-backdrop-filter: blur(18px) saturate(1.05);
+  isolation: isolate;
+}
+
+#youtubeStage.youtube-dock::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 16%;
+  right: 16%;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 58%, var(--ivory)), transparent);
+  opacity: .7;
+}
+
+#youtubeStage .youtube-provider-media {
+  position: relative;
+  overflow: hidden;
+  background: #050609;
+}
+
+#youtubeStage .youtube-provider-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(246,236,215,.035);
+  box-shadow: inset 0 -34px 48px rgba(0,0,0,.10);
+}
+
+#youtubeStage .provider-dock-bar {
+  min-height: 40px;
+  border-top-color: rgba(246,236,215,.075);
+  background: linear-gradient(180deg, rgba(15,17,27,.96), rgba(9,11,20,.98));
+}
+
+#youtubeStage .provider-dock-bar > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(246,236,215,.58);
+}
+
+#youtubeStage .provider-dock-bar > span::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+#youtubeStage .provider-dock-open,
+#youtubeStage .provider-dock-bar button {
+  color: rgba(246,236,215,.72);
+}
+
+#youtubeStage .provider-dock-open:hover,
+#youtubeStage .provider-dock-bar button:hover {
+  background: rgba(246,236,215,.065);
+  color: var(--ivory);
+}
+
+#providerDockStop {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 !important;
+  font-size: 0 !important;
+  display: grid;
+  place-items: center;
+}
+#providerDockStop::before {
+  content: "×";
+  color: var(--ivory);
+  font: 300 24px/1 var(--sans);
+}
+
+@media (min-width: 701px) {
+  #youtubeStage.youtube-dock {
+    width: min(356px, calc(100vw - 48px));
+    right: max(24px, var(--safe-right));
+  }
+
+  #youtubeStage.youtube-dock.is-expanded {
+    width: min(520px, calc(46vw - 24px));
+  }
+
+  #youtubeStage.youtube-dock.is-expanded .provider-media,
+  #youtubeStage.youtube-dock.is-expanded .provider-media iframe {
+    width: 100%;
+    height: clamp(260px, 27vw, 292px);
+    min-width: 200px;
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  /* The official YouTube player must stay visibly >=200x200. Compact mode keeps it
+     present without turning the whole mobile player into a video app. */
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage {
+    top: max(72px, calc(var(--safe-top) + 58px));
+    right: max(16px, var(--safe-right));
+    bottom: auto;
+    width: 216px;
+    max-width: calc(100vw - 32px);
+    border-radius: 20px 20px 14px 14px;
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage .provider-media,
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage .provider-media iframe {
+    width: 100%;
+    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage .provider-dock-bar {
+    min-height: 38px;
+    justify-content: flex-end;
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage .provider-dock-bar > span {
+    display: none;
+  }
+
+  /* Expanded mode becomes one centred performance stage. It is still secondary to
+     Now Playing and intentionally stops short of a full-screen video treatment. */
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded {
+    left: max(16px, var(--safe-left));
+    right: max(16px, var(--safe-right));
+    width: auto;
+    max-width: none;
+    top: max(72px, calc(var(--safe-top) + 58px));
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded .provider-media,
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded .provider-media iframe {
+    height: clamp(200px, 55vw, 232px);
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded .provider-dock-bar {
+    justify-content: space-between;
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded .provider-dock-bar > span {
+    display: inline-flex;
+  }
+
+  /* If the listener deliberately reopens Browse/Search during YouTube playback,
+     reserve a real playback zone above the sheet instead of stacking the sheet
+     underneath the required visible iframe. */
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="medium"],
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="full"] {
+    height: clamp(220px, 48dvh, calc(100dvh - 320px));
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="medium"] .song-list,
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="full"] .song-list {
+    overscroll-behavior: contain;
+  }
+
+  /* Mobile geometry guardrails. These intentionally use important because the
+     genre-art layer loads later and must never be allowed to paint outside the
+     usable iPhone viewport. */
+  html body .app .player-shell {
+    padding-left: max(22px, var(--safe-left)) !important;
+    padding-right: max(22px, var(--safe-right)) !important;
+  }
+
+  html body .app .controls {
+    width: auto !important;
+    max-width: min(340px, calc(100vw - 20px)) !important;
+    margin-inline: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  html body .app .progress-wrap {
+    width: min(340px, calc(100vw - 20px)) !important;
+    max-width: calc(100vw - var(--safe-left) - var(--safe-right) - 20px) !important;
+  }
+
+  html body .app #genreStrip {
+    contain: layout !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    max-width: calc(100vw - 8px) !important;
+    padding-left: max(20px, var(--safe-left)) !important;
+    padding-right: max(20px, var(--safe-right)) !important;
+  }
+}
+
+/* Current large iPhones sit around 393-430 CSS px in portrait. Keep the utility
+   controls comfortably tappable without squeezing the wordmark or clipping the row. */
+@media (max-width: 430px) {
+  html body .app .topbar {
+    padding-left: max(18px, var(--safe-left)) !important;
+    padding-right: max(18px, var(--safe-right)) !important;
+    gap: 10px;
+  }
+
+  html body .app .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: clamp(25px, 7.2vw, 29px) !important;
+    white-space: nowrap;
+  }
+
+  html body .app .utilities {
+    flex: 0 0 auto;
+    min-height: 44px !important;
+    gap: 1px !important;
+    padding: 2px !important;
+    max-width: calc(100vw - 154px);
+  }
+
+  html body .app .utilities .icon-button,
+  html body .app .utilities .mobile-heart {
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 7px !important;
+  }
+
+  html body .app .utilities .icon-button svg,
+  html body .app .utilities .mobile-heart svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  html body .app .controls {
+    width: auto !important;
+    max-width: min(340px, calc(100vw - 20px)) !important;
+    margin-inline: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  html body .app .progress-wrap {
+    width: min(340px, calc(100vw - 20px)) !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage:not(.is-expanded) {
+    right: max(10px, var(--safe-right));
+    width: 208px;
+  }
+
+  html body .app .controls {
+    width: auto !important;
+    max-width: min(340px, calc(100vw - 12px)) !important;
+    margin-inline: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  html body .app .progress-wrap {
+    width: min(340px, calc(100vw - 12px)) !important;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage {
+    top: max(48px, calc(var(--safe-top) + 38px));
+    right: max(8px, var(--safe-right));
+    bottom: auto;
+    width: 208px;
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #youtubeStage.is-expanded {
+    left: auto;
+    right: max(8px, var(--safe-right));
+    width: min(320px, 46vw);
+  }
+
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="medium"],
+  body:has(#youtubeStage.open[aria-hidden="false"]) #songSheet[data-snap="full"] {
+    height: min(46dvh, calc(100dvh - 250px));
+  }
+}
+
+@media (max-width: 700px) {
+  html, body { height: 100% !important; min-height: 100% !important; }
+  .app { position: fixed !important; inset: 0 !important; width: auto !important; height: auto !important; min-width: 0 !important; min-height: 0 !important; max-width: none !important; max-height: none !important; }
+  .world, .world-layer { position: fixed !important; inset: -6px !important; }
+  .topbar { padding-top: max(18px, var(--safe-top)); padding-left: max(18px, var(--safe-left)); padding-right: max(18px, var(--safe-right)); }
+  .brand { line-height: 42px; }
+  .utilities { gap: 1px; min-height: 44px; }
+  .utilities .icon-button, .utilities .mobile-heart { width: 42px; min-width: 42px; height: 42px; min-height: 42px; margin: 0; padding: 8px; border: 1px solid transparent; border-radius: 999px; background: rgba(8,10,18,.16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .artist-row > .mobile-heart { visibility: hidden; }
+  .utilities .mobile-heart { display: grid !important; flex: 0 0 42px; visibility: visible; }
+  .utilities .mobile-heart svg { width: 23px; height: 23px; }
+  .utilities .mobile-heart.active { background: color-mix(in srgb, var(--accent) 12%, rgba(8,10,18,.24)); }
+  .artist-row { display: block; }
+  .artist { margin-top: 10px; }
+  .player-shell { padding-left: max(16px, var(--safe-left)); padding-right: max(16px, var(--safe-right)); padding-bottom: max(16px, calc(var(--safe-bottom) + 2px)); }
+  .track-block { max-width: min(91vw, 560px); }
+  .controls { margin-top: 8px; gap: clamp(14px, 4.2vw, 28px); }
+  .progress-wrap { width: min(440px, 84vw); margin-top: 4px; }
+  .genre-strip { padding-top: 14px; padding-bottom: 8px; }
+
+  /* Match the final runtime geometry on first paint so Browse never changes shape
+     after Nonstop initializes. */
+  .app .browse-actions { width: auto; display: flex; grid-template-columns: none; flex-wrap: nowrap; align-items: stretch; justify-content: center; gap: 0; margin-top: 0; padding: 0; border: 0; border-radius: 0; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+  .app .browse-actions .browse-button { flex: 0 0 auto; min-width: 0; min-height: 40px; margin: 0; padding: 0 13px; justify-content: center; border: 1px solid rgba(246,236,215,.11); border-radius: 999px; background: rgba(8,10,18,.20); box-shadow: 0 8px 26px rgba(0,0,0,.10); font-size: 14px; line-height: 1; }
+
+  .sheet { border-radius: 24px 24px 0 0; box-shadow: 0 -24px 72px rgba(0,0,0,.48); }
+  .sheet-header { grid-template-columns: minmax(0,1fr) auto auto; gap: 4px; }
+  .sheet-close { display: grid !important; width: 42px; min-width: 42px; height: 42px; min-height: 42px; padding: 0; place-items: center; border: 1px solid rgba(246,236,215,.10); background: rgba(246,236,215,.055); }
+  .sheet-close svg { display: none; }
+  .sheet-close::before { content: "×"; font: 300 27px/1 var(--sans); transform: translateY(-1px); }
+  .sheet[data-snap="medium"] { height: 60vh; height: 60dvh; }
+  .sheet[data-snap="full"] { height: 88vh; height: 88dvh; }
+  .sheet-inner { padding-bottom: max(14px, var(--safe-bottom)); }
+  .sheet-handle { height: 27px; }
+  .sheet-handle span { width: 42px; height: 4px; margin-top: 10px; }
+
+  .genre-button { touch-action: pan-x; }
+  .song-row, .browse-button, .transport, .play-button, .icon-button, .heart-button, .sheet-close { touch-action: manipulation; }
+  .provider-dock { bottom: max(76px, calc(var(--safe-bottom) + 66px)); box-shadow: 0 22px 72px rgba(0,0,0,.52); }
+}
+
+@media (max-width: 390px) {
+  .topbar { padding-left: max(14px, var(--safe-left)); padding-right: max(14px, var(--safe-right)); }
+  .utilities .icon-button, .utilities .mobile-heart { width: 39px; min-width: 39px; height: 39px; min-height: 39px; }
+  .app .browse-actions .browse-button { min-height: 38px; padding-inline: 11px; font-size: 13px; }
+  .controls { gap: clamp(8px, 3vw, 14px); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   PWA full-bleed layout (standalone / fullscreen / minimal-ui)
+   Background must cover the ENTIRE screen including behind the bottom home
+   indicator. Controls stay above it via safe-area-inset-bottom padding.
+   The cutout shows at the bottom in browser mode (reserved for the browser UI)
+   but in installed PWA mode there is no browser chrome — so we seal it shut.
+────────────────────────────────────────────────────────────────────────────── */
+@media (display-mode: standalone),
+       (display-mode: fullscreen),
+       (display-mode: minimal-ui),
+       (display-mode: window-controls-overlay) {
+  /* Lock html and body to the exact device screen height — zero gap. */
+  html,
+  body {
+    height: 100% !important;
+    height: -webkit-fill-available !important;
+    height: 100dvh !important;
+    min-height: 100% !important;
+    min-height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #111323 !important;
+  }
+
+  /* App frame fills exactly the screen; no horizontal scroll or cutout. */
+  .app {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    width: 100% !important;
+    height: 100% !important;
+    height: 100dvh !important;
+    min-height: 100% !important;
+    min-height: 100dvh !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    background: #111323 !important;
+  }
+
+  /* Artwork and background layers bleed past physical display boundaries */
+  .world,
+  .world-layer {
+    position: fixed !important;
+    inset: -12px !important;
+    width: calc(100vw + 24px) !important;
+    height: calc(100dvh + 24px) !important;
+    margin: 0 !important;
+  }
+
+  /* Status bar zone: soft top scrim so notch / dynamic island blends naturally */
+  .world-vignette {
+    background:
+      linear-gradient(to bottom,
+        rgba(5,7,16,.68) 0%,
+        rgba(5,7,16,.18) 10%,
+        rgba(5,7,16,.02) 28%,
+        rgba(5,7,16,.18) 66%,
+        rgba(5,7,16,.76) 100%
+      ),
+      radial-gradient(circle at 50% 46%, rgba(5,7,16,.015) 0 20%, rgba(5,7,16,.07) 56%, rgba(5,7,16,.2) 100%) !important;
+  }
+
+  .player-shell {
+    padding-bottom: max(14px, calc(var(--safe-bottom) + 4px)) !important;
+  }
+}
+
+/* Narrow phone PWA: ensure 100vw width */
+@media (display-mode: standalone) and (max-width: 700px) {
+  .app { inset: 0 !important; width: 100vw !important; }
+}
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  #youtubeStage.youtube-dock { transition: none; }
+}
+
+/* On narrow phones the YouTube attribution keeps just its lockup (the YouTube mark and name), so it clears the
+   centred Explore label. The container's aria-label still reads "Streaming via YouTube". */
+@media (max-width: 460px) {
+  html body .app .streaming-via .streaming-label { display: none !important; }
+}
+/* Custom PlayGarba genre artwork.
+   The icon assets are decorative; the existing text labels remain the accessible names. */
+
+.genre-button[data-genre="traditional"] { --genre-icon-image: url("../assets/genre-icons/traditional.webp"); }
+.genre-button[data-genre="dandiya"] { --genre-icon-image: url("../assets/genre-icons/dandiya.webp"); }
+.genre-button[data-genre="devotional"] { --genre-icon-image: url("../assets/genre-icons/devotional.webp"); }
+.genre-button[data-genre="folk"] { --genre-icon-image: url("../assets/genre-icons/folk-dhol.webp"); }
+.genre-button[data-genre="sanedo"] { --genre-icon-image: url("../assets/genre-icons/sanedo.webp"); }
+.genre-button[data-genre="fusion"] { --genre-icon-image: url("../assets/genre-icons/fusion.webp"); }
+#nonstopButton { --genre-icon-image: url("../assets/genre-icons/nonstop.webp"); }
+
+/*
+  Interaction stability contract
+  ------------------------------
+  Genre rows are horizontal controls, not miniature two-axis scrollers. Keep their
+  block size fixed, remove vertical overflow entirely and keep active/inactive states
+  geometrically identical. This prevents iOS/PWA diagonal drift and layout jumps.
+*/
+.genre-strip {
+  align-items: center !important;
+  overflow-x: auto;
+  overflow-y: hidden !important;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  scroll-behavior: auto;
+  scroll-padding-inline: 26px;
+  contain: layout paint;
+}
+
+.genre-strip::-webkit-scrollbar { display: none; }
+
+.genre-button,
+#nonstopButton {
+  flex: 0 0 auto;
+  align-self: center;
+  box-sizing: border-box;
+  margin: 0;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  scroll-snap-align: center;
+  scroll-snap-stop: normal;
+  transform: none !important;
+}
+
+.genre-button[data-genre],
+#nonstopButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  padding-top: 0;
+  padding-bottom: 8px;
+  padding-left: 39px;
+  padding-right: 2px;
+  background-image: var(--genre-icon-image);
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: 2px calc(50% - 4px);
+  transition: color 160ms ease, filter 160ms ease;
+}
+
+.app #genreStrip .genre-button[data-genre],
+.app #genreStrip #nonstopButton {
+  padding-right: 2px;
+}
+
+.app #genreStrip .genre-button[data-genre].active,
+.app #genreStrip #nonstopButton.active {
+  filter: drop-shadow(0 3px 8px color-mix(in srgb, var(--accent) 18%, transparent));
+}
+
+/* Explore: text on top of borderless downward chevron floating below genres */
+#browseActions,
+html body .app #browseActions {
+  min-height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: -4px auto 0 !important;
+}
+
+#browseActions .browse-button,
+html body .app #browseActions .browse-button,
+html body .app #browseActions #browseButton {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 38px !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: rgba(246, 236, 215, 0.78) !important;
+  cursor: pointer !important;
+  transition: color 200ms ease, transform 200ms ease !important;
+  text-decoration: none !important;
+}
+
+#browseActions .browse-button:hover,
+html body .app #browseActions .browse-button:hover,
+html body .app #browseActions #browseButton:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--ivory, #fff) !important;
+  transform: translateY(2px) !important;
+}
+
+#browseActions .browse-button svg,
+html body .app #browseActions .browse-button svg,
+html body .app #browseActions .browse-button .browse-chevron {
+  display: block !important;
+  width: 15px !important;
+  height: 9px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.6 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85)) !important;
+  transition: transform 200ms ease, stroke 200ms ease !important;
+}
+
+#browseActions .browse-button span,
+html body .app #browseActions .browse-button span,
+html body .app #browseActions #browseButton span {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: nowrap !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: currentColor !important;
+  line-height: 1.2 !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85) !important;
+}
+
+/*
+  The Now Playing block is a fixed three-row frame. Short, long and very long titles
+  therefore change inside the same rectangle instead of pushing transport/progress/
+  genres up and down. The full text remains in the DOM for assistive technology and
+  remains available in Browse even when the hero title needs visual truncation.
+*/
+.app .track-block {
+  height: 146px;
+  min-height: 146px;
+  max-height: 146px;
+  display: grid;
+  grid-template-rows: 18px minmax(0, 1fr) 34px;
+  align-items: center;
+  justify-items: center;
+  align-content: stretch;
+  padding-inline: 16px;
+}
+
+.app .track-block .genre-eyebrow {
+  align-self: center;
+  margin: 0;
+  line-height: 1;
+}
+
+.app .track-block .song-title {
+  align-self: center;
+  max-width: 100%;
+  max-height: 2.04em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app .track-block.is-long-title .song-title {
+  font-size: clamp(34px, 3.35vw, 46px);
+}
+
+.app .track-block.is-very-long-title .song-title {
+  font-size: clamp(30px, 2.9vw, 40px);
+}
+
+.app .track-block .artist-row {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  max-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.app .track-block .artist {
+  min-width: 0;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Top utilities use fixed tap boxes. Badges and state changes never alter spacing. */
+.utilities .icon-button {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+}
+
+@media (hover: hover) {
+  .genre-button[data-genre]:hover,
+  #nonstopButton:hover {
+    filter: brightness(1.06) saturate(1.04);
+  }
+}
+
+/* The browse sheet uses the same artwork at a quieter, fully fixed scale. */
+.sheet-genres {
+  height: 58px;
+  min-height: 58px;
+  max-height: 58px;
+  gap: 18px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.sheet-genres .genre-button[data-genre] {
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  padding-left: 35px;
+  padding-bottom: 8px;
+  background-size: 27px 27px;
+  background-position: 2px calc(50% - 4px);
+}
+
+@media (max-width: 700px) {
+  .genre-strip { scroll-padding-inline: 22px; }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    padding-left: 35px;
+    padding-bottom: 7px;
+    font-size: 15px;
+    background-size: 27px 27px;
+    background-position: 2px calc(50% - 3px);
+  }
+
+  .sheet-genres {
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    gap: 16px !important;
+  }
+
+  .sheet-genres .genre-button[data-genre] {
+    height: 46px;
+    min-height: 46px;
+    max-height: 46px;
+    padding-left: 32px;
+    font-size: 14px;
+    background-size: 25px 25px;
+  }
+
+  .app .track-block {
+    height: 126px;
+    min-height: 126px;
+    max-height: 126px;
+    grid-template-rows: 16px minmax(0, 1fr) 26px;
+    padding-inline: 8px;
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(33px, 8.8vw, 42px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(29px, 7.7vw, 36px);
+  }
+
+  .app .track-block .artist-row {
+    height: 26px;
+    min-height: 26px;
+    max-height: 26px;
+  }
+
+  .app .track-block .artist {
+    max-width: min(82vw, 520px);
+  }
+
+  .utilities {
+    min-height: 42px;
+    gap: 2px;
+  }
+
+  /* Offline stays accessible but collapses to a status dot so it cannot squeeze the
+     logo or utility buttons on a narrow iPhone. */
+  .network-status.show {
+    flex: 0 0 28px;
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+  }
+
+  .network-status.show::before { margin: 0; }
+
+  #browseActions { min-height: 40px; }
+}
+
+@media (max-width: 390px) {
+  .genre-strip { scroll-padding-inline: 18px; }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    height: 46px;
+    min-height: 46px;
+    max-height: 46px;
+    padding-left: 32px;
+    font-size: 14px;
+    background-size: 25px 25px;
+    background-position-x: 1px;
+  }
+
+  .sheet-genres { gap: 14px !important; }
+
+  .sheet-genres .genre-button[data-genre] {
+    padding-left: 30px;
+    background-size: 24px 24px;
+  }
+
+  .app .track-block {
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    padding-left: 30px;
+    font-size: 13px;
+    background-size: 23px 23px;
+  }
+  .brand { font-size: 25px !important; }
+}
+
+@media (max-height: 760px) and (max-width: 700px) {
+  .app .track-block {
+    height: 112px;
+    min-height: 112px;
+    max-height: 112px;
+  }
+}
+
+@media (max-height: 660px) and (max-width: 700px) {
+  .app .track-block {
+    height: 102px;
+    min-height: 102px;
+    max-height: 102px;
+    grid-template-rows: 14px minmax(0, 1fr) 22px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    padding-bottom: 6px;
+    font-size: 13px;
+    background-size: 24px 24px;
+    padding-left: 31px;
+  }
+
+  .app .track-block {
+    height: 94px;
+    min-height: 94px;
+    max-height: 94px;
+  }
+
+  .app .track-block .song-title,
+  .app .track-block.is-long-title .song-title,
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(27px, 5.3vw, 37px);
+  }
+
+  .app .track-block .artist-row {
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genre-button[data-genre],
+  #nonstopButton {
+    transition: none;
+  }
+}
+
+/*
+  Genre composition and final player geometry
+  -------------------------------------------
+  This late layer owns genre artwork plus primary genre-rail, ambient-ring and timeline
+  geometry that must win in the final cascade. Earlier player-control layers should not override it.
+*/
+.controls {
+  position: relative;
+  justify-content: center;
+}
+
+/* Heart favourite button lives inside .controls as the 5th transport button */
+.controls .favourite-control {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(246, 236, 215, .76);
+  opacity: .90;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.28));
+  transition: color 150ms ease, opacity 150ms ease, filter 150ms ease;
+}
+
+.controls .favourite-control svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.controls .favourite-control.active {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.controls .favourite-control.active svg {
+  fill: var(--accent);
+}
+
+@media (max-width: 700px) {
+  .controls .favourite-control {
+    width: 42px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .controls .favourite-control {
+    width: 36px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .controls .favourite-control {
+    width: 36px;
+    height: 44px;
+    min-height: 44px;
+  }
+}
+
+
+
+.ambient-ring {
+  inset: -15px;
+  border: 0;
+  opacity: .18;
+  background: repeating-conic-gradient(
+    from -6deg,
+    color-mix(in srgb, var(--accent) 48%, rgba(246, 236, 215, .35)) 0 2deg,
+    transparent 2deg 14deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 67%, #000 69% 72%, transparent 74% 100%);
+  mask: radial-gradient(circle, transparent 0 67%, #000 69% 72%, transparent 74% 100%);
+}
+
+.ambient-ring::before,
+.ambient-ring::after { display: none; }
+
+.app.is-playing .ambient-ring {
+  opacity: .30;
+  animation: garba-console-ring 16s linear infinite;
+}
+
+@keyframes garba-console-ring {
+  to { rotate: 360deg; }
+}
+
+.progress-wrap {
+  grid-template-columns: 38px minmax(180px, 1fr) 38px;
+  gap: 12px;
+  align-items: center;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0 var(--progress, 0%),
+    rgba(246, 236, 215, .25) var(--progress, 0%) 100%
+  );
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  transition: height 160ms ease;
+}
+
+input[type="range"]:hover::-webkit-slider-runnable-track,
+input[type="range"]:focus-visible::-webkit-slider-runnable-track {
+  height: 6px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(246, 236, 215, .25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+input[type="range"]::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--ivory);
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6), 0 0 8px color-mix(in srgb, var(--accent) 50%, transparent);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ivory);
+  border: 2px solid var(--accent);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6), 0 0 8px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+@media (hover: hover) {
+  .progress:hover::-webkit-slider-thumb,
+  .progress:focus-visible::-webkit-slider-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent);
+  }
+
+  .progress:hover::-moz-range-thumb,
+  .progress:focus-visible::-moz-range-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent);
+  }
+}
+
+.app #genreStrip {
+  height: 82px !important;
+  min-height: 82px !important;
+  max-height: 82px !important;
+  align-items: flex-start !important;
+  align-self: end !important;
+  gap: clamp(9px, 1.7vw, 18px) !important;
+  padding: 6px 12px 4px !important;
+  max-width: min(760px, 91vw);
+}
+
+.app #genreStrip .genre-button[data-genre],
+.app #genreStrip #nonstopButton {
+  position: relative;
+  top: 0;
+  min-width: 78px;
+  width: auto;
+  height: 72px;
+  min-height: 72px;
+  max-height: 72px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 45px 7px 8px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background-image: var(--genre-icon-image);
+  background-size: 36px 36px;
+  background-position: center 5px;
+  background-repeat: no-repeat;
+  color: rgba(246, 236, 215, .66);
+  font-size: clamp(13px, 1vw, 16px);
+  transition: color 160ms ease, filter 160ms ease, background-color 160ms ease, border-color 160ms ease, top 180ms ease;
+}
+
+.app #genreStrip .genre-button,
+.app #genreStrip #nonstopButton {
+  top: 0;
+  transform: none;
+}
+
+.app #genreStrip .genre-button[data-genre].active,
+.app #genreStrip #nonstopButton.active,
+.app[data-play-mode="nonstop"] #genreStrip #nonstopButton {
+  color: var(--ivory);
+  border-color: color-mix(in srgb, var(--accent) 26%, rgba(246, 236, 215, .10));
+  background-color: rgba(8, 10, 18, .24);
+  filter:
+    drop-shadow(0 5px 11px color-mix(in srgb, var(--accent) 20%, transparent))
+    brightness(1.04) saturate(1.05);
+}
+
+.app #genreStrip .genre-button::before,
+.app #genreStrip #nonstopButton::before {
+  width: 4px;
+  height: 4px;
+  bottom: 3px;
+}
+
+.app #genreStrip .genre-button::after,
+.app #genreStrip #nonstopButton::after {
+  left: 30%;
+  right: 30%;
+  bottom: 7px;
+}
+/* Explore action alignment handled cleanly by primary rules */
+
+@media (pointer: coarse) {
+  input[type="range"]::-webkit-slider-thumb {
+    background: var(--accent);
+    box-shadow: 0 0 9px color-mix(in srgb, var(--accent) 42%, transparent);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    background: var(--accent);
+    box-shadow: 0 0 9px color-mix(in srgb, var(--accent) 42%, transparent);
+  }
+}
+
+@media (max-width: 700px) {
+  .progress-wrap {
+    grid-template-columns: 31px minmax(150px, 1fr) 31px;
+  }
+
+  .app #genreStrip {
+    height: 76px !important;
+    min-height: 76px !important;
+    max-height: 76px !important;
+    gap: 8px !important;
+    padding-left: max(12px, var(--safe-left)) !important;
+    padding-right: max(12px, var(--safe-right)) !important;
+    padding-top: 4px !important;
+    padding-bottom: 3px !important;
+  }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    min-width: 67px;
+    height: 67px;
+    min-height: 67px;
+    max-height: 67px;
+    padding: 41px 5px 7px;
+    font-size: 12px;
+    background-size: 31px 31px;
+    background-position: center 5px;
+    border-radius: 16px;
+  }
+
+  html body .app #browseActions {
+    margin-top: 1px !important;
+  }
+
+  html body .app #browseActions #browseButton {
+    min-height: 34px;
+    padding-inline: 27px !important;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .app #genreStrip {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+    gap: 7px !important;
+  }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    min-width: 62px;
+    height: 63px;
+    min-height: 63px;
+    max-height: 63px;
+    padding: 38px 5px 7px;
+    font-size: 11px;
+    background-size: 29px 29px;
+    background-position: center 5px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 350px) {
+  .app #genreStrip { gap: 7px !important; }
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    min-width: 62px;
+    font-size: 11px;
+    background-size: 29px 29px;
+  }
+}
+
+@media (max-height: 760px) and (max-width: 700px) {
+  .app #genreStrip {
+    height: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
+  }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    top: 0 !important;
+    height: 61px;
+    min-height: 61px;
+    max-height: 61px;
+    padding-top: 37px;
+    background-size: 28px 28px;
+  }
+}
+
+@media (max-height: 660px) and (max-width: 700px) {
+  .app #genreStrip {
+    height: 62px !important;
+    min-height: 62px !important;
+    max-height: 62px !important;
+  }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    min-width: 58px;
+    height: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    padding-top: 34px;
+    background-size: 25px 25px;
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .progress-wrap {
+    grid-template-columns: 28px minmax(120px, 1fr) 28px;
+  }
+
+  .app #genreStrip {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+  }
+
+  .app #genreStrip .genre-button,
+  .app #genreStrip #nonstopButton {
+    top: 0 !important;
+    min-width: 56px;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 25px 4px 5px;
+    font-size: 10px;
+    background-size: 22px 22px;
+    background-position: center 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app.is-playing .ambient-ring { animation: none; }
+}
+
+/* Final Now Playing metadata geometry. Keep transport anchors stable while text changes. */
+.app .track-block .song-title {
+  width: 100%;
+  min-width: 0;
+  max-width: min(780px, 88vw);
+  max-height: 1.96em;
+  font-size: clamp(40px, 4.1vw, 47px);
+  line-height: .98;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.app .track-block.is-long-title .song-title {
+  font-size: clamp(34px, 3.35vw, 44px);
+}
+
+.app .track-block.is-very-long-title .song-title {
+  font-size: clamp(30px, 2.9vw, 38px);
+}
+
+.app .track-block .artist-row {
+  height: 34px;
+  min-height: 34px;
+  max-height: 34px;
+}
+
+.app .track-block .artist {
+  max-width: min(620px, 82vw);
+  color: rgba(246, 236, 215, .76);
+}
+
+@media (max-width: 700px) {
+  .app .track-block .song-title {
+    max-width: min(94vw, 560px);
+    max-height: 1.94em;
+    font-size: clamp(34px, 9vw, 40px);
+    line-height: .97;
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(31px, 8vw, 37px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(28px, 7.2vw, 34px);
+  }
+
+  .app .track-block .artist-row {
+    height: 26px;
+    min-height: 26px;
+    max-height: 26px;
+  }
+
+  .app .track-block .artist {
+    max-width: 74vw;
+  }
+}
+
+@media (max-width: 390px) {
+  .app .track-block .song-title {
+    font-size: clamp(31px, 8.7vw, 35px);
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(29px, 8vw, 33px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(27px, 7.3vw, 31px);
+  }
+}
+
+@media (max-height: 760px) and (max-width: 700px) {
+  .app .track-block {
+    grid-template-rows: 14px minmax(0, 1fr) 26px;
+  }
+
+  .app .track-block .song-title {
+    font-size: clamp(30px, 8vw, 34px);
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(29px, 7.6vw, 32px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(27px, 7vw, 30px);
+  }
+}
+
+@media (max-height: 660px) and (max-width: 700px) {
+  .app .track-block {
+    grid-template-rows: 12px minmax(0, 1fr) 26px;
+  }
+
+  .app .track-block .song-title {
+    font-size: clamp(28px, 7.4vw, 32px);
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(27px, 7vw, 30px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(25px, 6.5vw, 28px);
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .app .track-block {
+    grid-template-rows: 12px minmax(0, 1fr) 18px;
+  }
+
+  .app .track-block .song-title {
+    max-height: 1.92em;
+    font-size: clamp(25px, 4.4vw, 30px);
+    line-height: .96;
+  }
+
+  .app .track-block.is-long-title .song-title {
+    font-size: clamp(24px, 4.1vw, 29px);
+  }
+
+  .app .track-block.is-very-long-title .song-title {
+    font-size: clamp(23px, 3.8vw, 27px);
+  }
+
+  .app .track-block .artist-row {
+    height: 18px;
+    min-height: 18px;
+    max-height: 18px;
+  }
+}
+
+/* Full-title disclosure stays inside the fixed Now Playing frame. */
+.app .track-block.has-track-details .artist-row {
+  width: calc(100% - 132px);
+  max-width: 620px;
+}
+
+.app .track-block .track-details-button {
+  position: absolute;
+  right: 10px;
+  bottom: 3px;
+  z-index: 5;
+  min-width: 56px;
+  height: 28px;
+  padding: 0 5px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(246, 236, 215, .74);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .01em;
+  cursor: pointer;
+}
+
+.app .track-block .track-details-button[hidden],
+.app .track-block .track-details-panel[hidden] {
+  display: none !important;
+}
+
+.app .track-block .track-details-button::before {
+  content: "";
+  position: absolute;
+  inset: -8px -5px;
+}
+
+.app .track-block .track-details-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .app .track-block .track-details-button:hover {
+    color: var(--ivory);
+  }
+}
+
+.app .track-block .track-details-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  z-index: 6;
+  box-sizing: border-box;
+  width: min(560px, calc(100% - 24px));
+  max-height: min(112px, calc(100% - 38px));
+  padding: 10px 12px;
+  overflow: auto;
+  transform: translateX(-50%);
+  border: 1px solid rgba(246, 236, 215, .18);
+  border-radius: 14px;
+  background: rgba(12, 13, 20, .94);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .34);
+  color: var(--ivory);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  text-align: left;
+}
+
+.app .track-block .track-details-title,
+.app .track-block .track-details-artist {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.app .track-block .track-details-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.app .track-block .track-details-artist {
+  margin-top: 4px;
+  color: rgba(246, 236, 215, .76);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+@media (max-width: 700px) {
+  .app .track-block.has-track-details .artist-row {
+    width: calc(100% - 112px);
+  }
+
+  .app .track-block .track-details-button {
+    right: 5px;
+    bottom: 0;
+    min-width: 52px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .app .track-block .track-details-button::before {
+    inset: -9px -5px;
+  }
+
+  .app .track-block .track-details-panel {
+    bottom: 28px;
+    width: calc(100% - 16px);
+    max-height: calc(100% - 32px);
+    padding: 9px 10px;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .app .track-block.has-track-details .artist-row {
+    width: calc(100% - 104px);
+  }
+
+  .app .track-block .track-details-button {
+    bottom: -2px;
+    min-width: 50px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  .app .track-block .track-details-button::before {
+    inset: -10px -5px;
+  }
+
+  .app .track-block .track-details-panel {
+    bottom: 22px;
+    max-height: calc(100% - 26px);
+  }
+}
+
+:root {
+  --garba-dandiya-marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 8'%3E%3Cpath d='M4 4h44' fill='none' stroke='%23e3bf76' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M11 4h5M22 4h5M34 4h5' fill='none' stroke='%238b3043' stroke-width='3.2' stroke-linecap='butt'/%3E%3Cpath d='M16 4h3M30 4h3M42 4h3' fill='none' stroke='%23df7442' stroke-width='3.2' stroke-linecap='butt'/%3E%3C/svg%3E");
+}
+
+html body .app .player-shell {
+  display: grid !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  box-sizing: border-box !important;
+  padding-top: clamp(86px, 10vh, 126px) !important;
+  padding-bottom: max(22px, var(--safe-bottom)) !important;
+  padding-inline: 22px !important;
+  grid-template-rows: minmax(18px, 1.35fr) auto auto auto minmax(12px, 1.05fr) auto auto !important;
+  align-content: stretch !important;
+  justify-items: center !important;
+  row-gap: 0 !important;
+}
+
+html body .app .track-block {
+  grid-row: 2 !important;
+  margin: 0 auto !important;
+}
+
+html body .app .controls {
+  grid-row: 3 !important;
+  margin: clamp(12px, 1.8vh, 18px) auto 0 !important;
+}
+
+html body .app .progress-wrap {
+  grid-row: 4 !important;
+  margin: clamp(10px, 1.5vh, 15px) auto 0 !important;
+}
+
+html body .app #genreStrip {
+  grid-row: 6 !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  align-self: end !important;
+  justify-self: center !important;
+  height: 76px !important;
+  min-height: 76px !important;
+  max-height: 76px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(8px, 1.6vw, 16px) !important;
+  padding: 4px 12px !important;
+  max-width: min(780px, 94vw) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  margin: -24px auto clamp(2px, 0.5vh, 6px) !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  transition: opacity 240ms ease, transform 240ms ease !important;
+}
+
+html body .app #genreStrip .genre-button,
+html body .app #genreStrip #nonstopButton,
+html body .app .sheet-genres .genre-button {
+  border: 0 !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+  text-shadow: 0 1px 12px rgba(0,0,0,.52);
+}
+
+html body .app #genreStrip .genre-button,
+html body .app #genreStrip #nonstopButton {
+  position: relative !important;
+  top: 0 !important;
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 72px !important;
+  height: 70px !important;
+  min-height: 70px !important;
+  max-height: 70px !important;
+  padding: 3px 8px 6px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background-color: transparent !important;
+  background-image: var(--genre-icon-image) !important;
+  background-repeat: no-repeat !important;
+  background-size: 0 0 !important;
+  color: rgba(246, 236, 215, 0.72) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transform: none !important;
+  transition: color 160ms ease, transform 160ms ease !important;
+}
+
+/* Independent center alignment for genre icon frame */
+html body .app #genreStrip .genre-button .genre-icon-frame,
+html body .app #genreStrip #nonstopButton .genre-icon-frame {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 auto !important;
+  flex: 0 0 38px !important;
+  pointer-events: none !important;
+}
+
+html body .app #genreStrip .genre-button .genre-icon-img,
+html body .app #genreStrip #nonstopButton .genre-icon-img {
+  display: block !important;
+  width: 34px !important;
+  height: 34px !important;
+  margin: 0 auto !important;
+  background-image: var(--genre-icon-image) !important;
+  background-size: contain !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  transition: transform 160ms ease, filter 160ms ease !important;
+}
+
+/* Independent center alignment for genre text label */
+html body .app #genreStrip .genre-button .genre-label,
+html body .app #genreStrip #nonstopButton .genre-label {
+  display: block !important;
+  width: 100% !important;
+  margin: 2px auto 0 !important;
+  text-align: center !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+  color: inherit !important;
+  letter-spacing: -0.01em !important;
+}
+
+html body .app #genreStrip .genre-button.active,
+html body .app #genreStrip .genre-button[aria-current="true"],
+html body .app #genreStrip #nonstopButton.active,
+html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton {
+  color: var(--ivory) !important;
+  border: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html body .app #genreStrip .genre-button.active .genre-icon-img,
+html body .app #genreStrip .genre-button[aria-current="true"] .genre-icon-img,
+html body .app #genreStrip #nonstopButton.active .genre-icon-img,
+html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton .genre-icon-img {
+  transform: scale(1.06) !important;
+  filter: drop-shadow(0 3px 8px color-mix(in srgb, var(--accent) 30%, transparent)) !important;
+}
+
+html body .app #genreStrip .genre-button::before,
+html body .app #genreStrip #nonstopButton::before,
+html body .app .sheet-genres .genre-button::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: -4px -6px !important;
+  border-radius: 20px !important;
+  border: 0 !important;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(6, 8, 18, 0.65) 0%,
+    rgba(6, 8, 18, 0.40) 38%,
+    rgba(6, 8, 18, 0.12) 65%,
+    transparent 82%
+  ) !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  opacity: 0.88 !important;
+  transition: opacity 180ms ease, background 180ms ease !important;
+}
+
+html body .app #genreStrip .genre-button:hover::before,
+html body .app #genreStrip #nonstopButton:hover::before {
+  opacity: 1 !important;
+}
+
+html body .app #genreStrip .genre-button.active::before,
+html body .app #genreStrip .genre-button[aria-current="true"]::before,
+html body .app #genreStrip #nonstopButton.active::before,
+html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton::before {
+  opacity: 1 !important;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    color-mix(in srgb, var(--accent) 26%, rgba(6, 8, 18, 0.75)) 0%,
+    rgba(6, 8, 18, 0.48) 42%,
+    rgba(6, 8, 18, 0.14) 68%,
+    transparent 85%
+  ) !important;
+}
+
+html body .app #genreStrip .genre-button::after,
+html body .app #genreStrip #nonstopButton::after,
+html body .app .sheet-genres .genre-button::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 1px !important;
+  width: 44px !important;
+  height: 8px !important;
+  transform: translateX(-50%) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: var(--garba-dandiya-marker) !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 150ms ease !important;
+}
+
+html body .app #genreStrip .genre-button.active::after,
+html body .app #genreStrip .genre-button[aria-current="true"]::after,
+html body .app #genreStrip #nonstopButton.active::after,
+html body .app[data-play-mode="nonstop"] #genreStrip #nonstopButton::after,
+html body .app .sheet-genres .genre-button.active::after,
+html body .app .sheet-genres .genre-button[aria-current="true"]::after {
+  opacity: .96 !important;
+}
+
+/* Flat horizontal baseline — no arc stepping. Every genre button sits at the same level. */
+html body .app #genreStrip .genre-button:nth-child(n) { top: 0 !important; transform: none !important; }
+
+/* Explore button is center aligned at the very bottom baseline with 24/7 Live and YouTube button.
+   The chevron down icon is placed directly below the Explore text. */
+html body .app #browseActions {
+  grid-row: 7 !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  align-self: end !important;
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: auto !important;
+  transition: opacity 240ms ease, transform 240ms ease !important;
+}
+
+html body .app #browseActions #browseButton {
+  appearance: none !important;
+  display: inline-flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  height: auto !important;
+  min-height: 38px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  color: rgba(246, 236, 215, 0.78) !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  transition: color 200ms ease, transform 180ms ease !important;
+}
+
+html body .app #browseActions #browseButton::before,
+html body .app #browseActions #browseButton::after {
+  content: none !important;
+  display: none !important;
+}
+
+html body .app #browseActions #browseButton:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--ivory, #fff) !important;
+  transform: translateY(2px) !important;
+  box-shadow: none !important;
+}
+
+html body .app #browseActions #browseButton span,
+html body .app #browseActions #browseButton .browse-label {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  line-height: 1.2 !important;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  padding: 0 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: currentColor !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85) !important;
+}
+
+html body .app #browseActions #browseButton .browse-chevron {
+  width: 14px !important;
+  height: 9px !important;
+  margin: 0 !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.85)) !important;
+  transition: transform 160ms ease, opacity 160ms ease !important;
+}
+
+@media (hover: hover) {
+  html body .app #genreStrip .genre-button:hover,
+  html body .app #genreStrip #nonstopButton:hover {
+    color: rgba(246,236,215,.92) !important;
+    filter: none !important;
+  }
+
+  html body .app #browseActions #browseButton:hover .browse-chevron {
+    transform: translateY(1.5px) !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  html body .app .player-shell {
+    padding-top: clamp(64px, 8vh, 88px) !important;
+    padding-bottom: max(14px, var(--safe-bottom)) !important;
+    padding-inline: max(14px, var(--safe-left)) !important;
+    grid-template-rows: minmax(0, 1fr) auto auto auto minmax(10px, 1.1fr) auto auto !important;
+  }
+
+  html body .app .controls {
+    margin-top: clamp(8px, 1.4vh, 14px) !important;
+  }
+
+  html body .app .progress-wrap {
+    margin-top: clamp(6px, 1.2vh, 12px) !important;
+  }
+
+  html body .app #genreStrip {
+    height: 70px !important;
+    min-height: 70px !important;
+    max-height: 70px !important;
+    padding-inline: max(14px, var(--safe-left)) !important;
+    justify-content: flex-start !important;
+    margin: 0 auto 6px !important;
+  }
+
+  html body .app #genreStrip .genre-button,
+  html body .app #genreStrip #nonstopButton {
+    min-width: 64px !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    max-height: 64px !important;
+    padding: 2px 4px 5px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-icon-frame,
+  html body .app #genreStrip #nonstopButton .genre-icon-frame {
+    width: 32px !important;
+    height: 32px !important;
+    flex: 0 0 32px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-icon-img,
+  html body .app #genreStrip #nonstopButton .genre-icon-img {
+    width: 29px !important;
+    height: 29px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-label,
+  html body .app #genreStrip #nonstopButton .genre-label {
+    font-size: 11.5px !important;
+    margin-top: 1px !important;
+  }
+
+  html body .app #genreStrip .genre-button::after,
+  html body .app #genreStrip #nonstopButton::after {
+    width: 40px !important;
+    height: 7px !important;
+    bottom: 1px !important;
+  }
+
+  html body .app #browseActions {
+    height: auto !important;
+    min-height: 38px !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+  }
+
+  html body .app #browseActions #browseButton {
+    height: auto !important;
+    min-height: 38px !important;
+    padding: 0 !important;
+    font-size: 10.5px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  html body .app #genreStrip .genre-button::after,
+  html body .app #genreStrip #nonstopButton::after {
+    width: 36px !important;
+    height: 7px !important;
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  html body .app .player-shell {
+    padding-top: 48px !important;
+    padding-bottom: max(10px, var(--safe-bottom)) !important;
+    grid-template-rows: auto auto auto 10px 0 auto 6px auto !important;
+  }
+
+  html body .app .track-block {
+    grid-row: 1 !important;
+    height: 94px !important;
+    min-height: 94px !important;
+    max-height: 94px !important;
+  }
+
+  html body .app .controls {
+    grid-row: 2 !important;
+    margin-top: 2px !important;
+  }
+
+  html body .app .progress-wrap {
+    grid-row: 3 !important;
+    margin-top: 2px !important;
+  }
+
+  html body .app #genreStrip {
+    grid-row: 6 !important;
+    align-self: end !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    margin: 0 auto !important;
+  }
+
+  html body .app #genreStrip .genre-button,
+  html body .app #genreStrip #nonstopButton {
+    top: 0 !important;
+    min-width: 56px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    padding: 2px 4px 4px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-icon-frame,
+  html body .app #genreStrip #nonstopButton .genre-icon-frame {
+    width: 26px !important;
+    height: 26px !important;
+    flex: 0 0 26px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-icon-img,
+  html body .app #genreStrip #nonstopButton .genre-icon-img {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  html body .app #genreStrip .genre-button .genre-label,
+  html body .app #genreStrip #nonstopButton .genre-label {
+    font-size: 10px !important;
+    margin-top: 1px !important;
+  }
+
+  html body .app #genreStrip .genre-button::after,
+  html body .app #genreStrip #nonstopButton::after {
+    width: 32px !important;
+    height: 6px !important;
+    bottom: 0 !important;
+  }
+
+  html body .app #browseActions {
+    grid-row: 8 !important;
+    align-self: end !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    margin: 0 auto !important;
+  }
+
+  html body .app #browseActions #browseButton {
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: 9.5px !important;
+  }
+
+  html body .live-station-container {
+    bottom: max(10px, var(--safe-bottom)) !important;
+  }
+  html body .live-station-button {
+    height: 32px !important;
+    padding: 0 10px 0 8px !important;
+    font-size: 10px !important;
+    gap: 5px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .app #genreStrip .genre-button::after,
+  html body .app #genreStrip #nonstopButton::after,
+  html body .app #browseActions #browseButton .browse-chevron {
+    transition: none !important;
+  }
+}
+
+/* Dismiss bottom actions cleanly when songSheet is open */
+.app:not([data-sheet-snap="closed"]) #browseActions,
+.app[data-sheet-snap="collapsed"] #browseActions,
+.app[data-sheet-snap="medium"] #browseActions,
+.app[data-sheet-snap="full"] #browseActions,
+.app:not([data-sheet-snap="closed"]) #genreStrip,
+.app[data-sheet-snap="collapsed"] #genreStrip,
+.app[data-sheet-snap="medium"] #genreStrip,
+.app[data-sheet-snap="full"] #genreStrip {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(12px) !important;
+}
+
+/* Align all genre buttons cleanly on a flat, even baseline without jumping or wave offsets */
+html body .app #genreStrip .genre-button,
+html body .app #genreStrip #nonstopButton {
+  top: 0 !important;
+  transform: none !important;
+  align-self: center !important;
+  vertical-align: middle !important;
+}
+
+/* Remove uppercase genre eyebrow text above the song title */
+html body .app .track-block .genre-eyebrow {
+  display: none !important;
+}
+
+/* Maintain YouTube media runtime without intrusive popup dock obstructing courtyard artwork */
+html body #youtubeStage.youtube-dock {
+  opacity: 0.002 !important;
+  pointer-events: none !important;
+  z-index: -10 !important;
+}
+
+/* Ensure track-block is perfectly centered with genre eyebrow removed */
+html body .app .track-block {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+  width: 100% !important;
+}
+
+html body .app .track-block .song-title {
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+
+html body .app .track-block .artist-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+
+/* Perfectly center 5-button transport controls */
+html body .app .controls {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-inline: auto !important;
+  width: auto !important;
+  max-width: min(440px, 94vw) !important;
+  gap: clamp(14px, 3vw, 26px) !important;
+}
+
+/* Progress Bar & Seek Track - High Contrast, Visible & Luminous */
+html body .app .progress-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: min(380px, 86vw) !important;
+  max-width: 380px !important;
+  margin: clamp(12px, 1.8vh, 18px) auto 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+html body .app .progress-wrap .time {
+  flex: 0 0 38px !important;
+  color: #FFFFFF !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-variant-numeric: tabular-nums !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
+html body .app .progress-wrap .time:first-child {
+  text-align: right !important;
+}
+
+html body .app .progress-wrap .time:last-child {
+  text-align: left !important;
+}
+
+html body .app .progress-wrap .progress {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: 20px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
+}
+
+html body .app .progress-wrap .progress::-webkit-slider-runnable-track {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(
+    to right,
+    var(--accent, #e5a93c) 0 var(--progress, 0%),
+    rgba(246, 236, 215, 0.38) var(--progress, 0%) 100%
+  ) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.85) !important;
+  border: 1px solid rgba(246, 236, 215, 0.25) !important;
+}
+
+html body .app .progress-wrap .progress::-webkit-slider-thumb {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-top: -6px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--accent, #e5a93c) !important;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent, #e5a93c) 75%, transparent), 0 2px 6px rgba(0, 0, 0, 0.85) !important;
+  transition: transform 140ms ease !important;
+}
+
+html body .app .progress-wrap .progress:hover::-webkit-slider-thumb {
+  transform: scale(1.2) !important;
+}
+
+html body .app .progress-wrap .progress::-moz-range-track {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: rgba(246, 236, 215, 0.38) !important;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8), 0 2px 6px rgba(0, 0, 0, 0.85) !important;
+  border: 1px solid rgba(246, 236, 215, 0.25) !important;
+}
+
+html body .app .progress-wrap .progress::-moz-range-progress {
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: var(--accent, #e5a93c) !important;
+}
+
+html body .app .progress-wrap .progress::-moz-range-thumb {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--accent, #e5a93c) !important;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent, #e5a93c) 75%, transparent), 0 2px 6px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Production Hardening: Disable accidental text selection, image drag, and touch callouts */
+html body .app {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+html body .app input[type="search"],
+html body .app input[type="text"] {
+  -webkit-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Streaming via YouTube - Clean floating attribution text + logo, no button pill */
+html body .app .streaming-via {
+  position: fixed !important;
+  right: max(22px, var(--safe-right)) !important;
+  bottom: max(22px, var(--safe-bottom)) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  height: auto !important;
+  min-height: unset !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  z-index: 12 !important;
+  pointer-events: auto !important;
+  cursor: default !important;
+  transition: opacity 240ms ease, transform 180ms ease !important;
+}
+
+html body .app .streaming-via:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+html body .app .streaming-via .streaming-label {
+  font-family: inherit !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  color: rgba(246, 236, 215, 0.72) !important;
+  white-space: nowrap !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+html body .app .streaming-via .yt-brand-lockup {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+html body .app .streaming-via .youtube-badge-logo {
+  width: 20px !important;
+  height: 14px !important;
+  display: block !important;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.8)) !important;
+}
+
+html body .app .streaming-via .yt-brand-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+.app:not([data-sheet-snap="closed"]) .streaming-via,
+.app[data-sheet-snap="collapsed"] .streaming-via,
+.app[data-sheet-snap="medium"] .streaming-via,
+.app[data-sheet-snap="full"] .streaming-via {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(12px) !important;
+}
+
+@media (max-width: 600px) {
+  html body .app .streaming-via {
+    bottom: max(14px, var(--safe-bottom)) !important;
+    right: max(14px, var(--safe-right)) !important;
+    height: auto !important;
+    padding: 0 !important;
+    gap: 5px !important;
+  }
+  html body .app .streaming-via .streaming-label {
+    font-size: 10px !important;
+  }
+  html body .app .streaming-via .youtube-badge-logo {
+    width: 17px !important;
+    height: 12px !important;
+  }
+  html body .app .streaming-via .yt-brand-text {
+    font-size: 11px !important;
+  }
+}
+
+
